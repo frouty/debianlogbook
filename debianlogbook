@@ -1,2 +1,9 @@
 Comment ajouter un user à un ou plusieurs groups:
 usermod -a -G nomgroup1,nomgroup2 nomuser
+
+###
+Probleme de bad password avec wicd 
+
+pour régler le probleme: 
+# apt-get remove network-manager
+#service wicd restart
