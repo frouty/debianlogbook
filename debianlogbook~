@@ -1,0 +1,2 @@
+Comment ajouter un user à un ou plusieurs groups:
+usermod -a -G nomgroup1,nomgroup2 nomuser

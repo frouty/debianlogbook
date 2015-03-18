@@ -1,2 +1,644 @@
-Comment ajouter un user à un ou plusieurs groups:
-usermod -a -G nomgroup1,nomgroup2 nomuser
+%%%%%%%%%% INSTALL DEBIAN %%%%%%%%%%
+installation d'un system minimum avec le cd netinstall
+reboot
+configuration du reseau: /etc/resolv.conf, /etc/network/ifconfig
+puis : #aptitude update #aptitude upgrade
+modification de /etc/apt/sources.list. Changer etch en lenny
+#aptitude update 
+#aptitude dist-upgrade
+
+# aptitude install apt-file
+# apt-file update
+#aptitude install pciutils
+Pour retrouver dans quel package on trouve un fichier. #install apt-file
+#apt-file update
+regarder le resultat de lspci pour choisir le pilote de la carte graphique. 
+installation xserver-xorg
+installation de X11
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+pour obtenir les preview des fichiers pdf:
+
+Go to your ~/.thumbnails directory and delete them all. Then go to
+Applications > System Tools > Configuration Editor > desktop > gnome >
+thumbnailers > application@pdf > uncheck enable. Do this for every
+file type you don't want to preview.
+
+%%% COMMENT MODIFIER SON EDITEUR PAR DEFAUT
+
+sudo update-alternatives --config editor
+Password:
+
+Il y a 5 alternatives fournissant ��editor��.
+
+  selection    Alternative
+-----------------------------------------------
+          1    /bin/nano
+          2    /bin/ed
+          3    /usr/bin/emacs21
+*+        4    /usr/bin/vim.python
+
+%%%%%%% UTILISATION DE SUBVERSION %%%%%%%%%%%%%
+
+Création du repository
+
+mkdir ~/svn-repos
+svnadmin create ~/svn-repos
+
+Importation du projet dans le repository:
+
+$cd /laoùestleprojet/ 
+$svn import -m "un message" . file:///home/lfs/svn-repos/ophtagnu/trunk
+
+%% Récupération des fichiers qui sont dans le répository dans le workdirectory
+%% Check out dans le workdirectory
+
+$mkdir ~/workcopy
+$cd ~/workcopy
+$svn co file:///home/lfs/svn-repos/ophtagnu/trunk ophtagnu
+
+co : checkout
+ophtagnu: répertoire ou on veut mettre la copie de travail dans le working directory. 
+
+Lorsque l'on est dans une workcopy on peut obtenir des informations
+sur l'origines des fichiers qui s'y trouvent. avec: $svn info
+
+Ensuite on fait des modifications des fichiers. Pour que svn puisse
+prendre en compte ces changements il faut faire: $svn commit -m "un
+message informatif" qui va charger les modifications dans le
+repository
+
+Si on crée un nouveau directory ,un nouveau fichier on le fait
+dans le working directory et puis on fait un svn add pour les placer
+sous gestionnaire de version.
+ 
+%% Mise à jour du repository s'il y a modification dans le
+workdirectory
+
+%% J'ai fait une connerie dans mon workcopy. Je veux récupérer la derniere version
+Je recupere les fichiers contenu dans le svn-repository en faisant
+$mkdir workcopy (je crée le working directory)
+$cd workcopy
+$svn checkout file:///home/lfs/svn-repos/ophtagnu
+
+
+%%%%%%%%%% emacs %%%%%%%%%%
+
+Connaitre le load-path C-h v load-path
+
+Byte-compiler : M-x byte-compile-file
+
+%%%%%%%%% emacs calendar/ agenda %%%%%%%%%%%%%%
+
+on se met dans le mode calendar. puis 
+
+t m
+    Generate a one-month calendar (cal-tex-cursor-month). 
+t M
+    Generate a sideways-printing one-month calendar (cal-tex-cursor-month-landscape). 
+n t d
+    Generate a one-day calendar (cal-tex-cursor-day). Where n is the number of days you want to print.  
+t w 1
+    Generate a one-page calendar for one week (cal-tex-cursor-week). 
+t w 2
+    Generate a two-page calendar for one week (cal-tex-cursor-week2). 
+t w 3
+    Generate an ISO-style calendar for one week (cal-tex-cursor-week-iso). 
+t w 4
+    Generate a calendar for one Monday-starting week (cal-tex-cursor-week-monday). 
+t f w
+    Generate a Filofax-style two-weeks-at-a-glance calendar (cal-tex-cursor-filofax-2week). 
+t f W
+    Generate a Filofax-style one-week-at-a-glance calendar (cal-tex-cursor-filofax-week). 
+t y
+    Generate a calendar for one year (cal-tex-cursor-year). 
+t Y
+    Generate a sideways-printing calendar for one year (cal-tex-cursor-year-landscape). 
+t f y
+    Generate a Filofax-style calendar for one year (cal-tex-cursor-filofax-year). 
+l
+Le code source latex est generé par le fichier cal-tex.el qu'il faut
+modifier car il ne gere pas les accents par exemple. Pour cela il faut
+rajouter apres \documentclass[...]  \usepackage[utf8x]{inputenc}
+
+
+
+%%%%%%%%%%%%%%% EMACS HTML %%%%%%%%
+Je ne trouve pas de mode pour éditer les fichiers HTML assez complet. 
+Installation du mode html-helper. Mai pas de coloration syntaxique
+
+%%% Emacs et les templates %%%%%%%%%%%%%%%
+
+<<<AUTHOR>>> = lfs@prony.venus.org
+<<<USER NAME>>> = laurent FRANCOIS
+
+
+%%%% EMACS PYTHON ENCODING 
+
+Warning (:warning): Invalid coding system `UTF-8' is specified
+for the current buffer/file by the :coding tag.
+It is highly recommended to fix it before writing to a file.
+
+Pas de majuscule pour UTF-8 mais utf-8
+
+%%%%% EMACS et .emacs
+
+pour évaluer les modifications faites sur le .emacs sans avoir a
+arréter puis relancer emacs : Alt-x eval-buffer
+
+%%%%%% SERVEUR DE NEWS %%%%%%%%%%%%%%%%%%%%
+news.lacave.net
+login lfrancois.lacave
+psswd: alacro13
+
+
+%%%%%%% DYNDNS %%%%%%%%%%
+# inadyn -u frouty -p 123b654 -a kuendu.homelinux.com
+a l'air de tres bien marcher
+
+%%%%%%%%%%%%%%%%%%% ENREGISTRER un FLUX STREAMING %%%%%%%%%%%%%%%%
+mplayer -dumpstream rtsp://streaming.od.tv-radio.com/france_inter/TETE/TETE20090903.rm
+ puis il faut transformer le stream.dump en mp3
+transformation d'abord en wav
+
+mplayer -ao pcm stream.dump
+
+mplayer -dumpstream -dumpfile henri.ogg -playlist http://www.tv-radio.com/ondemand/france_inter/HISTOIRE/HISTOIRE20091207.ram 
+
+
+%%%%%%%%%%%%% WEBCAM %%%%%%%%%%%%%%%%
+
+Install de la webcam
+
+Suivant le port USB ou est branchée la webcam je n'ai pas toujours 
+le voyant qui s'allume 
+# lsusb
+[...]
+Bus 003 Device 002: ID 0471:0307 Philips PCVC675K WebCam [pwc]
+[...]
+
+avec VLC on retrouve la webcam sur /dev/video0
+1§ 
+enregistrer un flux video avec vlc c'est possible mais je n'arrive pas a le lire avec mplayer
+
+2§
+ffmpeg -an -f video4linux -s 320x240  -r 15 -i /dev/video0 -vcodec mpeg4 -vtag DIVX out.avi
+marche lible par mplayer / vlc /totem
+
+-an = audio no
+
+Maintenant comment faire pour enregister le son?
+ffmpeg -f audio_device -i /dev/dsp -f video4linux -s 320x240  -r 15 -i /dev/video0 -vcodec mpeg4 -vtag DIVX out.avi
+
+avec la Creative 
+
+rmmod uvcvideo && modprobe uvcvideo
+/dev/video0 apparait
+xawtv -c /dev/video0 m'affiche la webcam
+Camstream ne marche pas 
+caminfo me trouve bien la webcam
+skype no device found 
+
+%%%%%%%%%%%%% FONT %%%%%%%%%%%
+
+Telecharger les fichiers .ttf. Les installer dans ~/.fonts
+puis $mkfontdir ~/.fonts
+puis
+$fc-cache et les fonts deviennent disponibles pour scribus, gimp
+
+
+%%%%%%%%%%%% AIDE PYTHON %%%%%% 
+%%%%%%%%%%%% PYTHONPATH %%%%%%%
+
+Comment ajouter des chemins au python path?
+
+J'ai ajouté un .pth sous /usr/lib/python2.4/site-package. 
+
+%%%%%% SOURCEFORGE.NET %%%%%%%%%
+
+Subversion Server:
+https://ophtagnu.svn.sourceforge.net
+
+Path to Repository:
+/svnroot/ophtagnu
+
+Ensuite pour récuperer les sources:
+$svn co https://ophtagnu.svn.sourceforge.net/svnroot/ophtagnu ~/sourceforgeworkcopy/ --username frouty
+A    /home/lfs/sourceforgeworkcopy/ophtagnu
+A    /home/lfs/sourceforgeworkcopy/ophtagnu/trunk
+A    /home/lfs/sourceforgeworkcopy/ophtagnu/trunk/connection.py
+A    /home/lfs/sourceforgeworkcopy/ophtagnu/trunk/GUI.py
+
+~/sourceforgeworkcopy/ représente le chemin ou est copié les
+sources. Si on ne met pas de chemin les sources sont installées sous
+./ophtagnu/ophtagnu.
+
+
+%%%%%%%%%% PYTHONCARD %%%%%
+
+pas moyen d'installer pythoncard qui me demande de désinstaller
+wxaddons. Je crois que wxaddons est important.
+
+%%%%%%%%%% VNC SERVER %%%%%%%%%%%%
+
+Demarrer le server 
+
+Tuer le server 
+vncserver -clean -kill :1
+Killing Xvnc process ID 12756
+
+Lire le log sur le server, installer les fichiers qui lui manque
+
+Ca marche mais il ne se passe rien sur l'ecran du PC controlé. 
+
+%%%%%% Connaitre sa version d'ubuntu %%%%%%
+
+$lsb_release -a
+
+%%%%%% CONNAITRE SA VERSION DE XORG %%%%%
+X -version
+
+%%%%%% CONVERTIR UN .CHM EN PDF %%%%%%
+
+Il faut installler chm2pdf, htmldoc, libchm-bin, python-chm
+
+ensuite chm2pdf --webpage fichier.chm 
+
+mais ça ne marche pas très bien. 
+
+%%%%%%%%%%%%%%%%  SSH  %%%%%%%
+
+ssh remotehostname par defaut suppose que l'on veut s'authentifier comme le meme utilisateur que celui de la machine locale. pour utiliser un user différent :
+ssh remoteusername@remotehostname
+
+pour faire de l'export display
+ssh -X remoteuser@remotehostname
+puis lancer l'application graphique. 
+
+%%%%% CUPS %%%%%
+
+sur le system local la ou est branchée l'imprimante:
+lpstat -d  : affiche la destination par defaut. C'est quoi cette destination. C'est l'imprimante par defaut.
+lpstat -p  : affiche  la liste des imprimantes
+
+Pour indiquer a cups l'imprimante par defaut:
+lpoptions -d nomimprimante
+
+http://localhost:631/help/options.html?TOPIC=Getting+Started&QUERY= fournit des informations sur les options d'impressions. 
+
+Comment imprimer d'un poste linux sur le réseau. 
+aptitude install cupsys-client
+editer /etc/cups/client.conf et rajouter la ligne : ServerName nom_serveur_impression.nom_domaine
+et là hop $lpstat -p me donne la liste de toutes les imprimantes. Et je la retrouve dans localhost:631 avec comme Device URI: ipp://192.168.2.50:631/printers/HP_LaserJet_1220
+
+http://www.cups.org/doc-1.1/sam.html#CLIENT_SERVER
+
+Sur le serveur cups, j'ai enlevé toutes les imprimantes. Puis j'en ai reinstallé une en choisissant celle qui est noté avec le port USB.
+Sur le client J'ai désinstallé puis réintaller cups-client. Il n'y a pas de fichier /etc/cups/client.conf. L'impression fonctionne avec evince, gedit.
+~$ lpstat -d
+no system default destination
+lfs@prony:~$ lpstat -a
+HP_1220 accepting requests since Wed 24 Jun 2009 08:12:54 PM NCT
+$ lpstat -p
+printer HP_1220 is idle.  enabled since Wed 24 Jun 2009 08:12:54 PM NCT
+$ lpstat -v
+device for HP_1220: ipp://192.168.2.50:631/printers/HP_1220
+
+Par contre sur le serveur j'ai: 
+# lpstat -v
+périphérique pour HP_1220 : hp:/usb/HP_LaserJet_1220?serial=00CNBK043795
+# lpq
+lpq: Erreur - aucune destination par défaut n’est disponible.
+Dans le serveur je suis allé mettre l'imprimante comme imprimante par défault. Et:
+# lpq
+HP_1220 est prête
+aucune entrée
+Et sur le client:
+$ lpq
+HP_1220 is ready
+no entries
+
+OK j'imprime à partir d'emacs sur le client. 
+
+%%%%% SCAN %%%%%
+
+Installation du scanner 
+aptitude install hplip
+hp-check qui me donne de nombreuses dependences manquantes. 
+install des dépendances manquantes
+
+puis pas moyen de lancer xsane qui marche uniquement en route
+hp-check me donne 
+[...] 
+Device Node /dev/bus/usb....
+ls -hal /dev/bus/usb me donne les droits et ce qu'il faut faire pour que $USER puisse utiliser le scanner
+
+%%%%%%%%%% COMMENT METTRE DES BOOKMARKS DANS UN PDF %%%%%%%%%%%%%%
+
+Comment faire que le document pdf s'ouvre a la derniere page lue.
+
+Acroread le fait automatiquement si Edit-->Preferences-->Document--> Restore
+last view setting when reopening. 
+
+Evince ferait la meme chose en tout cas pas chez moi.  
+
+On peut installer un javascript qui se trouve dans http://www.pdfhacks.com/bookmark_page/
+mais aussi localement dans acrobatreader-doc. Decompresser/installer
+sous /home/lfs/.adobe/Acrobat/8.0/JavaScripts et non pas sous
+/usr/lib/Adobe/Reader8/Reader/intellinux/plug_ins/Javascripts.
+
+%%%%%%%%%%%%%% INSTALLATION DE SKYPE SUR ETCH
+modifier /etc/apt/source.list
+
+deb http://download.skype.com/linux/repos/debian/ stable non-free
+
+%%%%%%%%%%%%% REALISATION DE SREENCAST %%%%%%%%%%%%%%%%%%%
+
+Istanbul Desktop Session Recorder
+La video est de bonne qualité au niveau du graphisme.
+pas de son 
+Il ne se passe rien quand on clique sur le bouton stop. Il y a un long temps d'attente avant que nous soit proposé l'enreistrement du screencast
+
+XvidCap
+il y a un carré rouge qui correspond a la zone qui sera sauvegardée. 
+ce n'est pas pratique du tout. On peut la redefinir en appuyant sur la petite icone pipette 
+Il y a le son
+
+08/08/2009: j'utilise gtk-recordmydesktop sous applications/sons-video
+
+%%%%%%%%%%%%% BACULA %%%%%%
+
+pour installer bacula j'ai du enlever tetexlive et remettre tetex. Je ne sais plus pourquoi j'ai enlevé tetex un jour et mis texlive à la place. 
+
+
+
+%%%%%%%%%%%% DICTIONNAIRE %%%%%%
+Pour modifier le dictionnaire ispell par defaut
+select-default-ispell
+
+Qu'est ce que les wordlist?
+pour choisir les wordlist par defaut select-default-wordlist
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+VFS: busy inodes on changed media.
+
+The workaround appears to be the following two steps, even if you have no CDROM in the drive at this point:
+
+1. Open Terminal
+2. sudo eject
+3. Let it eject and then push the button on your drive to pull the empty CD tray back in.
+4. sudo eject -t
+5. exit
+
+%%% RESEAU %%%%
+%%%% CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU
+$nmap -sP 192.168.2.0/24
+%%% CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU 
+%%% ET LES PORTS OUVERTS 
+$nmap 192.168.2.0/24 
+
+nmap appartient au paquet "nmap"
+
+#### SCRIPT au DEMARRAGE de la DEBIAN
+ecrire le script: 
+/home/lfs/scripts/monscript:
+
+#!/bin/bash
+invoke-rc.d networking restart
+ifdown eth0
+
+
+chmod +x monscript
+
+creer un lien 
+ln 
+
+%%%%%%%%%%%%%%%%%% EVOLUTION %%%%%%%%%%
+Pour avoir le spell checking installer aspell et 
+les dictionnaires aspell-fr, aspell-en ...qu'on veut
+et puis installer gnome-spell
+
+### CREER UNE IMAGE ISO D'UN LIVE CD DEBIAN
+1/ installer live_helper
+2/ mkdir live-debian && cd live-debian && su
+3/ lh_config -p xfce-desktop -a i386 -d lenny --mirror-bootstrap "http://ftp.nc.debian.org/debian/" --mirror-chroot "http://ftp.nc.debian.org/debian/" --mirror-chroot-security "http://ftp.nc.debian.org/debian-security/" --mirror-binary-security "http://ftp.nc.debian.org/debian-security/" && lh_build
+
+Je ne sais pas encore si ca marche il va falloir attendre.
+http://wiki.debian.org/DebianLive
+J'ai eu le message d'erreur:
+chroot/test-dev-null: Permission denied
+J'ai fait:
+ mount -o remount,dev /dev/hdc1
+hdc1 c'est la que se trouve mon repertoire de travail
+ lh_build
+Ca n'a pas marche. J'ai rajouté dans le fstab dev , exec 
+démonté/remonté 
+lh_build
+ca a marche mais l'image est trop grosse pour aller sur un cd
+
+ensuite 
+lh_config --bootstrap cdebootstrap --bootstrap-flavour minimal --packages "bsdmainutils procps klogd netbase iputils-ping sysklogd ifupdown update-inetd tcpd dhcp3-client whiptail openssh-server openssh-client partimage-server partimage" --apt-recommends disabled  --apt apt --tasksel none --linux-flavours 486 --distribution lenny --union-filesystem unionfs $LOCALOPTS && lh_build
+
+avec LOCALOPTS=" --mirror-binary http://ftp.nc.debian.org/debian/ --mirror-chroot http://ftp.nc.debian.org/debian/ --mirror-bootstrap http://ftp.nc.debian.org/debian/ --mirror-binary-security http://ftp.nc.debian.org/debian-security/ --mirror-chroot-security http://ftp.nc.debian.org/debian-security/"
+
+
+Mais je n'ai pas le francais
+Note to non US-keyboard users : you probably want to add the package console-common to the list (which will pull console-tools or kbd ). En fait il faut au boot entrer la commande live keyb=fr
+
+%%%%%%%%%%%%%%%%%%%%%% BACULA %%%%%%%%%%
+S'assurer que posgresql marche
+su postgres
+psql
+\l pour avoir la liste des databases
+\du meta-command is also useful for listing the existing roles. 
+change in Catalog Ressource:
+ dbname = "bacula"; dbuser = "bacula"; dbpassword = ****"venus"****
+#FDAddress = 127.0.0.1 -->   FDAddress = 192.168.2.20
+#FDAddress = 127.0.0.1 -->   FDAddress = 192.168.2.20
+invoke.rc bacula-fd(sd) restart
+mkdir /where/to/put/the/backup/volume/
+chown bacula:bacula /where/to/put/the/backup/volume/
+
+%%%%%%%%%%%%% SYNERGY %%%%%%%%%%%%%%%%%%%%%%%%%
+
+Démarrer le serveur (là ou est branché le clavier)
+$cd ~
+$ synergys -f --config synergy.conf
+
+Démarrer les clients
+ssh un_user@client
+ping prony
+synergyc -f server-host-name
+synergyc -f prony
+
+Ca n'a pas l'air de marcher si je suis deja en ssh. 
+
+%%%%%%%%%%%%%% NFS %%%%%%%%%%%%%%%
+je n'arrive pas a avoir de jolies icones avec nfsV4 dans 
+nautilus. 
+je passe a NFS. ca ne change rien. Il n'y pas d'icone spécifiques. 
+On retrouve dans le dossier partagé comme un autre dossier. 
+
+
+Avec NFS, l'acces d'un utilisateur à un dossier est déterminé par son
+appeatenance à un groupe (lequel ?) sur le client pas sur le serveur.
+
+%%% ecriture dans NFS %%%% 
+
+Sous route on ne peut pas dans un client ecrire dans un répertoire NFS
+il faut se mettre en user simple.  Et il faut aussi que dans
+etc/export il y ait "rw". Et il faut que le user du client soit le
+meme que le user du serveur.
+
+%%%%%% WRT54GL %%%%%%
+TODO
+%%%%%%%%%%%% OPHTANEWS
+news.ophtalmo.ne
+snof
+wab5t2
+
+%%% DVDRIP ----------------------------------------------------------
+Onglet "RIP Title":
+
+Specify chapter mode "No"
+
+----------------------------
+
+View selected title/chapter ne fonctionne pas
+
+-----------------------
+
+Onglet "Transcode"
+
+Video option : 
+video codec xvid4
+video framerate 25 fps
+2 pass encoding "yes"
+deinterlacing mode No deinterlacing
+filters : que faire?
+video bitrate calculation:
+target media one 650M
+
+Audio option:
+DVD audio track : 0:fr ac3 48khz 2 ch=>0
+target track: track #0
+bit/samplerate: 128kbit/s 48000 hz
+
+Transcode 
+
+%%%%%% MAIL 
+%% Utilisation de spambayes                                                                 
+                                                                                             
+Le script de démarrage de sb_server.py est /etc/init.d/spambayes                             
+Dans ce script est défini un répertoire /var/mail/.spambayes qui faut créer 
+Il appartient à facteur:mail je ne sais pas si c'est important
+mkdir /var/mail/.spambayes
+Puis  demarrer le serveur:                                                                    
+#invoke.rc spambayes start                                                                   
+affiche quelques messages d'erreur.                                                          
+ps -aux sb_server                                                                            
+root      5283  0.1  2.7  17364 14220 ?        S    07:37   0:23 /usr/bin/python /usr/bin/sb\
+_server.py                                                                                   
+root      8711  0.0  0.1   2880   752 pts/1    R+   12:45   0:00 grep sb_server              
+                                                                                             
+invoke.rc spambayes stop n'a pas l'air d'arreter sb_server.py.                               
+donc kill pid                                                                                
+                                                                                             
+Installation du package spambayes.                                                           
+                                                                                             
+#sb_server.py.                                                                               
+http://localhost:8880 dans un webbrowser me                                                  
+dit qu'il n'y a pas de pop3 prxie qui tourne. -> Configuration page                          
+saisir pop.aliceadsl.fr port 8110   
+
+----
+QS:
+dans le champ remote servers ont peut mettre plusieurs serveurs pop3.
+Moi j'ai un seul serveur pop3 (pop.monfai.fr) mais j'ai plusieurs "comp\
+tes"
+avec fetchmail j'avais
+poll pop.monfai.fr user "monusername%monfai.fr" passwd "ksjioura"
+poll pop.monfai.fr user "monautreusername%monfai.fr" passwd "kyuitra"
+Comment on fait pour renseigner le login et le password dans sb_server?
+Réponse:
+Dans l'interface Web, tu dis juste que le pop.monfai.fr est sur le port
+8110 (par exemple), le pop.monfai..fr sur 8111, etc...
+Ensuite dans fetchmail, tu n'indique plus ton FAI, mais 127.0.0.1, le
+port 8110 (pour fai1), mais tu laisse ton user et ton mdp.
+----
+Comment accéder à cette interface web depuis un PC distant.
+http://servername:8880 ne marche pas.
+
+
+%%%%%
+######
+Pour enregistrer une �mission:
+1 aller sur le lien de l'�mission
+2 bouton droit -->  Save link as
+3 Lire le fichier .ram cr�� et r�cup�rer son adresse rstp://...blabla/
+4 En ligne de commande taper:
+mplayer -dumpstream rtsp://a624.v107971150052460.c10797.g.vr.akamaistream.net/ondemand/7/624/10797/1150052460/franceinter.download.akamai.com/10797/france_inter/MASQUE/MASQUE.rm -nocache
+5 il n'y a pas de barre de progression mais un fichier stream.dump est cr�e dans le r�pertoire courant.
+
+###Pour récuperer les video de eyetube.
+Afficher le source
+rtmp: { url: '/assets_tube/flowplayer/flowplayer.rtmp-3.2.3.swf', netConnectionUrl: 'rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/'}, <-----ici c'est le chemin  
+		bwcheck: { url: '/assets_tube/flowplayer/flowplayer.bwcheck-3.2.5.swf', 
+		serverType: 'fms',
+		dynamic: true}
+	},
+	clip: {  
+		//scaling: 'fit',	
+	
+		urlResolvers: 'bwcheck',
+		provider: 'rtmp',
+		bufferLength: 4,
+		autoPlay:true,
+		bitrates: [
+		
+		{	url: "deved_1000kbps", bitrate: 1000, normal:true, isDefault:true }, <----ici c'est le fichier
+ 		{	url: "deved_748kbps", bitrate: 748, normal:true },
+		{	url: "deved_512kbps", bitrate: 512, normal:true }
+
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/trtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/deved_1000kbps -nocache
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/vonek_1000kbps -dumpfile basic_in_vitreoretinal_surgery.flv
+
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/sigim_1000kbps -dumpfile scleral-depression.flv
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/dosud_748kbps -dumpfile microincision.flv
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/gutun_748kbps -dumpfile microincision2.flv
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/hethe_748kbps -dumpfile posteriorvitreousdetachment.flv
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/benib_748kbps -dumpfile posteriorvitreousdetachment2.flv
+
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/hekoq_748kbps -dumpfile trocarremoval.flv
+mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/hagaj_748kbps -dumpfile trocarremoval2.flv
+
+#######
+Lemonde 
+www.lemonde.fr
+login:lfrancois-com@worldonline.fr
+password:j4bien26
+
+
+#####
+Comment savoir à quel group un utilisateur appartient
+
+~groups
+ou
+~id
+
+####
+Sudo comment ça marche?
+Il faut ajouter le user au group sudo
+#adduser user sudo
+
+####
+J'ai installé un paquetage. Je veux savoir ce qui a été installé sur machine:dpkg -L
+
+####
+Config post install de wireshark
+sudo addgroup -system wireshark
+sudo chown root:wireshark /usr/bin/dumpcap
+sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
+sudo usermod -a -G wireshark YOUR_USER_NAME
