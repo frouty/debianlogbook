@@ -634,7 +634,15 @@ Il faut ajouter le user au group sudo
 #adduser user sudo
 
 ####
-J'ai installé un paquetage. Je veux savoir ce qui a été installé sur machine:dpkg -L
+J'ai installé un paquetage. Je veux savoir ce qui a été installé sur machine:dpkg -l
+
+Je veux savoir les paquets backports intallés:
+
+aptitude search '?narrow(?version(CURRENT),?origin(Debian Backports))' -F '%100p'
+
+ou 
+
+dpkg -l  |awk '/^ii/ && $3 ~ /bpo[6-8]/ {print $2}'
 
 ####
 Config post install de wireshark
@@ -642,3 +650,26 @@ sudo addgroup -system wireshark
 sudo chown root:wireshark /usr/bin/dumpcap
 sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
 sudo usermod -a -G wireshark YOUR_USER_NAME
+
+###
+Comment connaitre la marque du disque dur en fonction de son /dev/name
+lsw -class disk
+Je ne trouve pas lsw
+###
+
+### nettoyage
+aptitude autoclean
+aptitude clean
+deborphan liste les paquets orophelins.
+deborphan --add-keep 'nom du paquet' que l'on veut garder.
+aptitude remove $(deborphan) pour se débarrasser des paquets orphelins.
+
+aptitude en mode interactif
+nouvelle vue liste --> puis taper "l" puis ~i puis "S" puis ~installsize
+
+###upadate wheezy to jessie.
+nettoyage de source.list.
+le backport-wheezy ne poserait pas de probleme.
+le debian-multimedia je ne sais pas 
+
+
