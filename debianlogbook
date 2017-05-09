@@ -1187,3 +1187,4 @@ usermod -a -G nomgroup1,nomgroup2 nomuser
 - 1 Menu / Administration / printers / Installable options / cocher duplex.
 - 2 Relancer libreoffice
 
+Par contre je n'ai pas eu ce probleme avec Okular.
