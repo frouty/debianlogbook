@@ -1179,3 +1179,11 @@ reboot
 ########
 Comment ajouter un user à un ou plusieurs groups:
 usermod -a -G nomgroup1,nomgroup2 nomuser
+
+
+# Linux Mint
+## problem d'impression recto-verso 
+
+- 1 Menu / Administration / printers / Installable options / cocher duplex.
+- 2 Relancer libreoffice
+
