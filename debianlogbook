@@ -1,3 +1,9 @@
+### COMMENT CREER UN MOT DE PASSE EN CLI
+## avec OPENSSL
+openssl rand -base64 14
+## avec gpg
+gpg --gen-random --armor 1 14
+
 %%%%%%%%%% INSTALL DEBIAN %%%%%%%%%%
 installation d'un system minimum avec le cd netinstall
 reboot
