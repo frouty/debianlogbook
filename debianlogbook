@@ -1,16 +1,16 @@
 Comment ajouter un user à un ou plusieurs groups:
 usermod -a -G nomgroup1,nomgroup2 nomuser
 
-###
-Probleme de bad password avec wicd 
+# Probleme de bad password avec wicd 
 
 pour régler le probleme: 
+```
 # apt-get remove network-manager
 #service wicd restart
+```
 
-####
 
-#list##### NFS V4
+# NFS V4
 
 On veut monter un répertoire réel :
 /home/users
@@ -38,28 +38,26 @@ On peut monter une partie de l'arbre:
 avec automount : cd /net/prony (nom du serveur tel qu'il est dans /etc/hosts/) ou son adresse ip.
 
 
-%%%%% 
-Intel® Graphics Media Accelerator X4500
-j'ai mis un xorg.conf avec vesa comme driver. 
 
-%%%%% MAC %%%%%
-Comment trouver l'adresse MAC d'une interface
+# MAC address
 
-  cat /sys/class/net/eth0/address 
+## Comment trouver l'adresse MAC d'une interface
+
+  `cat /sys/class/net/eth0/address`
 
 
-%%% FONCTIONNEMENT DU SERVEUR DE MAIL
+# FONCTIONNEMENT DU SERVEUR DE MAIL
 
 Les mails sont sur un serveur pop sur l'internet
 
 user@domain_emetteur.fr envoit un mail à toto@domain_receveur.fr. 
 
-1/Pour cela il utilise un MUA (mail user agent) pour écrire le message. 
-2/le MUA envoie le message au serveur de mail du FAI par SMTP.
-3/Le MTA (mail transfert agent) réceptionne le message et y applique un certains nombre de traitements.
-4/Le MTA fait une requete DNS (enregistrement MX) pour la recherche du serveur de mail rattaché au domaine "domain_receveur.fr"
-5/Le message est alors transmis via SMTP entre les deux MTA
-6/Si l'adresse correspond à un utilsateur valide (login ou alias), le second MTA stocke le messge localement pour que l'utilisateur demande à le lire.
+- 1 Pour cela il utilise un MUA (mail user agent) pour écrire le message. 
+- 2 le MUA envoie le message au serveur de mail du FAI par SMTP.
+- 3 Le MTA (mail transfert agent) réceptionne le message et y applique un certains nombre de traitements.
+- 4 Le MTA fait une requete DNS (enregistrement MX) pour la recherche du serveur de mail rattaché au domaine "domain_receveur.fr"
+- 5 Le message est alors transmis via SMTP entre les deux MTA
+- 6 Si l'adresse correspond à un utilsateur valide (login ou alias), le second MTA stocke le messge localement pour que l'utilisateur demande à le lire.
 
 Réception d'un mail:
 Dans la pluspart des cas 
@@ -444,7 +442,7 @@ http://localhost/drupal6/install.php) to populate the database. This is the pref
 login: frouty
 password : "comme d'habitude"
 
-%%%% GALLERY2
+# GALLERY2
 
 Créer un user séparé pour l'utilisation de gallery.
 
@@ -477,7 +475,7 @@ password "comme d'habitude"
 
 voir http://codex.gallery2.org/Gallery2:Security
 
-%%%%% WORDPRESS
+# WORDPRESS
 
 INSTALLATION DE MYSQL SERVER 
 
@@ -546,7 +544,7 @@ sml_user
 sml_password
 
 
-%%% INSTALL OPENERP
+# INSTALL OPENERP
 
 sudo apt-get install openerp-server openerp-client python2.5 python2.5-dev python-profiler  
 wget http://sourceforge.net/projects/pyxml/files/pyxml/0.8.4/PyXML-0.8.4.tar.gz
@@ -610,53 +608,11 @@ postgres=#
 
 OK ca marche. 
 
-istallation de openerpV6
-
-On installe les librairies python pour la version 5 et en plus on installe 
-aptitude search python-yaml python-mako python-hippocanvas
-pour vérifier que ca existe puis 
-sudo aptitude install python-yaml python-mako python-hippocanvas
-sudo aptitude install postgresql-client
-sudo dpkg -i openerp-server_6.0.1-0_all.deb 
-$ sudo locale-gen
-Generating locales (this might take a while)...
-  en_US.UTF-8... done
-  fr_FR.UTF-8... done
-Generation complete.
-lfs@woodin:~/Downloads$ locale -a
-C
-en_US.utf8
-fr_FR.utf8
-POSIX
-lfs@woodin:~/Downloads$ 
-
-
-Gestion des modules 
-Administration --> Modules 
-s'assurer que l'on a bien l'extended dans User-->Preferences interface
-Recliquer sur Administration pour rafraichir
-
-Comment connaitre sa version du serveur openerp.
-Help --> About
-
-aptitude search openerp-client
-Version: 6.0.1-0
-aptitude search openerp-server
-Version: 6.0.1-0
-
-Installation du web-client. 
-probleme avec la version 6.0.1.
-Je pense installer la version 6.0.0 sur http://www.openerp.com/download/stable/source/ 
-cd /openerp/openerp-web.6.0.0 
-python openerp-web.py
-localhost:8080 
-mais ca ne marche pas 
 
 
 
-
-%%%%% POSTGRESQL 
-Comment droper une database 
+# POSTGRESQL 
+## Comment droper une database?
 
 Drop database madatabase;
 
@@ -666,11 +622,11 @@ et kill -9 les procpid.
 
 puis Drop database madatabase;
 
-%%%% Conversion de wma en ogg 
+# Conversion de wma en ogg 
 ffmpeg -i 09\ Piste\ 9.wma -strict experimental -acodec vorbis -aq 100 09\ Piste\ 9.ogg
 
 
-%%%%%%%%% INSTALLATION DE SYSLINUX sur 
+# INSTALLATION DE SYSLINUX sur 
 une clef USB
 
 # mkdir /tmp/cdrom
@@ -692,48 +648,41 @@ Marche en utilisant le LIVECD rescuecd avec
 # sysresccd-usbstick copyfiles /dev/sdXn
 # sysresccd-usbstick syslinux /dev/sdXn
 
-%%%% CREATION d'un LIVE CD DEBIAN sur une Clef USB
+# CREATION d'un LIVE CD DEBIAN sur une Clef USB
 
+```
 #mkdir /tmp/isohybrid
-
 #cd /tmp/isohybrid
-
 #lb config --distribution squeeze --mirror-bootstrap http://debian.nautile.nc/debian --mirror-chroot-security http://debian.nautile.nc/debian-security/ --language fr --packages-lists "kde-full rescue" --bootappend-live "locales=fr_FR.UTF-8 keyboard-layouts=fr"
-
 #lb build
-
+```
 Marche pas avec testing le 170411
 
-%%%% COMMENT METTRE UN TIMESTAMP sur UN NOM DE FICHIER
+# COMMENT METTRE UN TIMESTAMP sur UN NOM DE FICHIER
 
 touch tempo.$(date +%Y%m%d-%Hh%M)
 
-%%% COMMENT CONNAITRE LE FSYSTEM D'UN DEVICE
+# COMMENT CONNAITRE LE FSYSTEM D'UN DEVICE
 fsarchiver probe simple
 ou plus élégant :
 blkid (du paquet util-linux
 mnemotechnique : blockID
 Donne aussi UUID
 
-%%%%% Fonts
+# Comment connaitre les UUID des disques
+ls /dev/disk/by-uuid -lha
+
+# Fonts
 fc-list
 fc-cache -fv – rebuilds cached list of fonts 
 dpkg-reconfigure fontconfig-config
 dpkg-reconfigure fontconfig
 
 
-%%%
-probleme avec le fichier /etc/initramfs-tools/conf.d/resume
-qui contient la ligne /dev/hda2. Ce device n'existe plus
-Je fais mv resume resume.ini
-Mais j'ai aussi fait aptitude reinstall initramfs-tools
-et update-initramfs -u mais sans résultat.
-
-
-%%%%% FS_UUID
+## FS_UUID
 If you run "blkid" with no flags it should show you all block devices with details including LABEL (if any), type and uuid. 
 
-%%% REPAIR GRUB2
+# REPAIR GRUB2
 J'ai un disque dur qui déconne. On peut le monter en disque dur externe USB mais on arrive pas à booter dessus en DD externe usb.
 Comment réparer le grub.
 
@@ -755,7 +704,7 @@ on enleve le USB key live
 et boot selection du DD externe et ca devrait marcher.  
 
 
-%%%%%%%% check md5sum
+# check md5sum
 md5sum -c package.tgz package.md5
 
 
@@ -764,22 +713,13 @@ PARTITION MANUELLE
 Si on utilise l'option guided use entire disk and set up encrypted LVM sur un DD de 1To la phase d'erasing les data est trop longue (plusieurs heures) donc on choisit manual. On crée une partition en ext3 bootable que l'on mount sur /boot. puis une nouvelle partition puis configure encrypted volume.
 puis on crée un volume groupe puis les partition / /home /opt /usr /var /tmp swap comme d'habitued 
 
-%%%%%%%%%%%%%%%%%%%%%%%
-Comment lister les paquets installés
+# Comment lister les paquets installé?
+`aptitude search ~i `
 
-aptitude search ~i 
+# HOST DISCOVERY
+`nmap -sP 192.168.2.1-254`
+`nmap -sP 192.168.2.0/24`
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-ape
-kooba{frere
-routeur
-
-
-%%%%% HOST DISCOVERY
-nmap -sP 192.168.2.1-254
-
-%%% Comment connaitre les UUID des disques
-ls /dev/disk/by-uuid -lha
 
 %%%%% TP-LINK 8810
 bridge.
@@ -801,13 +741,6 @@ J'essaie dos
 mais la carte n'est tjs pas lu par l'APN qui demande a ce qu'elle soit formatée.
 Sur une autre carte il y a bcp d'err et renommage auto de nombreux fichiers ca prend trois plombes.
 
-%%%%%%%%%
-dpkg-reconfigure dnet-common      
-
-
-%%%%%%
-281608@nautile.nc
-pft819
 
 %%%% Télécharger les video de eyetube.net
 login lau.francois@worldonline.fr
@@ -912,7 +845,7 @@ openjdk-7-jre
 et icedtea-plugin
 
 
-%%%%% EMACS
+# EMACS
 
 Gestion des paquet avec ELPA
 M-x package-list-packages
@@ -928,9 +861,7 @@ puis whitespace Line.
 
 
 
-%%%% PROBLEME DE CARTE SON SOUND
-Toutes mes cartes son n'étaient pas reconnues. Rien dans cat /proc/asound/cards
-#alsa force-reload et reboot a régler le probleme. 
+
 
 %%%%%%% COMPRENDRE L'ALIGNEMENT
 fdisk
@@ -1013,7 +944,7 @@ Création des logical volume:
 Creation d'un systeme de fichier:
 mkfs.ext4 -O extent -b 4096 -E stride=128,stripe-width=128 /dev/mapper/ssd-debian
 
-%%%%% RIP RIPPER LES DVD
+# RIP RIPPER LES DVD
 
 acidrip
 dvdrip
@@ -1097,31 +1028,18 @@ AMPOULE
 6V
 20WG4
  
-%%%%%% BEEP PILE TELECOMMANDE GARAGE 
-CR2032
+# CHMOD 
 
-
-%%%%%%%%%%  ZOTAC
-avec une wheezy probleme de driver 
-avec nouveau j'ai l'écran qui saute a cause de EDID
-avec le driver proprietaire nvidia j'ai un probleme de résolution avec le videoprojecteur
-
-Sous squeeze j'ai une souri tres lente sous XBMC. J'ai essayé  xbmc-standalone et ca n'y fait rien. 
-j'ai installé les paquets nvidia* de la debian et c'estg bon pourle curseur de la souri
-
-
-%%%%%% CHMOD %%%%%%%
-
-Recursively chmod directories only
+## Recursively chmod directories only
 June 19th, 2006
 
-find . -type d -exec chmod 755 {} \;
+`find . -type d -exec chmod 755 {} \;`
 
 This will recursively search your directory tree (starting at dir ‘dot’) and chmod 755 all directories only.
 
 Similarly, the following will chmod all files only (and ignore the directories):
 
-find . -type f -exec chmod 644 {} \;
+`find . -type f -exec chmod 644 {} \;`
 
 %%%%%%%%%%%%%%% ASUS TRANSFORMER TFT300T
  idVendor: 0b05
@@ -1176,8 +1094,7 @@ aptitude ne marche pas utiliser apt-get update et upgrade
 exit 
 reboot
 
-########
-Comment ajouter un user à un ou plusieurs groups:
+# Comment ajouter un user à un ou plusieurs groups ?
 usermod -a -G nomgroup1,nomgroup2 nomuser
 
 
@@ -1188,3 +1105,6 @@ usermod -a -G nomgroup1,nomgroup2 nomuser
 - 2 Relancer libreoffice
 
 Par contre je n'ai pas eu ce probleme avec Okular.
+
+# password generateur.
+`xkcdpass` il y a un paquet pour cela.
