@@ -1,4 +1,19 @@
-### COMMENT CREER UN MOT DE PASSE EN CLI
+# comment imprimer en ligne de commandes
+## obtenir des infos sur les imprimantes disponibles.
+`lpstat -a`
+`lpstat -d -p`
+## comment lancer une impression  
+lpr -P lenomdelaprinter -#2 /path/to/fle/to/print  
+-#2 deux exemplaire
+
+Mais attention on peut imprimer des pdf pas des odt.
+
+# Comment connaitre la taille des directories et subdirectories 
+ncdu 
+aptitude install ncdu.
+
+
+# COMMENT CREER UN MOT DE PASSE EN CLI
 ## avec OPENSSL
 openssl rand -base64 14
 ## avec gpg
@@ -31,7 +46,7 @@ Applications > System Tools > Configuration Editor > desktop > gnome >
 thumbnailers > application@pdf > uncheck enable. Do this for every
 file type you don't want to preview.
 
-%%% COMMENT MODIFIER SON EDITEUR PAR DEFAUT
+# COMMENT MODIFIER SON EDITEUR PAR DEFAUT
 
 sudo update-alternatives --config editor
 Password:
@@ -89,13 +104,13 @@ $cd workcopy
 $svn checkout file:///home/lfs/svn-repos/ophtagnu
 
 
-%%%%%%%%%% emacs %%%%%%%%%%
+# emacs
 
 Connaitre le load-path C-h v load-path
 
 Byte-compiler : M-x byte-compile-file
 
-%%%%%%%%% emacs calendar/ agenda %%%%%%%%%%%%%%
+## emacs calendar/ agenda 
 
 on se met dans le mode calendar. puis 
 
@@ -130,17 +145,23 @@ rajouter apres \documentclass[...]  \usepackage[utf8x]{inputenc}
 
 
 
-%%%%%%%%%%%%%%% EMACS HTML %%%%%%%%
+## EMACS HTML 
 Je ne trouve pas de mode pour éditer les fichiers HTML assez complet. 
 Installation du mode html-helper. Mai pas de coloration syntaxique
 
-%%% Emacs et les templates %%%%%%%%%%%%%%%
+## Emacs et les templates 
 
 <<<AUTHOR>>> = lfs@prony.venus.org
 <<<USER NAME>>> = laurent FRANCOIS
 
+## EMACS DICTIONNAIRE 
+Pour modifier le dictionnaire ispell par defaut
+select-default-ispell
 
-%%%% EMACS PYTHON ENCODING 
+Qu'est ce que les wordlist?
+pour choisir les wordlist par defaut select-default-wordlist
+
+## EMACS PYTHON ENCODING 
 
 Warning (:warning): Invalid coding system `UTF-8' is specified
 for the current buffer/file by the :coding tag.
@@ -148,38 +169,36 @@ It is highly recommended to fix it before writing to a file.
 
 Pas de majuscule pour UTF-8 mais utf-8
 
-%%%%% EMACS et .emacs
+## EMACS et .emacs
 
 pour évaluer les modifications faites sur le .emacs sans avoir a
 arréter puis relancer emacs : Alt-x eval-buffer
 
-%%%%%% SERVEUR DE NEWS %%%%%%%%%%%%%%%%%%%%
+## SERVEUR DE NEWS
 news.lacave.net
 login lfrancois.lacave
 psswd: alacro13
 
 
-%%%%%%% DYNDNS %%%%%%%%%%
-# inadyn -u frouty -p 123b654 -a kuendu.homelinux.com
+# DYNDNS 
+`\# inadyn -u frouty -p 123b654 -a kuendu.homelinux.com` 
 a l'air de tres bien marcher
 
-%%%%%%%%%%%%%%%%%%% ENREGISTRER un FLUX STREAMING %%%%%%%%%%%%%%%%
-mplayer -dumpstream rtsp://streaming.od.tv-radio.com/france_inter/TETE/TETE20090903.rm
- puis il faut transformer le stream.dump en mp3
-transformation d'abord en wav
+# ENREGISTRER un FLUX STREAMING 
+`mplayer -dumpstream rtsp://streaming.od.tv-radio.com/france_inter/TETE/TETE20090903.rm`
+ puis il faut transformer le stream.dump en mp3  
+transformation d'abord en wav  
 
 mplayer -ao pcm stream.dump
-
 mplayer -dumpstream -dumpfile henri.ogg -playlist http://www.tv-radio.com/ondemand/france_inter/HISTOIRE/HISTOIRE20091207.ram 
 
 
-%%%%%%%%%%%%% WEBCAM %%%%%%%%%%%%%%%%
+# WEBCAM 
 
-Install de la webcam
-
+Install de la webcam  
 Suivant le port USB ou est branchée la webcam je n'ai pas toujours 
-le voyant qui s'allume 
-# lsusb
+le voyant qui s'allume   
+\# lsusb
 [...]
 Bus 003 Device 002: ID 0471:0307 Philips PCVC675K WebCam [pwc]
 [...]
@@ -206,7 +225,7 @@ Camstream ne marche pas
 caminfo me trouve bien la webcam
 skype no device found 
 
-%%%%%%%%%%%%% FONT %%%%%%%%%%%
+# FONT 
 
 Telecharger les fichiers .ttf. Les installer dans ~/.fonts
 puis $mkfontdir ~/.fonts
@@ -214,11 +233,10 @@ puis
 $fc-cache et les fonts deviennent disponibles pour scribus, gimp
 
 
-%%%%%%%%%%%% AIDE PYTHON %%%%%% 
-%%%%%%%%%%%% PYTHONPATH %%%%%%%
+# AIDE PYTHON 
+## PYTHONPATH 
 
-Comment ajouter des chemins au python path?
-
+Comment ajouter des chemins au python path?  
 J'ai ajouté un .pth sous /usr/lib/python2.4/site-package. 
 
 %%%%%% SOURCEFORGE.NET %%%%%%%%%
@@ -258,14 +276,15 @@ Lire le log sur le server, installer les fichiers qui lui manque
 
 Ca marche mais il ne se passe rien sur l'ecran du PC controlé. 
 
-%%%%%% Connaitre sa version d'ubuntu %%%%%%
+# Connaitre sa version d'ubuntu 
 
-$lsb_release -a
+$lsb_release -a  
+marche pas en debian
 
-%%%%%% CONNAITRE SA VERSION DE XORG %%%%%
+# CONNAITRE SA VERSION DE XORG 
 X -version
 
-%%%%%% CONVERTIR UN .CHM EN PDF %%%%%%
+# CONVERTIR UN .CHM EN PDF 
 
 Il faut installler chm2pdf, htmldoc, libchm-bin, python-chm
 
@@ -273,7 +292,7 @@ ensuite chm2pdf --webpage fichier.chm
 
 mais ça ne marche pas très bien. 
 
-%%%%%%%%%%%%%%%%  SSH  %%%%%%%
+#  SSH  
 
 ssh remotehostname par defaut suppose que l'on veut s'authentifier comme le meme utilisateur que celui de la machine locale. pour utiliser un user différent :
 ssh remoteusername@remotehostname
@@ -282,7 +301,7 @@ pour faire de l'export display
 ssh -X remoteuser@remotehostname
 puis lancer l'application graphique. 
 
-%%%%% CUPS %%%%%
+# CUPS  
 
 sur le system local la ou est branchée l'imprimante:
 lpstat -d  : affiche la destination par defaut. C'est quoi cette destination. C'est l'imprimante par defaut.
@@ -327,7 +346,7 @@ no entries
 
 OK j'imprime à partir d'emacs sur le client. 
 
-%%%%% SCAN %%%%%
+# SCAN 
 
 Installation du scanner 
 aptitude install hplip
@@ -340,7 +359,7 @@ hp-check me donne
 Device Node /dev/bus/usb....
 ls -hal /dev/bus/usb me donne les droits et ce qu'il faut faire pour que $USER puisse utiliser le scanner
 
-%%%%%%%%%% COMMENT METTRE DES BOOKMARKS DANS UN PDF %%%%%%%%%%%%%%
+# COMMENT METTRE DES BOOKMARKS DANS UN PDF 
 
 Comment faire que le document pdf s'ouvre a la derniere page lue.
 
@@ -354,12 +373,8 @@ mais aussi localement dans acrobatreader-doc. Decompresser/installer
 sous /home/lfs/.adobe/Acrobat/8.0/JavaScripts et non pas sous
 /usr/lib/Adobe/Reader8/Reader/intellinux/plug_ins/Javascripts.
 
-%%%%%%%%%%%%%% INSTALLATION DE SKYPE SUR ETCH
-modifier /etc/apt/source.list
 
-deb http://download.skype.com/linux/repos/debian/ stable non-free
-
-%%%%%%%%%%%%% REALISATION DE SREENCAST %%%%%%%%%%%%%%%%%%%
+# REALISATION DE SREENCAST  
 
 Istanbul Desktop Session Recorder
 La video est de bonne qualité au niveau du graphisme.
@@ -379,12 +394,7 @@ pour installer bacula j'ai du enlever tetexlive et remettre tetex. Je ne sais pl
 
 
 
-%%%%%%%%%%%% DICTIONNAIRE %%%%%%
-Pour modifier le dictionnaire ispell par defaut
-select-default-ispell
 
-Qu'est ce que les wordlist?
-pour choisir les wordlist par defaut select-default-wordlist
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -398,35 +408,21 @@ The workaround appears to be the following two steps, even if you have no CDROM 
 4. sudo eject -t
 5. exit
 
-%%% RESEAU %%%%
-%%%% CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU
+# RESEAU %%%%
+## CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU
 $nmap -sP 192.168.2.0/24
-%%% CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU 
-%%% ET LES PORTS OUVERTS 
+##  CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU ET LES PORTS OUVERTS 
 $nmap 192.168.2.0/24 
 
 nmap appartient au paquet "nmap"
 
-#### SCRIPT au DEMARRAGE de la DEBIAN
-ecrire le script: 
-/home/lfs/scripts/monscript:
-
-#!/bin/bash
-invoke-rc.d networking restart
-ifdown eth0
-
-
-chmod +x monscript
-
-creer un lien 
-ln 
 
 %%%%%%%%%%%%%%%%%% EVOLUTION %%%%%%%%%%
 Pour avoir le spell checking installer aspell et 
 les dictionnaires aspell-fr, aspell-en ...qu'on veut
 et puis installer gnome-spell
 
-### CREER UNE IMAGE ISO D'UN LIVE CD DEBIAN
+# CREER UNE IMAGE ISO D'UN LIVE CD DEBIAN
 1/ installer live_helper
 2/ mkdir live-debian && cd live-debian && su
 3/ lh_config -p xfce-desktop -a i386 -d lenny --mirror-bootstrap "http://ftp.nc.debian.org/debian/" --mirror-chroot "http://ftp.nc.debian.org/debian/" --mirror-chroot-security "http://ftp.nc.debian.org/debian-security/" --mirror-binary-security "http://ftp.nc.debian.org/debian-security/" && lh_build
@@ -467,7 +463,7 @@ invoke.rc bacula-fd(sd) restart
 mkdir /where/to/put/the/backup/volume/
 chown bacula:bacula /where/to/put/the/backup/volume/
 
-%%%%%%%%%%%%% SYNERGY %%%%%%%%%%%%%%%%%%%%%%%%%
+# SYNERGY 
 
 Démarrer le serveur (là ou est branché le clavier)
 $cd ~
@@ -481,31 +477,13 @@ synergyc -f prony
 
 Ca n'a pas l'air de marcher si je suis deja en ssh. 
 
-%%%%%%%%%%%%%% NFS %%%%%%%%%%%%%%%
-je n'arrive pas a avoir de jolies icones avec nfsV4 dans 
-nautilus. 
-je passe a NFS. ca ne change rien. Il n'y pas d'icone spécifiques. 
-On retrouve dans le dossier partagé comme un autre dossier. 
 
-
-Avec NFS, l'acces d'un utilisateur à un dossier est déterminé par son
-appeatenance à un groupe (lequel ?) sur le client pas sur le serveur.
-
-%%% ecriture dans NFS %%%% 
-
-Sous route on ne peut pas dans un client ecrire dans un répertoire NFS
-il faut se mettre en user simple.  Et il faut aussi que dans
-etc/export il y ait "rw". Et il faut que le user du client soit le
-meme que le user du serveur.
-
-%%%%%% WRT54GL %%%%%%
-TODO
-%%%%%%%%%%%% OPHTANEWS
+# OPHTANEWS
 news.ophtalmo.ne
 snof
 wab5t2
 
-%%% DVDRIP ----------------------------------------------------------
+# DVDRIP 
 Onglet "RIP Title":
 
 Specify chapter mode "No"
@@ -534,8 +512,8 @@ bit/samplerate: 128kbit/s 48000 hz
 
 Transcode 
 
-%%%%%% MAIL 
-%% Utilisation de spambayes                                                                 
+# MAIL 
+## Utilisation de spambayes                                                                 
                                                                                              
 Le script de démarrage de sb_server.py est /etc/init.d/spambayes                             
 Dans ce script est défini un répertoire /var/mail/.spambayes qui faut créer 
@@ -620,24 +598,21 @@ mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_
 mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/hekoq_748kbps -dumpfile trocarremoval.flv
 mplayer -dumpstream rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/hagaj_748kbps -dumpfile trocarremoval2.flv
 
-#######
-Lemonde 
+# Lemonde 
 www.lemonde.fr
 login:lfrancois-com@worldonline.fr
 password:j4bien26
 
 
-#####
-Comment savoir à quel group un utilisateur appartient
+# Comment savoir à quel group un utilisateur appartient
 
 ~groups
 ou
 ~id
 
-####
-Sudo comment ça marche?
+# Sudo comment ça marche?
 Il faut ajouter le user au group sudo
-#adduser user sudo
+`\#adduser user sudo`
 
 ####
 J'ai installé un paquetage. Je veux savoir ce qui a été installé sur machine:dpkg -l
