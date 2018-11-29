@@ -15,10 +15,13 @@ aptitude install ncdu.
 
 
 # COMMENT CREER UN MOT DE PASSE EN CLI
+
 ## avec OPENSSL
 openssl rand -base64 14
+
 ## avec gpg
 gpg --gen-random --armor 1 14
+
 ## password generateur.
 `xkcdpass` il y a un paquet pour cela.
 
@@ -62,50 +65,6 @@ Il y a 5 alternatives fournissant ��editor��.
           2    /bin/ed
           3    /usr/bin/emacs21
 *+        4    /usr/bin/vim.python
-
-%%%%%%% UTILISATION DE SUBVERSION %%%%%%%%%%%%%
-
-Création du repository
-
-mkdir ~/svn-repos
-svnadmin create ~/svn-repos
-
-Importation du projet dans le repository:
-
-$cd /laoùestleprojet/ 
-$svn import -m "un message" . file:///home/lfs/svn-repos/ophtagnu/trunk
-
-%% Récupération des fichiers qui sont dans le répository dans le workdirectory
-%% Check out dans le workdirectory
-
-$mkdir ~/workcopy
-$cd ~/workcopy
-$svn co file:///home/lfs/svn-repos/ophtagnu/trunk ophtagnu
-
-co : checkout
-ophtagnu: répertoire ou on veut mettre la copie de travail dans le working directory. 
-
-Lorsque l'on est dans une workcopy on peut obtenir des informations
-sur l'origines des fichiers qui s'y trouvent. avec: $svn info
-
-Ensuite on fait des modifications des fichiers. Pour que svn puisse
-prendre en compte ces changements il faut faire: $svn commit -m "un
-message informatif" qui va charger les modifications dans le
-repository
-
-Si on crée un nouveau directory ,un nouveau fichier on le fait
-dans le working directory et puis on fait un svn add pour les placer
-sous gestionnaire de version.
- 
-%% Mise à jour du repository s'il y a modification dans le
-workdirectory
-
-%% J'ai fait une connerie dans mon workcopy. Je veux récupérer la derniere version
-Je recupere les fichiers contenu dans le svn-repository en faisant
-$mkdir workcopy (je crée le working directory)
-$cd workcopy
-$svn checkout file:///home/lfs/svn-repos/ophtagnu
-
 
 # emacs
 
@@ -391,32 +350,12 @@ Il y a le son
 
 08/08/2009: j'utilise gtk-recordmydesktop sous applications/sons-video
 
-%%%%%%%%%%%%% BACULA %%%%%%
-
-pour installer bacula j'ai du enlever tetexlive et remettre tetex. Je ne sais plus pourquoi j'ai enlevé tetex un jour et mis texlive à la place. 
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-VFS: busy inodes on changed media.
-
-The workaround appears to be the following two steps, even if you have no CDROM in the drive at this point:
-
-1. Open Terminal
-2. sudo eject
-3. Let it eject and then push the button on your drive to pull the empty CD tray back in.
-4. sudo eject -t
-5. exit
 
 # RESEAU %%%%
 ## CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU
 $nmap -sP 192.168.2.0/24
 ##  CONNAITRE LES ADRESSES IP DE TOUT LE RESEAU ET LES PORTS OUVERTS 
-$nmap 192.168.2.0/24 
-
+$nmap 192.168.2.0/24  
 nmap appartient au paquet "nmap"
 
 
@@ -469,9 +408,10 @@ chown bacula:bacula /where/to/put/the/backup/volume/
 # SYNERGY 
 
 Démarrer le serveur (là ou est branché le clavier)
+```
 $cd ~
 $ synergys -f --config synergy.conf
-
+```
 Démarrer les clients
 ssh un_user@client
 ping prony
@@ -1755,3 +1695,5 @@ Par contre je n'ai pas eu ce probleme avec Okular.
 
 
 
+# disk usage, disk space
+ncdu
