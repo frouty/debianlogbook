@@ -1131,3 +1131,23 @@ On utilise crontab pour éditer un crontab
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
 ```
+## j'ai un problem avec le script 
+- reboot
+c'est problement un probleme de variables d'environnement
+### Comment obtenir les variables d'environnement de cron?
+- rajouter `* * * * *  env > ~/cronenv `
+- cronenv 
+``̀`
+LANGUAGE=fr_FR:fr
+HOME=/root
+LOGNAME=root
+PATH=/usr/bin:/bin
+LANG=fr_FR.UTF-8
+SHELL=/bin/sh
+PWD=/root
+```
+`̀which reboot ` --> /sbin/reboot
+Donc il y a bien un probleme de variable. 
+Je rajoute dans le crontab -e : `30 6 * * 1-5 . $HOME/.zshrc; /sbin/reboot`
+On verra si cela reble le probleme demain matin. 
+
