@@ -1169,9 +1169,17 @@ https://stackoverflow.com/questions/22743548/cronjob-not-running
     0       2       *             *                *          root /usr/bin/finduser field c'est juste pour root. Pas de user field pour les autres users. 
 
 
-# Debian 10 
+# Debian 10 
 ifconfig deprecated 
 à la place `ip addr`
 
 ## su maintenant c'est su -
 
+
+# Dual screen
+## to be tested
+```
+sudo apt-get install --reinstall xserver-xorg-video-intel xserver-xorg-core
+sudo dpkg-reconfigure xserver-xorg
+```
+Je suis passé de debian 9 a debian 10 et cela a reglé mon probleme de dual screen donc je n'ai pas testé.
