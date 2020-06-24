@@ -1,4 +1,4 @@
-Comment ajouter un user à un ou plusieurs groups:
+# Comment ajouter un user à un ou plusieurs groups:
 usermod -a -G nomgroup1,nomgroup2 nomuser
 
 # Probleme de bad password avec wicd 
@@ -10,7 +10,18 @@ pour régler le probleme:
 ```
 
 
-# NFS V4
+# NFS V4
+## Obtenir version de nfs
+### Sur le client
+- 1 `#nfsstat -m` ou `nfsstat` ca marche sur le client. 
+- 2 `# mount` si on a type nfs4 alors version 4 si on a type nfs alors version 3
+
+### Sur le serveur
+rpcinfo -p | grep nfs
+La version est dans la deuxieme colonne. 
+
+
+
 
 On veut monter un répertoire réel :
 /home/users
@@ -37,10 +48,20 @@ On peut monter une partie de l'arbre:
 
 avec automount : cd /net/prony (nom du serveur tel qu'il est dans /etc/hosts/) ou son adresse ip.
 
+## maproot 
 
+maproot -> user1
+maproot -> group1 qd j'accede le freenas je l'accede en user1 et group1 sur le freenas.
 
+## montage sur le freenas du cabinet
+je vois que sur le client le repertoire est monté avec nobody:nogroup
+je mets sur le freenas le share avec mapall user : nobody et mapall group avec nogroup
+
+## montage sur le freenas @home
+j'ai un repertoire du freenas qui se monte sur saphir. 
+Mais a chaque fois qu'un fichier se crée il appartient à root.
+touch blabla.txt appartient à root:<leuser>
 # MAC address
-
 ## Comment trouver l'adresse MAC d'une interface
 
   `cat /sys/class/net/eth0/address`
@@ -1227,7 +1248,7 @@ $ . .bashrc
 $ python --version
 Python 3.5.3
 
-# Imprimante, hplip, hp-plugin
+# Imprimante, hplip, hp-plugin, printing
 j'ai eu un probleme pour installer l'imprimante. 
 Des problemes de dépendance
 dmesg avec des messages d'erreur venant de apparmor DENIED
@@ -1237,7 +1258,7 @@ Finalement j'ai fait :
 - Install apparmor utils : `sudo apt-get install apparmor-utils`
 - Run : `sudo aa-disable /usr/share/hplip/plugin.py`
 - Run as normal user, not as root: `hp-plugin`
-- Run `apt-get remove --purge apt-get remove --purge printer-driver-hpcups`
+- Run `apt-get remove --purge apt-get remove hp--purge printer-driver-hpcups`
 - Run `aptitude install hplip`
 Et finalement c'est bon. 
 
@@ -1245,6 +1266,11 @@ Et finalement c'est bon.
 - run cat /var/log/syslog
 - j'ai fait un uninstall/install xsane et libsane et finalement c'est bon.
 - mais en fait il faut d'abord faire : Acquire Preview puis Scan
+
+## uninstall hplip
+
+pour avoir la version minimale de hplip:
+https://developers.hp.com/hp-linux-imaging-and-printing/supported_devices/index
 
 
 # UID GID
@@ -1254,3 +1280,7 @@ Et finalement c'est bon.
 `awk -F: '{printf "%s:%s\n",$1,$3}' /etc/passwd`
 ## Comment changer son user ID
 `usermod -u [NEW_USER_ID] [USERNAME]`
+
+# Network 
+## Lister les interfaces 
+`ip link`
