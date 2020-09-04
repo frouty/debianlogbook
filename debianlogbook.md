@@ -1152,10 +1152,12 @@ On utilise crontab pour éditer un crontab
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
 ```
-## j'ai un problem avec le script 
+
+## j'ai un problem avec le script 
 - reboot
 c'est problement un probleme de variables d'environnement
-### Comment obtenir les variables d'environnement de cron?
+
+### Comment obtenir les variables d'environnement de cron?
 - rajouter `* * * * *  env > ~/cronenv `
 - cronenv 
 ``̀`
@@ -1183,7 +1185,8 @@ https://stackoverflow.com/questions/22743548/cronjob-not-running
   - commonly used is this suppression: 30 1 * * * command > /dev/null 2>&1
   - suppress > /dev/null 2>&1
   - add ̀>> cront.out 2&1` will append standard output and standard error to cron.out in the invoking user's home directory.
- ## syntax
+
+## syntax
 # Minute  Hour  Day of Month      Month         Day of Week    User Command    
 # (0-59) (0-23)   (1-31)    (1-12 or Jan-Dec) (0-6 or Sun-Sat)  
 
