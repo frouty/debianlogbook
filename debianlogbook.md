@@ -510,7 +510,7 @@ You should also check the permissions and ownership of the /var/lib/mysql direct
 While not mandatory, it is highly recommended that you set a password for the MySQL administrative "root" user. If this field is left blank, the password will not be changed. New password for the MySQL "root" user:   Je le laisse blank     
 
 pour se connecter
-#mysql -u root -p
+mysql -u root -p
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 40
@@ -571,7 +571,7 @@ sml_password
 
 sudo apt-get install openerp-server openerp-client python2.5 python2.5-dev python-profiler  
 wget http://sourceforge.net/projects/pyxml/files/pyxml/0.8.4/PyXML-0.8.4.tar.gz
-
+```
 cd PyXML-0.8.4/   
 sudo python2.5 setup.py install  
 mkdir -p /usr/lib/python2.5/site-packages/oldxml/_xmlplus/utils/
@@ -604,7 +604,7 @@ local all all ident sameuser to local all all trust
    
 # sudo /etc/init.d/postgresql-8.3 restart  
 # $ sudo /etc/init.d/openerp-server restart
-
+`̀ `
 On a donc crée un nouveau user openerp. On va se connecter avec 
 psql -U openerp -W
 $ psql -U openerp -W
