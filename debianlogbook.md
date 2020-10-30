@@ -1200,7 +1200,8 @@ https://stackoverflow.com/questions/22743548/cronjob-not-running
 `ifconfig` deprecated   
 à la place `ip addr`
 
-## su maintenant c'est su -
+## su 
+`su` maintenant c'est `su -`
 
 
 # Dual screen
@@ -1209,7 +1210,7 @@ https://stackoverflow.com/questions/22743548/cronjob-not-running
 sudo apt-get install --reinstall xserver-xorg-video-intel xserver-xorg-core
 sudo dpkg-reconfigure xserver-xorg
 ```
-Je suis passé de debian 9 a debian 10 et cela a reglé mon probleme de dual screen donc je n'ai pas testé.
+Je suis passé de debian 9 à debian 10 et cela a reglé mon probleme de dual screen donc je n'ai pas testé.
 
 # Choisir sa version de python
 
@@ -1234,16 +1235,20 @@ update-alternatives: using /usr/bin/python3.5 to provide /usr/bin/python (python
 ```
 Plus l'entier est haut plus c'est prioritaire.
 ```
-# python --version
+## Comment connaitre sa version de python
+```
+python --version
 Python 3.5.3
+```
 
-## Changement de version de python
+## Comment changer de version de python
+
 ```
 # update-alternatives --config python
 There are 2 choices for the alternative python (providing /usr/bin/python).
 ```
 
-## Si on veut changer localement pour un user.
+### Si on veut changer localement pour un user.
 In case you need to only change a python version selectively on per user basis, you may try to edit user's .bashrc file. For example to change to python version 3.5 execute the following linux commands:
 
 $ python --version
