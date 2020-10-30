@@ -1178,12 +1178,12 @@ On verra si cela regle le probleme demain matin.
 Non cela ne marche pas.
 https://stackoverflow.com/questions/22743548/cronjob-not-running
 
--1 vérifier que cron tourne : `ps aux | grep cron`
--2 `service cron start` `service cron restart`
--3 cron fonctionne :` * * * * * /bin/echo "cron works" >> ~/file.txt`
--4 `tail -f /var/log/messages` `tail -f /var/log/syslog`
--5 need to have write access to the file you are redirecting the output.
--6 do not rely on environment variables like PATH, as their value will likely not be the same under cron as under an interactive session
+- 1 vérifier que cron tourne : `ps aux | grep cron`
+- 2 `service cron start` `service cron restart`
+- 3 cron fonctionne :` * * * * * /bin/echo "cron works" >> ~/file.txt`
+- 4 `tail -f /var/log/messages` `tail -f /var/log/syslog`
+- 5 need to have write access to the file you are redirecting the output.
+- 6 do not rely on environment variables like PATH, as their value will likely not be the same under cron as under an interactive session
 - dont suppress output while debugging
   - commonly used is this suppression: 30 1 * * * command > /dev/null 2>&1
   - suppress > /dev/null 2>&1
