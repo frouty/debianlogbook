@@ -1158,7 +1158,7 @@ On utilise crontab pour éditer un crontab
 c'est problement un probleme de variables d'environnement
 
 ### Comment obtenir les variables d'environnement de cron?
-- rajouter `* * * * *  env > ~/cronenv `
+co- rajouter `* * * * *  env > ~/cronenv `
 - cronenv 
 
 ```
@@ -1212,21 +1212,27 @@ sudo dpkg-reconfigure xserver-xorg
 ```
 Je suis passé de debian 9 à debian 10 et cela a reglé mon probleme de dual screen donc je n'ai pas testé.
 
-# Choisir sa version de python
+# Comment changer de version de pythonChoisir sa version de python
 
-## system wide switch between python versions : update-alternatives
-
+## Comment connaitre sa version de python
 ```
-
+python --version
+Python 3.5.3
+```
+## liste des alternatives
+```
 # update-alternatives --list python
-update-alternatives: error: no alternatives for python
+/usr/bin/python2.7
+/usr/bin/python3.7
 ```
+
 ### List all options
 
 ```
 $ ls /usr/bin/python*
 /usr/bin/python  /usr/bin/python2  /usr/bin/python2.7  /usr/bin/python3  /usr/bin/python3.5  /usr/bin/python3.5m  /usr/bin/python3m
 ```
+
 ```
 # update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 update-alternatives: using /usr/bin/python2.7 to provide /usr/bin/python (python) in auto mode
@@ -1235,11 +1241,7 @@ update-alternatives: using /usr/bin/python3.5 to provide /usr/bin/python (python
 ```
 Plus l'entier est haut plus c'est prioritaire.
 
-## Comment connaitre sa version de python
-```
-python --version
-Python 3.5.3
-```
+
 
 ## Comment changer de version de python
 
@@ -1250,13 +1252,14 @@ There are 2 choices for the alternative python (providing /usr/bin/python).
 
 ### Si on veut changer localement pour un user.
 In case you need to only change a python version selectively on per user basis, you may try to edit user's .bashrc file. For example to change to python version 3.5 execute the following linux commands:
-
+```
 $ python --version
 Python 2.7.13
 $ echo 'alias python="/usr/bin/python3.5"' >> ~/.bashrc
 $ . .bashrc 
 $ python --version
 Python 3.5.3
+```
 
 # Imprimante, hplip, hp-plugin, printing
 j'ai eu un probleme pour installer l'imprimante. 
@@ -1284,7 +1287,7 @@ https://developers.hp.com/hp-linux-imaging-and-printing/supported_devices/index
 
 
 # UID GID
-## Lister les UID >1000
+## Lister les UID >1000
 `awk -F: '($3 >= 1000) {printf "%s:%s\n",$1,$3}' /etc/passwd`
 ## Lister les UID de tous les user
 `awk -F: '{printf "%s:%s\n",$1,$3}' /etc/passwd`
