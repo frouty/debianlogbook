@@ -1154,13 +1154,14 @@ On utilise crontab pour éditer un crontab
 ```
 
 ## j'ai un problem avec le script 
-- reboot
+- reboot  
 c'est problement un probleme de variables d'environnement
 
 ### Comment obtenir les variables d'environnement de cron?
 - rajouter `* * * * *  env > ~/cronenv `
 - cronenv 
-``̀`
+
+```
 LANGUAGE=fr_FR:fr
 HOME=/root
 LOGNAME=root
@@ -1169,7 +1170,8 @@ LANG=fr_FR.UTF-8
 SHELL=/bin/sh
 PWD=/root
 ```
-`̀which reboot ` --> /sbin/reboot
+`which reboot` --> /sbin/reboot
+
 Donc il y a bien un probleme de variable. 
 Je rajoute dans le crontab -e : `30 6 * * 1-5 . $HOME/.zshrc; /sbin/reboot`
 On verra si cela regle le probleme demain matin. 
@@ -1233,7 +1235,6 @@ Plus l'entier est haut plus c'est prioritaire.
 ```
 # python --version
 Python 3.5.3
-```
 
 ## Changement de version de python
 ```
