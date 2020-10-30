@@ -1197,7 +1197,7 @@ https://stackoverflow.com/questions/22743548/cronjob-not-running
 
 
 # Debian 10 
-ifconfig deprecated 
+`ifconfig` deprecated   
 à la place `ip addr`
 
 ## su maintenant c'est su -
