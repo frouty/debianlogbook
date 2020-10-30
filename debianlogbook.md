@@ -604,7 +604,7 @@ local all all ident sameuser to local all all trust
    
 # sudo /etc/init.d/postgresql-8.3 restart  
 # $ sudo /etc/init.d/openerp-server restart
-`̀ `
+```
 On a donc crée un nouveau user openerp. On va se connecter avec 
 psql -U openerp -W
 $ psql -U openerp -W
