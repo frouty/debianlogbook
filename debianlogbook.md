@@ -1177,6 +1177,7 @@ Je rajoute dans le crontab -e : `30 6 * * 1-5 . $HOME/.zshrc; /sbin/reboot`
 On verra si cela regle le probleme demain matin. 
 Non cela ne marche pas.
 https://stackoverflow.com/questions/22743548/cronjob-not-running
+
 -1 vérifier que cron tourne : `ps aux | grep cron`
 -2 `service cron start` `service cron restart`
 -3 cron fonctionne :` * * * * * /bin/echo "cron works" >> ~/file.txt`
