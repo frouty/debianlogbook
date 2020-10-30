@@ -1234,7 +1234,7 @@ update-alternatives: using /usr/bin/python2.7 to provide /usr/bin/python (python
 update-alternatives: using /usr/bin/python3.5 to provide /usr/bin/python (python) in auto mode
 ```
 Plus l'entier est haut plus c'est prioritaire.
-```
+
 ## Comment connaitre sa version de python
 ```
 python --version
