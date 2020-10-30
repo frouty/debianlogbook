@@ -330,15 +330,24 @@ C'est moins efficace que directement mais permet l'expansion des local aliases e
 
 
 
-
-%%%% COMMENT CONNAITRE LES UTILISATEUR SUR UN SYSTEME
-Pour décrire un utilisateur : chfn
+# Group et user
+##  Comment connaitre les utilisateurs sur un systeme
+## Changer les informations d'un user
+`chfn`
 Cette commande permet d'indiquer dans le champ numéro 5 du fichier /etc/passwd différentes informations sur un utilisateur, son nom complet, son bureau, ses numeros de téléphone (séparées par des virgules). 
 
-Pour examiner les valeurs par défaut appliquées par useradd :
+## Pour examiner les valeurs par défaut appliquées par useradd :
 commande useradd -D ou éditer /etc/default/useradd 
 
-%%%% SKYPE 
+## Connaitre ses groupes 
+id
+ou
+groups nomutilisateur
+
+## Comment se rajouter à un groupe 
+usermod -a -G groupe user
+
+# SKYPE 
 Pas facile d'installer la version 64bits de skype
 version 2.1.0.81
 Probleme avec pulseaudio en installant j'ai reussi à regler mes probleme s de son que j'avais avec amarok. Mais par contre plus de son avec skype.
@@ -346,15 +355,8 @@ Pour réobtenir le son avec skype il faut faire un killall pulseaudio. Ensuite p
 malgres killall pulseaudio :
 lfs       4565  0.1  0.1 211728  5628 pts/0    Tl   07:01   0:00 pulseaudio
 
-%%%% Connaitre ses groupes %%%%%
-id
-ou
-groups nomutilisateur
 
-%%% Comment se rajouter à un groupe 
-usermod -a -G groupe user
-%%% APACHE2 %%%%
-Connaitre sa version d'apache: TODO
+# Apache
 
 httpd est en mode démon. Lorsqu'il est invoqué il lit le fichier de config /etc/apache2/httpd.conf. On peut alors utiliser un navigateur pour se connecter au serveur, et afficher la page de de test située dans le répertoire définie par la directive "DocumentRoot"
 
@@ -455,7 +457,7 @@ Il est parfois nécessaire de permettre un accés web à des parties du systeme 
 On peut utiliser des liens symboliques. Pour des raisons de sécurité Apache va suivre les liens symboliques uniquement si Options pour le directory en question contient FollowSymlinks ou SymLinksIfOwnerMatch.
 On peut utiliser la directive Alias va mapper n'importe qu'elle partie du systeme de fichier sur le web. par exemple avec Alias /docs /var/web, http://my.host.com/docs/dir/file.html sera servi à partir de /var/web/dir/file.html. 
 
-%%%%  DRUPAL6
+# DRUPAL6
 
 aptitude install php5-pgsql drupal6
 http://localhost/drupal6/install.php) to populate the database. This is the preferred method in drupal 6.x and upper.
@@ -860,8 +862,7 @@ rtmpdump -o vers-union-fiscale-europenne.flv -r "rtmp://artestras.fcod.llnwd.net
 
 rtmpdump -o retour-au-chateau-1-7.flv -o 'rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/EUR_DE_FR/arteprod/A7_SGT_ENC_08_046311-001-B_PG_HQ_FR?h=c289243c24f01a6874035a7d01488998'
 
-%%%% INSTALLATION DE JAVA
-
+# INSTALLATION DE JAVA
 openjdk-7-jre 
 et icedtea-plugin
 
@@ -884,7 +885,7 @@ puis whitespace Line.
 
 
 
-%%%%%%% COMPRENDRE L'ALIGNEMENT
+# COMPRENDRE L'ALIGNEMENT
 fdisk
 /dev/sda
 head 255
@@ -971,7 +972,7 @@ acidrip
 dvdrip
 handbrake
 
-%%%%% PLAN de BATAILLE POUR AUGMENTER LE STOCKAGE SUR LES SERVEURS
+# PLAN de BATAILLE POUR AUGMENTER LE STOCKAGE SUR LES SERVEURS
 
 L'OS est installé sous /dev/hdc
 hdc1 /boot
@@ -991,11 +992,11 @@ Il faut récupérer les films du DD de la videobox qui n'ont pu etre récupéré
 Avant de pouvoir utiliser le hdd1 il faut récupérer le dir dvdrp-data
 
 
-%%%%%%% CHROOT %%%%
+# CHROOT
 problem avec le sysrescuecd
 % chroot /host 
 chroot: failed to run command `/bin/zsh': No such file or directory
-cet erreur a une mauvaise configuration de la variable shell
+cet erreur  est du à une mauvaise configuration de la variable shell
 This type of error is due to the wrong setting of the SHELL variable.
 
 root@sysresccd /root % echo $SHELL
@@ -1006,46 +1007,31 @@ root@sysresccd /root % echo $SHELL
 
 Now you can chroot ! 
 
-%%%% TASK LIST OFF LINE
+# TASK LIST OFF LINE
 
-remember the milk pas de off line depuis html5
+- remember the milk pas de off line depuis html5
 
-toodledo tres vite on depasse les possibilité du free
+- toodledo tres vite on depasse les possibilité de la version gratuite
 
-plancake ne marche plus en offline des que l'on ferme le browser
+- plancake ne marche plus en offline des que l'on ferme le browser
 
-todolist
+- todolist
 
-Google task la technique avec l'onglet dans TB ne marche pas offline.
+- Google task la technique avec l'onglet dans TB ne marche pas offline.
 pas moyen d'avoir l'adresse ics du calendrier associé.
 C'est bien car pas besoin de due date mais pas de offline.
 
-Coolendar c'est pas mal se lie bien avec TB car il y a un lien ics qui permet d'avoir un calendrier qui fonctionne bien en cache. Le probleme c'est que c'est un calendrier et que c'est pas pratique pour des taches que je n'ai pas de date pour les terminer.en fait bodf ne se synchrsosie pas tres bien avec TB
+- Coolendar c'est pas mal se lie bien avec TB car il y a un lien ics qui permet d'avoir un calendrier qui fonctionne bien en cache. Le probleme c'est que c'est un calendrier et que c'est pas pratique pour des taches que je n'ai pas de date pour les terminer.en fait bodf ne se synchrsosie pas tres bien avec TB
 
 Ne se lie pas bien avec google calendar. 
 
 
 
-%%%%%%%%%%%% MYSQL PASSWORD
+# MYSQL PASSWORD
 New password pour Mysql 'root' user : 123b654
-%%%%%
 
-pourquoi 
 
-ruby*
-dwb
-tango*
-fts
-libtk-pod-perl
-qhid
-phone*
-vdr
-valgrind
-xcp
-
-%%%%%%%%%%%%%%%%%%
-
-AMPOULE 
+# AMPOULE 
 6V
 20WG4
  
@@ -1062,12 +1048,9 @@ Similarly, the following will chmod all files only (and ignore the directories):
 
 `find . -type f -exec chmod 644 {} \;`
 
-%%%%%%%%%%%%%%% ASUS TRANSFORMER TFT300T
- idVendor: 0b05
-idProduct: 4c80
-
-
-%%%%%
+# ASUS TRANSFORMER TFT300T
+- idVendor: 0b05
+- idProduct: 4c80
 
  ┌─────────────────────────────────────────────────────────────────────────────┤ Configuring backuppc ├─────────────────────────────────────────────────────────────────────────────┐                                
                                │ Web administration default user created
@@ -1077,15 +1060,15 @@ idProduct: 4c80
 
 
 
-PROBLEME avec GRUB2
-Cette methode ne marche pas si pas de connection internet"
+# PROBLEME avec GRUB2
+Cette methode ne marche pas si pas de connection internet
 J'avais fait une mise à jour par aptitude safe-upgrade et je n'arrivais plus à booter sur le server. 
 
 un cd live de debian. 
 
 
 qui n'est pas dans le live.   	      
-blkid pour avoir une idée des partitions et savoir ce qu'il faut monter
+`blkid` pour avoir une idée des partitions et savoir ce qu'il faut monter
 
 setxkbmap fr
 mount /dev/sda3 /mnt
@@ -1098,7 +1081,7 @@ exit
 halt
 enlever l'usblive
 
-PROBLEME AVEC UNE INSTALLATION QUI EST CASSEE
+# PROBLEME AVEC UNE INSTALLATION QUI EST CASSEE
 
 boot sur un livecd
 
