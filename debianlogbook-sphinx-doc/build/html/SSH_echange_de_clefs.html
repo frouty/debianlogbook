@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSH et échange de clefs &#8212; Debian logbook V1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Debian logbook’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="ssh-et-echange-de-clefs">
+<h1>SSH et échange de clefs<a class="headerlink" href="#ssh-et-echange-de-clefs" title="Permalink to this headline">¶</a></h1>
+<p>Par défaut la connection ssh se fait avec un mot de passe. Cette méthode d’authentification n’est pas la plus sure.
+Il est conseillé de se connecter en utilisant l’authentification par échange de clefs.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Sur le l’ordinateur qui va lancer la commande SSH:</dt><dd><ul>
+<li><p>~/.ssh/id_xxx la clef privée</p></li>
+<li><p>~/.ssh/id_xxx.pub la clef publique.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Sur l’ordinateur distant, le server:
+-  ~/.ssh/authorized_keys : liste des clefs publiques autorisées pour se connecter à l’utilisateur. C’est là que l’on va mettre les clefs publiques.</p></li>
+</ul>
+<div class="section" id="generer-la-paire-de-clef-sur-le-pc-local">
+<h2>Génerer la paire de clef sur le pc local<a class="headerlink" href="#generer-la-paire-de-clef-sur-le-pc-local" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ssh-keygen -t ed25519 ou</p></li>
+<li><p>ssh-keygen -t rsa -b 4096</p></li>
+<li><p>entrer une passphrase.</p></li>
+</ul>
+</div>
+<div class="section" id="transferer-la-clef-publique-sur-le-serveur-distant">
+<h2>Transferer la clef publique sur le serveur distant<a class="headerlink" href="#transferer-la-clef-publique-sur-le-serveur-distant" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>ssh-copy-id &lt;username&gt;&#64;ip_du_serveur.</p>
+</div></blockquote>
+<p>La clef publique est copiée dans le fichier ~/.ssh/authorized_keys sur le serveur distant</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Debian logbook</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SSH et échange de clefs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generer-la-paire-de-clef-sur-le-pc-local">Génerer la paire de clef sur le pc local</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transferer-la-clef-publique-sur-le-serveur-distant">Transferer la clef publique sur le serveur distant</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Debian logbook’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Laurent FRANCOIS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/SSH_echange_de_clefs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
