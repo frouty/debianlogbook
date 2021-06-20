@@ -632,8 +632,6 @@ postgres=#
 OK ca marche. 
 
 
-
-
 # POSTGRESQL 
 ## Comment droper une database?
 
@@ -651,7 +649,7 @@ ffmpeg -i 09\ Piste\ 9.wma -strict experimental -acodec vorbis -aq 100 09\ Piste
 
 # INSTALLATION DE SYSLINUX sur 
 une clef USB
-
+```
 # mkdir /tmp/cdrom
 # mount -o loop,exec /path/to/systemrescuecd-x86-x.y.z.iso /tmp/cdrom
 # cd /tmp/cdrom
@@ -660,17 +658,17 @@ une clef USB
 # ./usb_inst.sh format /dev/sdx1
 # ./usb_inst.sh copyfiles /dev/sdx1
 # ./usb_inst.sh syslinux /dev/sdx1
-
+```
 ne marche pas 
 
 Marche en utilisant le LIVECD rescuecd avec 
-
+```
 # sysresccd-usbstick listdev to see which devices are seen as USB-sticks
 # sysresccd-usbstick writembr /dev/sdX
 # sysresccd-usbstick format /dev/sdXn
 # sysresccd-usbstick copyfiles /dev/sdXn
 # sysresccd-usbstick syslinux /dev/sdXn
-
+```
 # CREATION d'un LIVE CD DEBIAN sur une Clef USB
 
 ```
@@ -731,7 +729,7 @@ et boot selection du DD externe et ca devrait marcher.
 md5sum -c package.tgz package.md5
 
 
-%%%%% INSTALL DE DEBIAN 
+# INSTALL DE DEBIAN 
 PARTITION MANUELLE
 Si on utilise l'option guided use entire disk and set up encrypted LVM sur un DD de 1To la phase d'erasing les data est trop longue (plusieurs heures) donc on choisit manual. On crée une partition en ext3 bootable que l'on mount sur /boot. puis une nouvelle partition puis configure encrypted volume.
 puis on crée un volume groupe puis les partition / /home /opt /usr /var /tmp swap comme d'habitued 
@@ -744,20 +742,20 @@ puis on crée un volume groupe puis les partition / /home /opt /usr /var /tmp sw
 `nmap -sP 192.168.2.0/24`
 
 
-%%%%% TP-LINK 8810
+# TP-LINK 8810
 bridge.
 pour communiquer avec le modem en bridge on peut le brancher rj45 en direct sur un pc et ping 192.168.1.1
 
 firmware :3.06L.03-T1.0a-091210.A2pB023k.d17m
 
-%%%% FLASH PLAYER 
+# FLASH PLAYER 
 mise a jour : # update-flashplugin-nonfree --install
 connaitre sa version de 
 #strings /usr/lib/flashplugin-nonfree/libflashplayer.so|grep -i flashplayer_  
 
-%%%% NIKON
+# NIKON
 avant de faire les manips sur la carte 
-#dd if=/dev/sdX of=/tmp/r1 bs=512
+`#dd if=/dev/sdX of=/tmp/r1 bs=512`
 
 probleme avec les cartes compact flash qui ne veulent plus etre lue dans l'APN
 J'essaie dos
@@ -765,7 +763,7 @@ mais la carte n'est tjs pas lu par l'APN qui demande a ce qu'elle soit formatée
 Sur une autre carte il y a bcp d'err et renommage auto de nombreux fichiers ca prend trois plombes.
 
 
-%%%% Télécharger les video de eyetube.net
+# Télécharger les video de eyetube.net
 login lau.francois@worldonline.fr
 password habituel
 recuperer le sources; trouver le code plugins: { 		
@@ -811,7 +809,7 @@ rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/forub_1000kbps
 rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/locri_1000kbps
 
 
-COMMENT TELECHARGER SUR ARTE+7
+# COMMENT TELECHARGER SUR ARTE+7
 aller sur la page de l'émission à telécharger 
 view source
 rechercher quelque chose du genre :videorefFileUrl=http%3A%2F%2Fvideos.arte.tv%2Ffr%2Fdo_delegate%2Fvideos%2Fle_dessous_des_cartes-6590276%2Cview%2CasPlayerXml.xml"
@@ -1280,3 +1278,12 @@ https://developers.hp.com/hp-linux-imaging-and-printing/supported_devices/index
 # Network 
 ## Lister les interfaces 
 `ip link`
+
+# gestion des paquet - apt
+## lister les dependances
+### apt_rdepends
+- apt-cache depends <nomdupaquet>
+- apt-cache rdepends <nomdupaquet>
+### debtree
+## générer le source list
+https://debgen.simplylinux.ch/index.php?generate
