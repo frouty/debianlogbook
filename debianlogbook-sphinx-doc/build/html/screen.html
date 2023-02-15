@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HPLIP &#8212; Debian logbook V1.0 documentation</title>
+    <title>Screen &#8212; Debian logbook V1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -14,8 +14,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Dash" href="dash-dock.html" />
-    <link rel="prev" title="Comment obtenir la valeur numérique des permissions d’un fichier?" href="Valeur-Numerique-Permission.html" />
+    <link rel="prev" title="Enigmail" href="enigmail.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -29,15 +28,23 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="hplip">
-<h1>HPLIP<a class="headerlink" href="#hplip" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="error-system-tray">
-<h2>Error system tray<a class="headerlink" href="#error-system-tray" title="Permalink to this headline">¶</a></h2>
-<p>No system tray detecded on this system</p>
-<p>Sur Bulleye debian</p>
-<p>Longuement discuté ici :
-<a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=793675">https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=793675</a></p>
-<p>j’ai rajouté NoShowIn=GNOME dans /etc/xdg/autostart/hplip-systray.desktop. Ca ne marche pas.</p>
+  <div class="section" id="screen">
+<h1>Screen<a class="headerlink" href="#screen" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creer-un-screen">
+<h2>Créer un screen<a class="headerlink" href="#creer-un-screen" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">screen</span> <span class="o">-</span><span class="n">S</span> <span class="n">nomdescreen</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="detacher-un-screen">
+<h2>Détacher un screen<a class="headerlink" href="#detacher-un-screen" title="Permalink to this headline">¶</a></h2>
+<p>il n’est plus affiché mais reste actif. Et on peut s’y rattacher à nouveau</p>
+</div>
+<div class="section" id="rattacher-un-screen">
+<h2>Rattacher un screen<a class="headerlink" href="#rattacher-un-screen" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">screen</span> <span class="o">-</span><span class="n">r</span> <span class="n">nondescreen</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -62,10 +69,7 @@
 <li class="toctree-l1"><a class="reference internal" href="SSH_echange_de_clefs.html">SSH et échange de clefs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gestion_des_paquets.html">Comment savoir si un paquet est installé</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Valeur-Numerique-Permission.html">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">HPLIP</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#error-system-tray">Error system tray</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="hplip.html">HPLIP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dash-dock.html">Dash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="password.html">Password generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regex.html">Regex</a></li>
@@ -75,14 +79,19 @@
 <li class="toctree-l1"><a class="reference internal" href="lvm.html#comprendre-lvm">Comprendre LVM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="permissions.html">Permissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enigmail.html">Enigmail</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Screen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creer-un-screen">Créer un screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#detacher-un-screen">Détacher un screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rattacher-un-screen">Rattacher un screen</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="Valeur-Numerique-Permission.html" title="previous chapter">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
-      <li>Next: <a href="dash-dock.html" title="next chapter">Dash</a></li>
+      <li>Previous: <a href="enigmail.html" title="previous chapter">Enigmail</a></li>
   </ul></li>
 </ul>
 </div>
@@ -108,7 +117,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
       
       |
-      <a href="_sources/hplip.rst.txt"
+      <a href="_sources/screen.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

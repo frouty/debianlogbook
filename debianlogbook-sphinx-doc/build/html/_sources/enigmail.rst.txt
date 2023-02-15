@@ -1,5 +1,41 @@
+
 Enigmail
-========
+########
+
+Gestion des clefs sous debian bulleye gnome
+*******************************************
+
+help
+====
+
+`ici pour trouver de l'aide <https://help.gnome.org/users/seahorse/stable/index.html.en\#pgp-keys>`_
+
+Les principes
+=============
+
+- 1 création de la clef publique et privée GPG
+- 2 Configurer Evolution pour qu'il utilise cette paire de clef:
+    Clique Droit sur le nom du compte / Security
+    On recupere le key ID dans seahorse.
+    On a un tout un tas de parametres à configurer
+- 3 dans evolution dans la barre d'outils on a des icones pour parametre le pgg de chaque mail et le menu option pour choisir l'encryption.
+
+Gestions des clefs sur plusieurs pc's
+=====================================
+Il faut que j'ai les memes clefs sur différents pc's sinon cela ne va pas marcher
+
+`voir ici <https://askubuntu.com/questions/32438/how-to-share-one-pgp-key-on-multiple-machines>`_
+
+Comment supprimer un compte dans evolution
+==========================================
+Dans Edit / Preferences
+ou keyboard shortcut Ctl-Shift-S
+Peut etre il faut se mettre offline (en bas dans le coin à gauche)
+
+Ajout d'accounts dans evolution
+===============================
+
+J'ai utilise les fonctions de Settings / Online Account de gnome. Du coup il n'y a rien à faire dans evolution
 
 Key Management
 --------------
@@ -15,7 +51,7 @@ Je n'ai pas trouvé les clefs que j'avais mises en place avec manjaro
 
 
 Comment faire des clefs?
------------------------
+------------------------
 `gpg --gen-key` 
 Je vois dans ~/.gnupg :
 
@@ -31,8 +67,6 @@ Je vois dans ~/.gnupg :
 ├── pubring.kbx~
 └── trustdb.gpg
 
-
-
 Lister les clefs publiques
 --------------------------
 
@@ -42,3 +76,14 @@ Pour partager une clef il faut d'abord l'exporter:
 
 `gpg --output unnomdefichier --armor --export any_part_of_the_user_ID_to_identify_the_key`
  
+Je vais dans l'application seahorse et je vois que mes clefs sont bien listés dans gGnuPG keys. 
+
+Gestion des clefs avec enigmail
+-------------------------------
+`ici <https://help.gnome.org/users/seahorse/stable/index.html.en#pgp-keys>`__
+
+Backup des clefs
+----------------
+
+Avec l'application seahorse j'ai exporté les clefs dans le repertory keys-backup. Pour savoir ce que sont les fichiers dedans on peut faire `file ~/key-backup/nom_du_fichier`
+

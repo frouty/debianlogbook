@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>snap &#8212; Debian logbook V1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Screen" href="screen.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="snap">
+<h1>snap<a class="headerlink" href="#snap" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">upgrade</span> <span class="o">-</span><span class="n">y</span>
+
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">snapd</span>
+<span class="n">sudo</span> <span class="n">snap</span> <span class="n">install</span> <span class="n">core</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="start-and-enable-snap">
+<h2>start and enable snap<a class="headerlink" href="#start-and-enable-snap" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">snapd</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">enable</span> <span class="n">snapd</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">snapd</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-snap-store">
+<h2>Install snap store<a class="headerlink" href="#install-snap-store" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">snap</span> <span class="n">install</span> <span class="n">snap</span><span class="o">-</span><span class="n">store</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gestion-des-paquets">
+<h2>Gestion des paquets<a class="headerlink" href="#gestion-des-paquets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="liste-des-paquets-installes">
+<h3>Liste  des paquets installés<a class="headerlink" href="#liste-des-paquets-installes" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snap</span> <span class="nb">list</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chercher-un-paquet">
+<h3>Chercher un paquet<a class="headerlink" href="#chercher-un-paquet" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snap</span> <span class="n">find</span> <span class="n">nom_du</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uninstall-a-package">
+<h3>Uninstall a package<a class="headerlink" href="#uninstall-a-package" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">snap</span> <span class="n">remove</span> <span class="n">nom_du_paquet</span> <span class="o">--</span><span class="n">purge</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Debian logbook</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SSH_echange_de_clefs.html">SSH et échange de clefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gestion_des_paquets.html">Comment savoir si un paquet est installé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Valeur-Numerique-Permission.html">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hplip.html">HPLIP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dash-dock.html">Dash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="password.html">Password generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">Regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Cron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lvm.html">J’ai plus de place dans mon systeme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lvm.html#comment-agrandir-vg-root">Comment agrandir vg-root?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enigmail.html">Enigmail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screen.html">Screen</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">snap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-and-enable-snap">start and enable snap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-snap-store">Install snap store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-des-paquets">Gestion des paquets</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="screen.html" title="previous chapter">Screen</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Laurent FRANCOIS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/snap.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

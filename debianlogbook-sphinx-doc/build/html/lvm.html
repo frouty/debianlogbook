@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>J’ai plus de place dans mon systeme &#8212; Debian logbook V1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Permissions" href="permissions.html" />
+    <link rel="prev" title="Cron" href="cron.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="j-ai-plus-de-place-dans-mon-systeme">
+<h1>J’ai plus de place dans mon systeme<a class="headerlink" href="#j-ai-plus-de-place-dans-mon-systeme" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">Filesystem</span>                      <span class="n">Size</span>  <span class="n">Used</span> <span class="n">Avail</span> <span class="n">Use</span><span class="o">%</span> <span class="n">Mounted</span> <span class="n">on</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">dm</span><span class="o">-</span><span class="mi">0</span>                       <span class="mf">8.2</span><span class="n">G</span>  <span class="mf">7.7</span><span class="n">G</span>     <span class="mi">0</span> <span class="mi">100</span><span class="o">%</span> <span class="o">/</span>
+<span class="n">udev</span>                             <span class="mi">10</span><span class="n">M</span>     <span class="mi">0</span>   <span class="mi">10</span><span class="n">M</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">dev</span>
+<span class="n">tmpfs</span>                           <span class="mi">743</span><span class="n">M</span>   <span class="mi">11</span><span class="n">M</span>  <span class="mi">733</span><span class="n">M</span>   <span class="mi">2</span><span class="o">%</span> <span class="o">/</span><span class="n">run</span>
+<span class="n">tmpfs</span>                           <span class="mf">1.9</span><span class="n">G</span>  <span class="mf">4.0</span><span class="n">K</span>  <span class="mf">1.9</span><span class="n">G</span>   <span class="mi">1</span><span class="o">%</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span>
+<span class="n">tmpfs</span>                           <span class="mf">5.0</span><span class="n">M</span>  <span class="mf">4.0</span><span class="n">K</span>  <span class="mf">5.0</span><span class="n">M</span>   <span class="mi">1</span><span class="o">%</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">lock</span>
+<span class="n">tmpfs</span>                           <span class="mf">1.9</span><span class="n">G</span>     <span class="mi">0</span>  <span class="mf">1.9</span><span class="n">G</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">cgroup</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">var</span>   <span class="mi">102</span><span class="n">G</span>  <span class="mf">4.8</span><span class="n">G</span>   <span class="mi">93</span><span class="n">G</span>   <span class="mi">5</span><span class="o">%</span> <span class="o">/</span><span class="n">var</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda1</span>                       <span class="mi">236</span><span class="n">M</span>   <span class="mi">33</span><span class="n">M</span>  <span class="mi">191</span><span class="n">M</span>  <span class="mi">15</span><span class="o">%</span> <span class="o">/</span><span class="n">boot</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">tmp</span>   <span class="mi">360</span><span class="n">M</span>  <span class="mf">2.1</span><span class="n">M</span>  <span class="mi">335</span><span class="n">M</span>   <span class="mi">1</span><span class="o">%</span> <span class="o">/</span><span class="n">tmp</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">home</span>  <span class="mi">197</span><span class="n">G</span>   <span class="mi">18</span><span class="n">G</span>  <span class="mi">169</span><span class="n">G</span>  <span class="mi">10</span><span class="o">%</span> <span class="o">/</span><span class="n">home</span>
+<span class="n">tmpfs</span>                           <span class="mi">372</span><span class="n">M</span>     <span class="mi">0</span>  <span class="mi">372</span><span class="n">M</span>   <span class="mi">0</span><span class="o">%</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="mi">1000</span>
+</pre></div>
+</div>
+<div class="section" id="qui-est-dm-0-dm-device-mapper">
+<h2>qui est dm-0? dm = device mapper?<a class="headerlink" href="#qui-est-dm-0-dm-device-mapper" title="Permalink to this headline">¶</a></h2>
+<p>device mapper du kernel utilisé par LVM.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dmsetup ls
+openerp70--vg-tmp (254:3)
+openerp70--vg-swap_1 (254:1)
+openerp70--vg-var (254:2)
+openerp70--vg-home   (254:4)
+openerp70--vg-root   (254:0)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lsblk</span> <span class="o">-</span><span class="n">o</span> <span class="o">+</span><span class="n">kname</span>
+</pre></div>
+</div>
+<p>NAME                     MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT KNAME
+sda                        8:0    0 596.2G  0 disk            sda
+├─sda1                     8:1    0   243M  0 part /boot      sda1
+├─sda2                     8:2    0     1K  0 part            sda2
+└─sda5                     8:5    0 465.5G  0 part            sda5</p>
+<blockquote>
+<div><p>├─openerp70–vg-root   254:0    0   8.4G  0 lvm  /          dm-0
+├─openerp70–vg-swap_1 254:1    0   7.5G  0 lvm  [SWAP]     dm-1
+├─openerp70–vg-var    254:2    0 102.8G  0 lvm  /var       dm-2
+├─openerp70–vg-tmp    254:3    0   380M  0 lvm  /tmp       dm-3
+└─openerp70–vg-home   254:4    0   200G  0 lvm  /home      dm-4</p>
+</div></blockquote>
+<p>sr0                       11:0    1  1024M  0 rom             sr0</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span>
+<span class="n">crw</span><span class="o">-------</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">236</span> <span class="n">Jun</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">35</span> <span class="n">control</span>
+<span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">7</span> <span class="n">Jun</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">35</span> <span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">home</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">dm</span><span class="o">-</span><span class="mi">4</span>
+<span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">7</span> <span class="n">Jun</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">35</span> <span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">dm</span><span class="o">-</span><span class="mi">0</span>
+<span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">7</span> <span class="n">Jun</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">35</span> <span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">swap_1</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">dm</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">7</span> <span class="n">Jun</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">35</span> <span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">tmp</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">dm</span><span class="o">-</span><span class="mi">3</span>
+<span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">7</span> <span class="n">Jun</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">35</span> <span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">var</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">dm</span><span class="o">-</span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -ahlp /dev/disk/by-id
+$ ls -ahlp /dev/mapper
+</pre></div>
+</div>
+</div>
+<div class="section" id="obtenir-des-details-sur-un-dm">
+<h2>Obtenir des détails sur un dm:<a class="headerlink" href="#obtenir-des-details-sur-un-dm" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> $ dmsetup info /dev/dm-0
+Name:              openerp70--vg-root
+State:             ACTIVE
+Read Ahead:        256
+Tables present:    LIVE
+Open count:        1
+Event number:      0
+Major, minor:      254, 0
+Number of targets: 1
+UUID: LVM-s0cNp65awilF27D1gcfIGLoGhDLCGzLcpGQ3Op5PZjPDs6lP1WkiOoYmKUsKip00
+</pre></div>
+</div>
+</div>
+<div class="section" id="quel-est-le-device-physique-qui-supporte-le-lvm">
+<h2>Quel est le device physique qui supporte le LVM<a class="headerlink" href="#quel-est-le-device-physique-qui-supporte-le-lvm" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> $ pvdisplay -m
+
+--- Physical volume ---
+PV Name               /dev/sda5
+VG Name               openerp70-vg
+PV Size               465.52 GiB / not usable 2.00 MiB
+Allocatable           yes
+PE Size               4.00 MiB
+Total PE              119173
+Free PE               37499
+Allocated PE          81674
+PV UUID               Hth2w4-qb5a-sDRd-PaDg-pvsP-zQCc-XAtm2O
+
+--- Physical Segments ---
+Physical extent 0 to 2144:
+  Logical volume   /dev/openerp70-vg/root
+  Logical extents  0 to 2144
+Physical extent 2145 to 2859:
+  Logical volume   /dev/openerp70-vg/var
+  Logical extents  0 to 714
+Physical extent 2860 to 4778:
+  Logical volume   /dev/openerp70-vg/swap_1
+  Logical extents  0 to 1918
+Physical extent 4779 to 4873:
+  Logical volume   /dev/openerp70-vg/tmp
+  Logical extents  0 to 94
+Physical extent 4874 to 56073:
+  Logical volume   /dev/openerp70-vg/home
+  Logical extents  0 to 51199
+Physical extent 56074 to 81673:
+  Logical volume   /dev/openerp70-vg/var
+  Logical extents  715 to 26314
+Physical extent 81674 to 119172:
+  FREE
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="comment-agrandir-vg-root">
+<h1>Comment agrandir vg-root?<a class="headerlink" href="#comment-agrandir-vg-root" title="Permalink to this headline">¶</a></h1>
+<p>pvs pour savoir ce qui reste de disponible</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  $ pvs
+PV         VG           Fmt  Attr PSize   PFree
+/dev/sda5  openerp70-vg lvm2 a--  465.52g 146.48g
+</pre></div>
+</div>
+<p>Je vois qu’il reste 146.48 G de libre</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  $ vgdisplay
+ --- Volume group ---
+ VG Name               openerp70-vg
+ System ID
+ Format                lvm2
+ Metadata Areas        1
+ Metadata Sequence No  8
+ VG Access             read/write
+ VG Status             resizable
+ MAX LV                0
+ Cur LV                5
+ Open LV               5
+ Max PV                0
+ Cur PV                1
+ Act PV                1
+ VG Size               465.52 GiB
+ PE Size               4.00 MiB
+ Total PE              119173
+ Alloc PE / Size       81674 / 319.04 GiB
+ Free  PE / Size       37499 / 146.48 GiB
+ VG UUID               s0cNp6-5awi-lF27-D1gc-fIGL-oGhD-LCGzLc
+
+J&#39;ai un volume group qui s&#39;appelle openerp70-vg qui a 146.48 G de dispo.
+
+On va voir les logical volume ::
+
+  $ lvdisplay
+ --- Logical volume ---
+ LV Path                /dev/openerp70-vg/root
+ LV Name                root
+ VG Name                openerp70-vg
+ LV UUID                pGQ3Op-5PZj-PDs6-lP1W-kiOo-YmKU-sKip00
+ LV Write Access        read/write
+ LV Creation host, time openerp70, 2015-07-15 23:31:56 +1100
+ LV Status              available
+ # open                 1
+ LV Size                8.38 GiB
+ Current LE             2145
+ Segments               1
+ Allocation             inherit
+ Read ahead sectors     auto
+ - currently set to     256
+ Block device           254:0
+
+ --- Logical volume ---
+ LV Path                /dev/openerp70-vg/var
+ LV Name                var
+ VG Name                openerp70-vg
+ LV UUID                STNDLE-msfI-fImk-cX4C-njvG-R5Cb-znoeI5
+ LV Write Access        read/write
+ LV Creation host, time openerp70, 2015-07-15 23:31:56 +1100
+ LV Status              available
+ # open                 1
+ LV Size                102.79 GiB
+ Current LE             26315
+ Segments               2
+ Allocation             inherit
+ Read ahead sectors     auto
+ - currently set to     256
+ Block device           254:2
+
+ --- Logical volume ---
+ LV Path                /dev/openerp70-vg/swap_1
+ LV Name                swap_1
+ VG Name                openerp70-vg
+ LV UUID                jN5zPz-LQL6-2uH7-Dh2Q-3TPZ-IcYL-oeADtc
+ LV Write Access        read/write
+ LV Creation host, time openerp70, 2015-07-15 23:31:57 +1100
+ LV Status              available
+ # open                 2
+ LV Size                7.50 GiB
+ Current LE             1919
+ Segments               1
+ Allocation             inherit
+ Read ahead sectors     auto
+ - currently set to     256
+ Block device           254:1
+
+ --- Logical volume ---
+ LV Path                /dev/openerp70-vg/tmp
+ LV Name                tmp
+ VG Name                openerp70-vg
+ LV UUID                0899Qy-Eq5u-gaZc-obE7-OjCr-Joc3-eH6KA6
+ LV Write Access        read/write
+ LV Creation host, time openerp70, 2015-07-15 23:31:57 +1100
+ LV Status              available
+ # open                 1
+ LV Size                380.00 MiB
+ Current LE             95
+ Segments               1
+ Allocation             inherit
+ Read ahead sectors     auto
+ - currently set to     256
+ Block device           254:3
+
+ --- Logical volume ---
+ LV Path                /dev/openerp70-vg/home
+ LV Name                home
+ VG Name                openerp70-vg
+ LV UUID                awfoxK-lf1o-Tz6V-SiwX-C7j3-1IEg-V3FYLl
+ LV Write Access        read/write
+ LV Creation host, time openerp70, 2015-07-15 23:31:57 +1100
+ LV Status              available
+ # open                 1
+ LV Size                200.00 GiB
+ Current LE             51200
+ Segments               1
+ Allocation             inherit
+ Read ahead sectors     auto
+ - currently set to     256
+ Block device           254:4
+</pre></div>
+</div>
+<p>On augmente la taille du logical volume</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lvextend</span> <span class="o">-</span><span class="n">L</span> <span class="o">+</span><span class="mi">10</span><span class="n">G</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">root</span>
+<span class="n">Size</span> <span class="n">of</span> <span class="n">logical</span> <span class="n">volume</span> <span class="n">openerp70</span><span class="o">-</span><span class="n">vg</span><span class="o">/</span><span class="n">root</span> <span class="n">changed</span> <span class="kn">from</span> <span class="mf">8.38</span> <span class="n">GiB</span> <span class="p">(</span><span class="mi">2145</span> <span class="n">extents</span><span class="p">)</span> <span class="n">to</span> <span class="mf">18.38</span> <span class="n">GiB</span> <span class="p">(</span><span class="mi">4705</span> <span class="n">extents</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Logical</span> <span class="n">volume</span> <span class="n">root</span> <span class="n">successfully</span> <span class="n">resized</span>
+
+<span class="n">resize2fs</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">openerp70</span><span class="o">--</span><span class="n">vg</span><span class="o">-</span><span class="n">root</span>
+</pre></div>
+</div>
+<p>J’ai ajouté 10G</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Debian logbook</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SSH_echange_de_clefs.html">SSH et échange de clefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gestion_des_paquets.html">Comment savoir si un paquet est installé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Valeur-Numerique-Permission.html">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hplip.html">HPLIP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dash-dock.html">Dash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="password.html">Password generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">Regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Cron</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">J’ai plus de place dans mon systeme</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#qui-est-dm-0-dm-device-mapper">qui est dm-0? dm = device mapper?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#obtenir-des-details-sur-un-dm">Obtenir des détails sur un dm:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quel-est-le-device-physique-qui-supporte-le-lvm">Quel est le device physique qui supporte le LVM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#comment-agrandir-vg-root">Comment agrandir vg-root?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enigmail.html">Enigmail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screen.html">Screen</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cron.html" title="previous chapter">Cron</a></li>
+      <li>Next: <a href="permissions.html" title="next chapter">Permissions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Laurent FRANCOIS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/lvm.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

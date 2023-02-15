@@ -1,8 +1,8 @@
 HPLIP
-=====
+#####
 
 Error system tray
------------------
+*****************
 No system tray detecded on this system
 
 Sur Bulleye debian 

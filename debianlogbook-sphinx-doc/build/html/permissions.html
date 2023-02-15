@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Permissions &#8212; Debian logbook V1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="permissions">
+<h1>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 16%" />
+<col style="width: 62%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>0
+1
+2
+3
+4
+5
+6
+7</p></td>
+<td><ul class="simple">
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>x</p></li>
+</ul>
+</li>
+<li><p>w -</p></li>
+<li><p>w x</p></li>
+</ul>
+<p>r - -
+r - x
+r w -
+r w x</p>
+</td>
+<td><p>aucun droit
+execution
+écriture
+ecriture et execution
+lecture seule
+lecture et execution
+lecture ecriture
+lecture ecriture execution</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 5%" />
+<col style="width: 9%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>octal</p></th>
+<th class="head"></th>
+<th class="head"><p>signification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>chmod
+chmod
+chmod
+chmod
+chmod
+chmod
+chmod
+chmod
+chmod</p></td>
+<td><p>400
+500
+600
+644
+660
+700
+755
+755
+777</p></td>
+<td><p>file
+directory
+file
+file
+file
+file
+directory
+file
+file</p></td>
+<td><p>To protect a file against accidental overwriting.
+To protect yourself from accidentally removing, renaming or moving files from this directory.
+A private file only changeable by the user who entered this command.
+A private file only changeable by the user who entered this command.
+Users belonging to your group can change this file, others don’t have any access to it at all.
+Protects a file against any access from other users, while the issuing user still has full access.
+For files that should be readable and executable by others, but only changeable by the issuing user.
+Standard file sharing mode for a group.
+Everybody can do everything to this file.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="changement-de-user">
+<h2>Changement de user<a class="headerlink" href="#changement-de-user" title="Permalink to this headline">¶</a></h2>
+<p>chown unuser unfichier</p>
+</div>
+<div class="section" id="changement-de-group">
+<h2>Changement de group<a class="headerlink" href="#changement-de-group" title="Permalink to this headline">¶</a></h2>
+<p>chgrp ungroup unfichier</p>
+</div>
+<div class="section" id="changement-group-et-user-en-meme-temps">
+<h2>Changement group et user en meme temps<a class="headerlink" href="#changement-group-et-user-en-meme-temps" title="Permalink to this headline">¶</a></h2>
+<p>chown unuser:ungroup unfichier</p>
+</div>
+<div class="section" id="les-droits-des-repertoires">
+<h2>Les droits des repertoires<a class="headerlink" href="#les-droits-des-repertoires" title="Permalink to this headline">¶</a></h2>
+<p>X est nécessaire pour que les repertoires puissent etre ouvert.</p>
+<p>X est à éviter dans les fichiers html et txt.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Debian logbook</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SSH_echange_de_clefs.html">SSH et échange de clefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gestion_des_paquets.html">Comment savoir si un paquet est installé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enigmail.html">Enigmail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Valeur-Numerique-Permission.html">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hplip.html">HPLIP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dash-dock.html">Dash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="password.html">Password generator</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Laurent FRANCOIS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/permissions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
