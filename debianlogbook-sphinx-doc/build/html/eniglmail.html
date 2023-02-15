@@ -5,14 +5,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Debian logbook V1.0 documentation</title>
+    <title>Enigmail &#8212; Debian logbook V1.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -27,11 +27,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="enigmail">
+<h1>Enigmail<a class="headerlink" href="#enigmail" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="key-management">
+<h2>Key Management<a class="headerlink" href="#key-management" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.enigmail.net/index.php/en/user-manual/key-management">ici document tres détaillé sur la gestion des clefs avec enigmail</a></p>
+</div>
+<div class="section" id="ou-sont-stockes-les-clefs">
+<h2>Où sont stockés les clefs ?<a class="headerlink" href="#ou-sont-stockes-les-clefs" title="Permalink to this headline">¶</a></h2>
+<p>Qd on fait un backup il faut tenir compte du fait que le format de stockage peut changer au cours du temps. Seul le format d’export est stable. Donc il faut backuper les keyring files (pubring, secring, trustdv) pour rendre les restaurations plus faciles.</p>
+<p>Je n’ai pas trouvé les clefs que j’avais mises en place avec manjaro</p>
+</div>
+<div class="section" id="comment-faire-des-clefs">
+<h2>Comment faire des clefs?<a class="headerlink" href="#comment-faire-des-clefs" title="Permalink to this headline">¶</a></h2>
+<p><cite>gpg –gen-key</cite>
+Je vois dans ~/.gnupg :</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a></p>
+<p>/home/lfs/.gnupg
+├── gpg-agent.conf
+├── openpgp-revocs.d
+│   └── 675764A7074570180EBE220AE50C7650F7CAEA0B.rev
+├── private-keys-v1.d
+│   ├── 020326FB896B4BF880879B2EA49BD798CF634B96.key
+│   └── D86305F6D9180E8FEBE0465702149C935FFB3A3F.key
+├── pubring.kbx
+├── pubring.kbx~
+└── trustdb.gpg</p>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+</div>
 </div>
 
 
@@ -54,10 +77,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="SSH_echange_de_clefs.html">SSH et échange de clefs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gestion_des_paquets.html">Comment savoir si un paquet est installé</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enigmail.html">Enigmail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Valeur-Numerique-Permission.html">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hplip.html">HPLIP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dash-dock.html">Dash</a></li>
 </ul>
 
 <div class="relations">
@@ -88,6 +108,9 @@
       Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
       
+      |
+      <a href="_sources/eniglmail.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
 
     

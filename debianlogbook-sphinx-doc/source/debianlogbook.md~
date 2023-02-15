@@ -1,4 +1,4 @@
-# Comment ajouter un user à un ou plusieurs groups:
+Comment ajouter un user à un ou plusieurs groups:
 usermod -a -G nomgroup1,nomgroup2 nomuser
 
 # Probleme de bad password avec wicd 
@@ -10,18 +10,7 @@ pour régler le probleme:
 ```
 
 
-# NFS V4
-## Obtenir version de nfs
-### Sur le client
-- 1 `#nfsstat -m` ou `nfsstat` ca marche sur le client. 
-- 2 `# mount` si on a type nfs4 alors version 4 si on a type nfs alors version 3
-
-### Sur le serveur
-rpcinfo -p | grep nfs
-La version est dans la deuxieme colonne. 
-
-
-
+# NFS V4
 
 On veut monter un répertoire réel :
 /home/users
@@ -48,20 +37,10 @@ On peut monter une partie de l'arbre:
 
 avec automount : cd /net/prony (nom du serveur tel qu'il est dans /etc/hosts/) ou son adresse ip.
 
-## maproot 
 
-maproot -> user1
-maproot -> group1 qd j'accede le freenas je l'accede en user1 et group1 sur le freenas.
 
-## montage sur le freenas du cabinet
-je vois que sur le client le repertoire est monté avec nobody:nogroup
-je mets sur le freenas le share avec mapall user : nobody et mapall group avec nogroup
-
-## montage sur le freenas @home
-j'ai un repertoire du freenas qui se monte sur saphir. 
-Mais a chaque fois qu'un fichier se crée il appartient à root.
-touch blabla.txt appartient à root:<leuser>
 # MAC address
+
 ## Comment trouver l'adresse MAC d'une interface
 
   `cat /sys/class/net/eth0/address`
@@ -330,24 +309,15 @@ C'est moins efficace que directement mais permet l'expansion des local aliases e
 
 
 
-# Group et user
-##  Comment connaitre les utilisateurs sur un systeme
-## Changer les informations d'un user
-`chfn`
+
+%%%% COMMENT CONNAITRE LES UTILISATEUR SUR UN SYSTEME
+Pour décrire un utilisateur : chfn
 Cette commande permet d'indiquer dans le champ numéro 5 du fichier /etc/passwd différentes informations sur un utilisateur, son nom complet, son bureau, ses numeros de téléphone (séparées par des virgules). 
 
-## Pour examiner les valeurs par défaut appliquées par useradd :
+Pour examiner les valeurs par défaut appliquées par useradd :
 commande useradd -D ou éditer /etc/default/useradd 
 
-## Connaitre ses groupes 
-id
-ou
-groups nomutilisateur
-
-## Comment se rajouter à un groupe 
-usermod -a -G groupe user
-
-# SKYPE 
+%%%% SKYPE 
 Pas facile d'installer la version 64bits de skype
 version 2.1.0.81
 Probleme avec pulseaudio en installant j'ai reussi à regler mes probleme s de son que j'avais avec amarok. Mais par contre plus de son avec skype.
@@ -355,8 +325,15 @@ Pour réobtenir le son avec skype il faut faire un killall pulseaudio. Ensuite p
 malgres killall pulseaudio :
 lfs       4565  0.1  0.1 211728  5628 pts/0    Tl   07:01   0:00 pulseaudio
 
+%%%% Connaitre ses groupes %%%%%
+id
+ou
+groups nomutilisateur
 
-# Apache
+%%% Comment se rajouter à un groupe 
+usermod -a -G groupe user
+%%% APACHE2 %%%%
+Connaitre sa version d'apache: TODO
 
 httpd est en mode démon. Lorsqu'il est invoqué il lit le fichier de config /etc/apache2/httpd.conf. On peut alors utiliser un navigateur pour se connecter au serveur, et afficher la page de de test située dans le répertoire définie par la directive "DocumentRoot"
 
@@ -457,7 +434,7 @@ Il est parfois nécessaire de permettre un accés web à des parties du systeme 
 On peut utiliser des liens symboliques. Pour des raisons de sécurité Apache va suivre les liens symboliques uniquement si Options pour le directory en question contient FollowSymlinks ou SymLinksIfOwnerMatch.
 On peut utiliser la directive Alias va mapper n'importe qu'elle partie du systeme de fichier sur le web. par exemple avec Alias /docs /var/web, http://my.host.com/docs/dir/file.html sera servi à partir de /var/web/dir/file.html. 
 
-# DRUPAL6
+%%%%  DRUPAL6
 
 aptitude install php5-pgsql drupal6
 http://localhost/drupal6/install.php) to populate the database. This is the preferred method in drupal 6.x and upper.
@@ -510,7 +487,7 @@ You should also check the permissions and ownership of the /var/lib/mysql direct
 While not mandatory, it is highly recommended that you set a password for the MySQL administrative "root" user. If this field is left blank, the password will not be changed. New password for the MySQL "root" user:   Je le laisse blank     
 
 pour se connecter
-mysql -u root -p
+#mysql -u root -p
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 40
@@ -571,7 +548,7 @@ sml_password
 
 sudo apt-get install openerp-server openerp-client python2.5 python2.5-dev python-profiler  
 wget http://sourceforge.net/projects/pyxml/files/pyxml/0.8.4/PyXML-0.8.4.tar.gz
-```
+
 cd PyXML-0.8.4/   
 sudo python2.5 setup.py install  
 mkdir -p /usr/lib/python2.5/site-packages/oldxml/_xmlplus/utils/
@@ -604,7 +581,7 @@ local all all ident sameuser to local all all trust
    
 # sudo /etc/init.d/postgresql-8.3 restart  
 # $ sudo /etc/init.d/openerp-server restart
-```
+
 On a donc crée un nouveau user openerp. On va se connecter avec 
 psql -U openerp -W
 $ psql -U openerp -W
@@ -632,6 +609,8 @@ postgres=#
 OK ca marche. 
 
 
+
+
 # POSTGRESQL 
 ## Comment droper une database?
 
@@ -649,7 +628,7 @@ ffmpeg -i 09\ Piste\ 9.wma -strict experimental -acodec vorbis -aq 100 09\ Piste
 
 # INSTALLATION DE SYSLINUX sur 
 une clef USB
-```
+
 # mkdir /tmp/cdrom
 # mount -o loop,exec /path/to/systemrescuecd-x86-x.y.z.iso /tmp/cdrom
 # cd /tmp/cdrom
@@ -658,17 +637,17 @@ une clef USB
 # ./usb_inst.sh format /dev/sdx1
 # ./usb_inst.sh copyfiles /dev/sdx1
 # ./usb_inst.sh syslinux /dev/sdx1
-```
+
 ne marche pas 
 
 Marche en utilisant le LIVECD rescuecd avec 
-```
+
 # sysresccd-usbstick listdev to see which devices are seen as USB-sticks
 # sysresccd-usbstick writembr /dev/sdX
 # sysresccd-usbstick format /dev/sdXn
 # sysresccd-usbstick copyfiles /dev/sdXn
 # sysresccd-usbstick syslinux /dev/sdXn
-```
+
 # CREATION d'un LIVE CD DEBIAN sur une Clef USB
 
 ```
@@ -729,7 +708,7 @@ et boot selection du DD externe et ca devrait marcher.
 md5sum -c package.tgz package.md5
 
 
-# INSTALL DE DEBIAN 
+%%%%% INSTALL DE DEBIAN 
 PARTITION MANUELLE
 Si on utilise l'option guided use entire disk and set up encrypted LVM sur un DD de 1To la phase d'erasing les data est trop longue (plusieurs heures) donc on choisit manual. On crée une partition en ext3 bootable que l'on mount sur /boot. puis une nouvelle partition puis configure encrypted volume.
 puis on crée un volume groupe puis les partition / /home /opt /usr /var /tmp swap comme d'habitued 
@@ -742,20 +721,20 @@ puis on crée un volume groupe puis les partition / /home /opt /usr /var /tmp sw
 `nmap -sP 192.168.2.0/24`
 
 
-# TP-LINK 8810
+%%%%% TP-LINK 8810
 bridge.
 pour communiquer avec le modem en bridge on peut le brancher rj45 en direct sur un pc et ping 192.168.1.1
 
 firmware :3.06L.03-T1.0a-091210.A2pB023k.d17m
 
-# FLASH PLAYER 
+%%%% FLASH PLAYER 
 mise a jour : # update-flashplugin-nonfree --install
 connaitre sa version de 
 #strings /usr/lib/flashplugin-nonfree/libflashplayer.so|grep -i flashplayer_  
 
-# NIKON
+%%%% NIKON
 avant de faire les manips sur la carte 
-`#dd if=/dev/sdX of=/tmp/r1 bs=512`
+#dd if=/dev/sdX of=/tmp/r1 bs=512
 
 probleme avec les cartes compact flash qui ne veulent plus etre lue dans l'APN
 J'essaie dos
@@ -763,7 +742,7 @@ mais la carte n'est tjs pas lu par l'APN qui demande a ce qu'elle soit formatée
 Sur une autre carte il y a bcp d'err et renommage auto de nombreux fichiers ca prend trois plombes.
 
 
-# Télécharger les video de eyetube.net
+%%%% Télécharger les video de eyetube.net
 login lau.francois@worldonline.fr
 password habituel
 recuperer le sources; trouver le code plugins: { 		
@@ -809,7 +788,7 @@ rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/forub_1000kbps
 rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/locri_1000kbps
 
 
-# COMMENT TELECHARGER SUR ARTE+7
+COMMENT TELECHARGER SUR ARTE+7
 aller sur la page de l'émission à telécharger 
 view source
 rechercher quelque chose du genre :videorefFileUrl=http%3A%2F%2Fvideos.arte.tv%2Ffr%2Fdo_delegate%2Fvideos%2Fle_dessous_des_cartes-6590276%2Cview%2CasPlayerXml.xml"
@@ -860,7 +839,8 @@ rtmpdump -o vers-union-fiscale-europenne.flv -r "rtmp://artestras.fcod.llnwd.net
 
 rtmpdump -o retour-au-chateau-1-7.flv -o 'rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/EUR_DE_FR/arteprod/A7_SGT_ENC_08_046311-001-B_PG_HQ_FR?h=c289243c24f01a6874035a7d01488998'
 
-# INSTALLATION DE JAVA
+%%%% INSTALLATION DE JAVA
+
 openjdk-7-jre 
 et icedtea-plugin
 
@@ -883,7 +863,7 @@ puis whitespace Line.
 
 
 
-# COMPRENDRE L'ALIGNEMENT
+%%%%%%% COMPRENDRE L'ALIGNEMENT
 fdisk
 /dev/sda
 head 255
@@ -970,7 +950,7 @@ acidrip
 dvdrip
 handbrake
 
-# PLAN de BATAILLE POUR AUGMENTER LE STOCKAGE SUR LES SERVEURS
+%%%%% PLAN de BATAILLE POUR AUGMENTER LE STOCKAGE SUR LES SERVEURS
 
 L'OS est installé sous /dev/hdc
 hdc1 /boot
@@ -990,11 +970,11 @@ Il faut récupérer les films du DD de la videobox qui n'ont pu etre récupéré
 Avant de pouvoir utiliser le hdd1 il faut récupérer le dir dvdrp-data
 
 
-# CHROOT
+%%%%%%% CHROOT %%%%
 problem avec le sysrescuecd
 % chroot /host 
 chroot: failed to run command `/bin/zsh': No such file or directory
-cet erreur  est du à une mauvaise configuration de la variable shell
+cet erreur a une mauvaise configuration de la variable shell
 This type of error is due to the wrong setting of the SHELL variable.
 
 root@sysresccd /root % echo $SHELL
@@ -1005,31 +985,46 @@ root@sysresccd /root % echo $SHELL
 
 Now you can chroot ! 
 
-# TASK LIST OFF LINE
+%%%% TASK LIST OFF LINE
 
-- remember the milk pas de off line depuis html5
+remember the milk pas de off line depuis html5
 
-- toodledo tres vite on depasse les possibilité de la version gratuite
+toodledo tres vite on depasse les possibilité du free
 
-- plancake ne marche plus en offline des que l'on ferme le browser
+plancake ne marche plus en offline des que l'on ferme le browser
 
-- todolist
+todolist
 
-- Google task la technique avec l'onglet dans TB ne marche pas offline.
+Google task la technique avec l'onglet dans TB ne marche pas offline.
 pas moyen d'avoir l'adresse ics du calendrier associé.
 C'est bien car pas besoin de due date mais pas de offline.
 
-- Coolendar c'est pas mal se lie bien avec TB car il y a un lien ics qui permet d'avoir un calendrier qui fonctionne bien en cache. Le probleme c'est que c'est un calendrier et que c'est pas pratique pour des taches que je n'ai pas de date pour les terminer.en fait bodf ne se synchrsosie pas tres bien avec TB
+Coolendar c'est pas mal se lie bien avec TB car il y a un lien ics qui permet d'avoir un calendrier qui fonctionne bien en cache. Le probleme c'est que c'est un calendrier et que c'est pas pratique pour des taches que je n'ai pas de date pour les terminer.en fait bodf ne se synchrsosie pas tres bien avec TB
 
 Ne se lie pas bien avec google calendar. 
 
 
 
-# MYSQL PASSWORD
+%%%%%%%%%%%% MYSQL PASSWORD
 New password pour Mysql 'root' user : 123b654
+%%%%%
 
+pourquoi 
 
-# AMPOULE 
+ruby*
+dwb
+tango*
+fts
+libtk-pod-perl
+qhid
+phone*
+vdr
+valgrind
+xcp
+
+%%%%%%%%%%%%%%%%%%
+
+AMPOULE 
 6V
 20WG4
  
@@ -1046,9 +1041,12 @@ Similarly, the following will chmod all files only (and ignore the directories):
 
 `find . -type f -exec chmod 644 {} \;`
 
-# ASUS TRANSFORMER TFT300T
-- idVendor: 0b05
-- idProduct: 4c80
+%%%%%%%%%%%%%%% ASUS TRANSFORMER TFT300T
+ idVendor: 0b05
+idProduct: 4c80
+
+
+%%%%%
 
  ┌─────────────────────────────────────────────────────────────────────────────┤ Configuring backuppc ├─────────────────────────────────────────────────────────────────────────────┐                                
                                │ Web administration default user created
@@ -1058,15 +1056,15 @@ Similarly, the following will chmod all files only (and ignore the directories):
 
 
 
-# PROBLEME avec GRUB2
-Cette methode ne marche pas si pas de connection internet
+PROBLEME avec GRUB2
+Cette methode ne marche pas si pas de connection internet"
 J'avais fait une mise à jour par aptitude safe-upgrade et je n'arrivais plus à booter sur le server. 
 
 un cd live de debian. 
 
 
 qui n'est pas dans le live.   	      
-`blkid` pour avoir une idée des partitions et savoir ce qu'il faut monter
+blkid pour avoir une idée des partitions et savoir ce qu'il faut monter
 
 setxkbmap fr
 mount /dev/sda3 /mnt
@@ -1079,7 +1077,7 @@ exit
 halt
 enlever l'usblive
 
-# PROBLEME AVEC UNE INSTALLATION QUI EST CASSEE
+PROBLEME AVEC UNE INSTALLATION QUI EST CASSEE
 
 boot sur un livecd
 
@@ -1133,16 +1131,13 @@ On utilise crontab pour éditer un crontab
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
 ```
-
-## j'ai un problem avec le script 
-- reboot  
+## j'ai un problem avec le script 
+- reboot
 c'est problement un probleme de variables d'environnement
-
-### Comment obtenir les variables d'environnement de cron?
-co- rajouter `* * * * *  env > ~/cronenv `
+### Comment obtenir les variables d'environnement de cron?
+- rajouter `* * * * *  env > ~/cronenv `
 - cronenv 
-
-```
+``̀`
 LANGUAGE=fr_FR:fr
 HOME=/root
 LOGNAME=root
@@ -1151,26 +1146,23 @@ LANG=fr_FR.UTF-8
 SHELL=/bin/sh
 PWD=/root
 ```
-`which reboot` --> /sbin/reboot
-
+`̀which reboot ` --> /sbin/reboot
 Donc il y a bien un probleme de variable. 
 Je rajoute dans le crontab -e : `30 6 * * 1-5 . $HOME/.zshrc; /sbin/reboot`
 On verra si cela regle le probleme demain matin. 
 Non cela ne marche pas.
 https://stackoverflow.com/questions/22743548/cronjob-not-running
-
-- 1 vérifier que cron tourne : `ps aux | grep cron`
-- 2 `service cron start` `service cron restart`
-- 3 cron fonctionne :` * * * * * /bin/echo "cron works" >> ~/file.txt`
-- 4 `tail -f /var/log/messages` `tail -f /var/log/syslog`
-- 5 need to have write access to the file you are redirecting the output.
-- 6 do not rely on environment variables like PATH, as their value will likely not be the same under cron as under an interactive session
+-1 vérifier que cron tourne : `ps aux | grep cron`
+-2 `service cron start` `service cron restart`
+-3 cron fonctionne :` * * * * * /bin/echo "cron works" >> ~/file.txt`
+-4 `tail -f /var/log/messages` `tail -f /var/log/syslog`
+-5 need to have write access to the file you are redirecting the output.
+-6 do not rely on environment variables like PATH, as their value will likely not be the same under cron as under an interactive session
 - dont suppress output while debugging
   - commonly used is this suppression: 30 1 * * * command > /dev/null 2>&1
   - suppress > /dev/null 2>&1
   - add ̀>> cront.out 2&1` will append standard output and standard error to cron.out in the invoking user's home directory.
-
-## syntax
+ ## syntax
 # Minute  Hour  Day of Month      Month         Day of Week    User Command    
 # (0-59) (0-23)   (1-31)    (1-12 or Jan-Dec) (0-6 or Sun-Sat)  
 
@@ -1178,11 +1170,10 @@ https://stackoverflow.com/questions/22743548/cronjob-not-running
 
 
 # Debian 10 
-`ifconfig` deprecated   
+ifconfig deprecated 
 à la place `ip addr`
 
-## su 
-`su` maintenant c'est `su -`
+## su maintenant c'est su -
 
 
 # Dual screen
@@ -1191,29 +1182,23 @@ https://stackoverflow.com/questions/22743548/cronjob-not-running
 sudo apt-get install --reinstall xserver-xorg-video-intel xserver-xorg-core
 sudo dpkg-reconfigure xserver-xorg
 ```
-Je suis passé de debian 9 à debian 10 et cela a reglé mon probleme de dual screen donc je n'ai pas testé.
+Je suis passé de debian 9 a debian 10 et cela a reglé mon probleme de dual screen donc je n'ai pas testé.
 
-# Comment changer de version de pythonChoisir sa version de python
+# Choisir sa version de python
 
-## Comment connaitre sa version de python
+## system wide switch between python versions : update-alternatives
+
 ```
-python --version
-Python 3.5.3
-```
-## liste des alternatives
-```
+
 # update-alternatives --list python
-/usr/bin/python2.7
-/usr/bin/python3.7
+update-alternatives: error: no alternatives for python
 ```
-
 ### List all options
 
 ```
 $ ls /usr/bin/python*
 /usr/bin/python  /usr/bin/python2  /usr/bin/python2.7  /usr/bin/python3  /usr/bin/python3.5  /usr/bin/python3.5m  /usr/bin/python3m
 ```
-
 ```
 # update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 update-alternatives: using /usr/bin/python2.7 to provide /usr/bin/python (python) in auto mode
@@ -1221,122 +1206,23 @@ update-alternatives: using /usr/bin/python2.7 to provide /usr/bin/python (python
 update-alternatives: using /usr/bin/python3.5 to provide /usr/bin/python (python) in auto mode
 ```
 Plus l'entier est haut plus c'est prioritaire.
+```
+# python --version
+Python 3.5.3
+```
 
-
-
-## Comment changer de version de python
-
+## Changement de version de python
 ```
 # update-alternatives --config python
 There are 2 choices for the alternative python (providing /usr/bin/python).
 ```
 
-### Si on veut changer localement pour un user.
+## Si on veut changer localement pour un user.
 In case you need to only change a python version selectively on per user basis, you may try to edit user's .bashrc file. For example to change to python version 3.5 execute the following linux commands:
-```
+
 $ python --version
 Python 2.7.13
 $ echo 'alias python="/usr/bin/python3.5"' >> ~/.bashrc
 $ . .bashrc 
 $ python --version
 Python 3.5.3
-```
-
-# Imprimante, hplip, hp-plugin, printing
-j'ai eu un probleme pour installer l'imprimante. 
-Des problemes de dépendance
-dmesg avec des messages d'erreur venant de apparmor DENIED
-Finalement j'ai fait :
-
-
-- Install apparmor utils : `sudo apt-get install apparmor-utils`
-- Run : `sudo aa-disable /usr/share/hplip/plugin.py`
-- Run as normal user, not as root: `hp-plugin`
-- Run `apt-get remove --purge apt-get remove hp--purge printer-driver-hpcups`
-- Run `aptitude install hplip`
-Et finalement c'est bon. 
-
-- run :`xsane`le scanner est detecté, le scan s'effectue mais rien de n'affiche
-- run cat /var/log/syslog
-- j'ai fait un uninstall/install xsane et libsane et finalement c'est bon.
-- mais en fait il faut d'abord faire : Acquire Preview puis Scan
-
-## uninstall hplip
-
-pour avoir la version minimale de hplip:
-https://developers.hp.com/hp-linux-imaging-and-printing/supported_devices/index
-
-
-# UID GID
-## Lister les UID >1000
-`awk -F: '($3 >= 1000) {printf "%s:%s\n",$1,$3}' /etc/passwd`
-## Lister les UID de tous les user
-`awk -F: '{printf "%s:%s\n",$1,$3}' /etc/passwd`
-## Comment changer son user ID
-`usermod -u [NEW_USER_ID] [USERNAME]`
-
-# Network 
-## Lister les interfaces 
-`ip link`
-
-# gestion des paquet - apt
-## lister les dependances
-### apt_rdepends
-- apt-cache depends <nomdupaquet>
-- apt-cache rdepends <nomdupaquet>
-### debtree
-## générer le source list
-https://debgen.simplylinux.ch/index.php?generate
-
-# installation de ohmyzsh
-## install de zsh et changement de shell
-
-``` 
-apt install -y zsh git curl wget
-chsh -s (which zsh)
-```
-
-On quitte et on relance le terminal
-
-`echo $SHELL` qui affiche /usr/bin/zsh
-
-## Installation des polices
-```
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hack.zip -O ~/hack.zip
-unzip ~/hack.zip -d ~/hack && rm ~/hack.zip
-find ~/hack/ -iname "*Windows*" -exec rm {} \; # suppression des fonts compatible Windows.
-sudo mv hack /usr/share/fonts/
-fc-cache -v # refresh le cache des polices.
-fc-list | grep -i 'hack'# vérifier la présence et prise en charge de la police.
-```
-
-On install ohmyzsh et des plugins
-
-```
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-On edite .zshrc:
-
-plugins=(
-zsh-autosuggestions
-zsh-completions
-zsh-syntax-highlighting)
-
-source .zshrc
-
-## Powerlevel10k
-```
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-```
-changer le theme dans .zshrc : ZSH_THEME="powerlevel10k/powerlevel10k".
-
-`source .zshrc`
-
-### Configuration de powerlevel10k
-
-`p10k configure`
-On peut aussi editer `~/.p10k-zsh`
-

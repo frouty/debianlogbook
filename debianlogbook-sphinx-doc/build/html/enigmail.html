@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enigmail &#8212; Debian logbook V1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Comment obtenir la valeur numérique des permissions d’un fichier?" href="Valeur-Numerique-Permission.html" />
+    <link rel="prev" title="Comment savoir si un paquet est installé" href="Gestion_des_paquets.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="enigmail">
+<h1>Enigmail<a class="headerlink" href="#enigmail" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="key-management">
+<h2>Key Management<a class="headerlink" href="#key-management" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.enigmail.net/index.php/en/user-manual/key-management">ici document tres détaillé sur la gestion des clefs avec enigmail</a></p>
+</div>
+<div class="section" id="ou-sont-stockes-les-clefs">
+<h2>Où sont stockés les clefs ?<a class="headerlink" href="#ou-sont-stockes-les-clefs" title="Permalink to this headline">¶</a></h2>
+<p>Qd on fait un backup il faut tenir compte du fait que le format de stockage peut changer au cours du temps. Seul le format d’export est stable. Donc il faut backuper les keyring files (pubring, secring, trustdv) pour rendre les restaurations plus faciles.</p>
+<p>Je n’ai pas trouvé les clefs que j’avais mises en place avec manjaro</p>
+</div>
+<div class="section" id="comment-faire-des-clefs">
+<h2>Comment faire des clefs?<a class="headerlink" href="#comment-faire-des-clefs" title="Permalink to this headline">¶</a></h2>
+<p><cite>gpg –gen-key</cite>
+Je vois dans ~/.gnupg :</p>
+<p>/home/lfs/.gnupg
+├── gpg-agent.conf
+├── openpgp-revocs.d
+│   └── 675764A7074570180EBE220AE50C7650F7CAEA0B.rev
+├── private-keys-v1.d
+│   ├── 020326FB896B4BF880879B2EA49BD798CF634B96.key
+│   └── D86305F6D9180E8FEBE0465702149C935FFB3A3F.key
+├── pubring.kbx
+├── pubring.kbx~
+└── trustdb.gpg</p>
+</div>
+<div class="section" id="lister-les-clefs-publiques">
+<h2>Lister les clefs publiques<a class="headerlink" href="#lister-les-clefs-publiques" title="Permalink to this headline">¶</a></h2>
+<p><cite>gpg –list-keys</cite></p>
+<p>Pour partager une clef il faut d’abord l’exporter:</p>
+<p><cite>gpg –output unnomdefichier –armor –export any_part_of_the_user_ID_to_identify_the_key</cite></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Debian logbook</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SSH_echange_de_clefs.html">SSH et échange de clefs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gestion_des_paquets.html">Comment savoir si un paquet est installé</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Enigmail</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#key-management">Key Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ou-sont-stockes-les-clefs">Où sont stockés les clefs ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comment-faire-des-clefs">Comment faire des clefs?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lister-les-clefs-publiques">Lister les clefs publiques</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Valeur-Numerique-Permission.html">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hplip.html">HPLIP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dash-dock.html">Dash</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Gestion_des_paquets.html" title="previous chapter">Comment savoir si un paquet est installé</a></li>
+      <li>Next: <a href="Valeur-Numerique-Permission.html" title="next chapter">Comment obtenir la valeur numérique des permissions d’un fichier?</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Laurent FRANCOIS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/enigmail.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

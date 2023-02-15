@@ -11,7 +11,11 @@ Welcome to Debian logbook's documentation!
    :caption: Contents:
 
    SSH_echange_de_clefs
-
+   Gestion_des_paquets
+   enigmail
+   Valeur-Numerique-Permission
+   hplip
+   dash-dock 
 
 Indices and tables
 ==================

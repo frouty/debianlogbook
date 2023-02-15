@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>debianlogbook.html</title>
+
+</head>
+
+<body>
+
+<p>Comment ajouter un user à un ou plusieurs groups:
+usermod -a -G nomgroup1,nomgroup2 nomuser</p>
+
+<h1>Probleme de bad password avec wicd</h1>
+
+<p>pour régler le probleme: 
+```</p>
+
+<h1>apt-get remove network-manager</h1>
+
+<h1>service wicd restart</h1>
+
+<p>```</p>
+
+<h1> NFS V4</h1>
+
+<p>On veut monter un répertoire réel :
+/home/users
+SUR LE SERVER
+1/ Créer un export filesystem:
+   mkdir exports
+   mkdir /export/users
+2/ Monter le répertoire réel avec --bind
+   mount -bind /home/users /export/users
+   que l'on peut mettre dans le /etc/fstab
+   /home/users   /export/users  none  bind 0 0
+3/ Pour exporter notre répertoire sur un réseau local 192.168.1.0/24
+   /export   192.168.1.0/24(rw,fsid=0,insecure,no<em>subtree</em>check,async)
+   /export/users 192.168.1.0/24(rw,nohide,insecure,no<em>subtree</em>check,async)</p>
+
+<p>4/ Redémarrer le service</p>
+
+<p>/etc/init.d/nfs-kernel-server restart
+CLIENT
+On peut monter l'arbre complet 
+   nfs-server:/users       /mnt   nfs4  _netdev,auto    0 0
+On peut monter une partie de l'arbre:
+   nfs-server:/    /mnt   nfs4  _netdev,auto    0 0</p>
+
+<p>avec automount : cd /net/prony (nom du serveur tel qu'il est dans /etc/hosts/) ou son adresse ip.</p>
+
+<h1>MAC address</h1>
+
+<h2>Comment trouver l'adresse MAC d'une interface</h2>
+
+<p><code>cat /sys/class/net/eth0/address</code></p>
+
+<h1>FONCTIONNEMENT DU SERVEUR DE MAIL</h1>
+
+<p>Les mails sont sur un serveur pop sur l'internet</p>
+
+<p>user@domain<em>emetteur.fr envoit un mail à toto@domain</em>receveur.fr. </p>
+
+<ul>
+<li>1 Pour cela il utilise un MUA (mail user agent) pour écrire le message. </li>
+<li>2 le MUA envoie le message au serveur de mail du FAI par SMTP.</li>
+<li>3 Le MTA (mail transfert agent) réceptionne le message et y applique un certains nombre de traitements.</li>
+<li>4 Le MTA fait une requete DNS (enregistrement MX) pour la recherche du serveur de mail rattaché au domaine "domain_receveur.fr"</li>
+<li>5 Le message est alors transmis via SMTP entre les deux MTA</li>
+<li>6 Si l'adresse correspond à un utilsateur valide (login ou alias), le second MTA stocke le messge localement pour que l'utilisateur demande à le lire.</li>
+</ul>
+
+<p>Réception d'un mail:
+Dans la pluspart des cas 
+ Donald <a href="&#x6D;&#x61;&#105;&#x6C;&#x74;&#111;:&#x64;&#x6F;&#110;&#x61;&#108;&#x64;&#64;&#x64;&#x6F;&#x6D;&#97;&#x69;&#110;&#101;&#45;r&#x65;&#x63;&#101;&#112;&#x74;e&#x75;&#x72;&#46;&#102;&#x72;">&#x64;&#x6F;&#110;&#x61;&#108;&#x64;&#64;&#x64;&#x6F;&#x6D;&#97;&#x69;&#110;&#101;&#45;r&#x65;&#x63;&#101;&#112;&#x74;e&#x75;&#x72;&#46;&#102;&#x72;</a> essaye de lire le message envoyé par Toto <a href="&#x6D;&#x61;&#105;&#x6C;&#x74;&#111;:&#x74;&#x6F;&#116;&#x6F;&#64;&#x64;&#x6F;&#x6D;&#x61;&#x69;&#110;&#x65;&#45;&#101;&#109;e&#x74;&#x65;&#117;&#114;&#x2E;f&#x72;">&#x74;&#x6F;&#116;&#x6F;&#64;&#x64;&#x6F;&#x6D;&#x61;&#x69;&#110;&#x65;&#45;&#101;&#109;e&#x74;&#x65;&#117;&#114;&#x2E;f&#x72;</a></p>
+
+<p>Soit le cas sans doutes le plus courant : il n'y a pas de serveur de
+mail local. L'utilisateur utilise son MUA pour rechercher le courrier
+sur son serveur de mail en utilisant l'un des protocoles supportés :
+POP3 (très souvent), IMAP, POP2, KPOP, etc ...</p>
+
+<p>Soit le cas le plus évolué (que nous étudierons ici) : on utilise un
+serveur de mail local. L'utilisateur utilise un logiciel (type
+Fetchmail) déclenché automatiquement, voir périodiquement pour
+rechercher le courrier sur son serveur de mail en utilisant l'un des
+protocoles supportés : POP3, IMAP, POP2, KPOP, etc ... ou
+éventuellement en déclenchant la délivrance des messages par le MTA du
+FAI sur le MTA local en utlisant le protocol ETRN. </p>
+
+<pre><code>  Les messages sont stockés sur la machine de l'utilisateur de
+façon standart (le plus souvent dans /var/spool/mail).
+  L'utilisateur peut alors lire ses messages avec son MUA en
+  interrogeant le MTA local (hors connection Internet). Le
+  protocol de récupération peut être n'importe lequel de ceux vu
+  précédement, mais une préférence sera donné à IMAP qui permet de
+  garder les messages sur le serveur local (dans /var/spool/mail
+  et dans le home pour les autres répertoires IMAP).
+</code></pre>
+
+<p>On utilise sb<em>server.py comme proxy. On donne comme information le nom
+de ce serveur (pop.monfai.fr) à sb</em>server et un port d'écoute.</p>
+
+<p>On utilise pour cela 
+User interface url is http://localhost:8880/</p>
+
+<p>On configure fetchmail pour aller chercher les mails sur le proxy.</p>
+
+<p>fetchmail a deux fichiers de configuration:
+- /etc/fetchmailrc
+- /etc/default/fetchmail
+fetchmail est un client pop et imap.
+fetchmail peut forwarder en utilisant smtp. </p>
+
+<p>pop.aliceadsl.fr --->> sb_server proxy --->> fetchmail qui change le
+To: --->> postfix ---> maildrop</p>
+
+<p>Fetchmail passe les mails à postfix (MTA) qui utilise maildrop pour
+les filtrer et les rangers dans différents répertoires en fonction de
+variables fournis par postfix et du fichier de conf /etc/maildrorc.</p>
+
+<p>is "laurent@francois.org" here
+is "sophie@griman.org" here</p>
+
+<p>Je ne comprends ou on dit à fetchmail d'utiliser postfix?</p>
+
+<p>Comment savoir si fetchmail tourne en daemon:</p>
+
+<h1>ps -e | grep fetch</h1>
+
+<p>10735 ?        00:00:00 fetchmail</p>
+
+<p>%%% FONCTIONNEMENT DE POSTFIX</p>
+
+<p>Je lis sur le site de la doc officielle de postfix qu'il faut créer:</p>
+
+<p>Un compte utilisateur "postfix" avec un user id et un group id qui ne
+sont pas utilisés par un autre compte. Preferably, this is an account
+that no-one can log into. The account does not need an executable
+login shell, and needs no existing home directory. Exemple:</p>
+
+<pre><code>      /etc/passwd:
+          postfix:*:12345:12345:postfix:/no/where:/no/shell
+
+      /etc/group:
+          postfix:*:12345:
+</code></pre>
+
+<p>Créer un groupe "postdrop" avec un group id qui n'est pas utilisé par
+un autre compte utilisateur, ni par le compte utilisateur
+"postfix". Exemple:</p>
+
+<pre><code>      /etc/group:
+          postdrop:*:54321:
+</code></pre>
+
+<p>Mais sous debian c'est déjà fait:
+/etc/passwd:
+    postfix:x:116:120::/var/spool/postfix:/bin/false
+/etc/group:
+    postdrop:x:121:</p>
+
+<p>Connaitre la version de postfix: postconf mail_version</p>
+
+<p>hostname -f 
+prony.venus.org</p>
+
+<p>Création des files d'attentes. Postfix utilise une arborescence
+beaucoup plus élaborée que celle de ses prédécesseurs pour placer les
+messages en attente de délivrance. Il suffit ici d'en indiquer la
+racine (/var/spool/postfix/, généralement) car tous les autres
+sous-répertoires y seront créés lors du premier démarrage de Postfix.</p>
+
+<h1>mkdir /var/spool/postfix</h1>
+
+<h1>chmod 0755 /var/spool/postfix</h1>
+
+<p>Réecritures d'adresses: il faut éfinir les correspondances entre les adresses locales de type lfs@prony.venus.org, sof@prony.venus.org qui n'ont aucune valeur pour les correspondants de l'extérieur et celles qu'ils connaissent de type unidentifiant@monfai.fr. 
+Comment démarrer postfix: invokerc.d postfix start</p>
+
+<p>postfix check : vérification elementaire</p>
+
+<p>postfix reload relecture des fichiers de conf</p>
+
+<p>Examen de la file d'attente: 
+       - mailq
+       - postqueue -p</p>
+
+<p>Examen des paramêtres de configuration:
+       - postconf</p>
+
+<p>Examen des paramêtres par defaut:
+       - postconf -d</p>
+
+<p>Examen des paramêtres différents de ceux par défaut:
+       - postconf -n</p>
+
+<p>Deux fichiers de configuration:
+     -/etc/postfix/main.cf
+     -/etc/postfix/master.cf</p>
+
+<p>Si on les modifie il faut faire: </p>
+
+<h1>postfix reload.</h1>
+
+<p>Test:
+telnet localhost 25
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+220 prony.localdomain ESMTP Postfix (Debian/GNU)
+ehlo localhost
+250-dawa.venus.org
+250-PIPELINING
+250-SIZE 10240000
+250-VRFY
+250-ETRN
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250 DSN
+mail from:root@localhost
+250 2.1.0 Ok
+rcpt to: sof@localhost
+250 2.1.5 Ok
+data
+354 End data with <CR><LF>.<CR><LF>
+subject: premier mail sur postfix</p>
+
+<p>C'est mon premier mail sur postfix
+. <taper enter>
+250 2.0.0 Ok: queued as B6E8D2FC76
+quit</p>
+
+<p>On peut se connecter à distance telnet prony 25</p>
+
+<p>Pour se déloguer: quit</p>
+
+<p>%%%% MAILDROP</p>
+
+<p>Les mails sont classés par maildrop. </p>
+
+<p>On trouve des infos dans "man maildropfilter"</p>
+
+<p>%%% MAILDIR MBOX</p>
+
+<p>Traditionnelement unix utilise mailbox pour stocker les mails. </p>
+
+<p>Pour mbox, chaque dossier de votre boîte mail (Reçu, Envoyés, Archive,
+Corbeille, etc) est representé par un fichier, ou tout les mails sont
+enregistrés à la suite, séparés par une ligne vide.</p>
+
+<p>Avec Maildir, chaque mail est un fichier, et chaque dossier de la
+boîte mail, un répertoire. Attention, c’est un peu plus compliqué que
+ça. Les mails ne sont pas directement enregistrés dans boîte/mail.</p>
+
+<p>Avec maildir, on crée le maildir avec maildirmake. </p>
+
+<p>%%%% DOVECOT
+Pour accéder aux mails mise en place de Dovecot imap server. </p>
+
+<p>telnet localhost 143
+1 login unsuer unpasswd
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+* OK Dovecot ready.
+1 login unuser unpasswd
+1 OK Logged in.
+2 select inbox
+* FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
+* OK [PERMANENTFLAGS (\Answered \Flagged \Deleted \Seen \Draft *)] Flags permitted.
+* 0 EXISTS
+* 0 RECENT
+* OK [UIDVALIDITY 1200572030] UIDs valid
+* OK [UIDNEXT 1] Predicted next UID
+2 OK [READ-WRITE] Select completed.
+4 list "" *
+* LIST (\HasNoChildren) "." "INBOX"
+4 OK List completed.
+6 list "" *
+* LIST (\HasNoChildren) "." "Popclub"
+* LIST (\HasNoChildren) "." "LeMonde"
+* LIST (\HasNoChildren) "." "Gnucash"
+* LIST (\HasNoChildren) "." "Gulnc"
+* LIST (\HasNoChildren) "." "WxPython"
+* LIST (\HasNoChildren) "." "GNUmed"
+* LIST (\HasNoChildren) "." "Trash"
+* LIST (\HasNoChildren) "." "INBOX"
+6 OK List completed.
+7 logout</p>
+
+<p>%%%% MAILDROP ET POSTFIX
+2 possibilités:</p>
+
+<p>Direct sans utiliser le local delivery agent Postfix va livrer
+  directement à maildrop sans utiliser l'agent de livraison
+  'local'. Cela veut dire que l'on aura l'expansion des aliases local
+  ou de $HOME/.forward. On utilise cela pour des domaines hosted avec
+  des destinataires qui n'ont pas de repertoire home.</p>
+
+<p>/etc/postfix/main.cf:
+ 2     maildrop<em>destination</em>recipient<em>limit = 1
+ 3     virtual</em>mailbox<em>domains = some.domain someother.domain
+ 4     virtual</em>transport = maildrop
+ 5     virtual<em>mailbox</em>maps = hash:/etc/postfix/virtual<em>mailbox
+ 6     virtual</em>alias<em>maps = hash:/etc/postfix/virtual</em>alias
+ 7 
+ 8 /etc/postfix/virtual<em>mailbox:
+ 9     user1@some.domain        ...text here does not matter...
+10     user2@some.domain        ...text here does not matter...
+11     user3@someother.domain   ...text here does not matter...
+12 
+13 /etc/postfix/virtual</em>alias:
+14     postmaster@some.domain           postmaster
+15     postmaster@someother.domain      postmaster</p>
+
+<p>/etc/postfix/master.cf:
+    maildrop  unix  -       n       n       -       -       pipe
+      flags=ODRhu user=vmail argv=/path/to/maildrop /path/to/maildroprc  ${recipient}</p>
+
+<p>Indirect delivery via local delivery agent.
+C'est moins efficace que directement mais permet l'expansion des local aliases et de $HOME/.forward. C'est utilisé pour des domaines listés dans "mydestination" et qui ont des user avec un home. </p>
+
+<p>%%%% COMMENT CONNAITRE LES UTILISATEUR SUR UN SYSTEME
+Pour décrire un utilisateur : chfn
+Cette commande permet d'indiquer dans le champ numéro 5 du fichier /etc/passwd différentes informations sur un utilisateur, son nom complet, son bureau, ses numeros de téléphone (séparées par des virgules). </p>
+
+<p>Pour examiner les valeurs par défaut appliquées par useradd :
+commande useradd -D ou éditer /etc/default/useradd </p>
+
+<p>%%%% SKYPE 
+Pas facile d'installer la version 64bits de skype
+version 2.1.0.81
+Probleme avec pulseaudio en installant j'ai reussi à regler mes probleme s de son que j'avais avec amarok. Mais par contre plus de son avec skype.
+Pour réobtenir le son avec skype il faut faire un killall pulseaudio. Ensuite pour faire remarcher pulseaudio je ne sais pas comment faire et amarok ne marche plus. 
+malgres killall pulseaudio :
+lfs       4565  0.1  0.1 211728  5628 pts/0    Tl   07:01   0:00 pulseaudio</p>
+
+<p>%%%% Connaitre ses groupes %%%%%
+id
+ou
+groups nomutilisateur</p>
+
+<p>%%% Comment se rajouter à un groupe 
+usermod -a -G groupe user
+%%% APACHE2 %%%%
+Connaitre sa version d'apache: TODO</p>
+
+<p>httpd est en mode démon. Lorsqu'il est invoqué il lit le fichier de config /etc/apache2/httpd.conf. On peut alors utiliser un navigateur pour se connecter au serveur, et afficher la page de de test située dans le répertoire définie par la directive "DocumentRoot"</p>
+
+<p>par exemple
+ DocumentRoot /usr/web</p>
+
+<p>un accès à http://www.my.host.com/index.html se réfère alors à /usr/web/index.html. Si chemin répertoire n'est pas un chemin absolu, il est considéré comme relatif au chemin défini par la directive ServerRoot.</p>
+
+<p>Au démarrage apache, un port et une adresse lui sont associé sur l'hote local et le serveur attend les requetes. Il écoute sur toutes les adresses de l'hote. on peut lui préciser sur quelles adresses et quels ports écouter. 
+pour écouter sur les ports 80 et 8000 sur toutes les interfaces :
+Listen 80
+Listen 8000</p>
+
+<p>pour écouter sur 80 sur une IP et 8000 su une autre 
+Listen 192.0.2.1:80
+Listen 192.0.2.5:8000 </p>
+
+<p>Comment tout cela fonctionne avec les hotes virtuels
+Listen n'implémente pas les autes virtuels. S'il n'y a pas de directive VirtualHost alors le serveur se comporte de la meme facon pour toutes les requetes. Il faut une VirtualHost pour chaque couple adresse+port afin de définir le comportement de cet hote virtuel. Il faut s'assurer que le server écoute sur cette adresse et ce port. </p>
+
+<p>Les serveurs virtuels permet de faire fonctionner un ou plusieurs serveurs web comme www.example1.com et www.example2.com sur une meme machine. 
+les serveurs virtuels peuvent être par IP (chaque serveur à son IP ) et par nom plusieurs noms de domaines se cotoient sur une meme adresse IP. Cette méthode est appelée host-based ou serveur virtuel non IP. C'et la méthode de choix</p>
+
+<p>Comment on fait:
+On désigne l'adresse IP sur laquelle le serveur va attendre les requetes. 
+NameVirtualHost addr[:port]
+j'ai *:80</p>
+
+<p>Ensuite création d'une section <VirtualHost> pour chaque serveur à créer. L'argument de la directive <VirtualHost> doit etre le meme que l'argument de la directive NameVirtualHost. Dans chaque section <VirtualHost> il faut définir au minimum:
+ServerName 
+DocumentRoot précise l'emplacement sur le systeme de fichiers du contenu de ce serveur</p>
+
+<p>Supposons que l'on héberge le domaine www.domain.tld et que l'on souhaite ajouter le serveur virtuel www.otherdomain.tld qui pointe sur la même adresse IP. Il suffit d'ajouter la configuration suivante à apache2.conf :</p>
+
+<p>NameVirtualHost *:80
+<VirtualHost *:80>
+ServerName www.domain.tld
+ServerAlias domain.tld *.domain.tld
+DocumentRoot /www/domain
+</VirtualHost></p>
+
+<p><VirtualHost *:80>
+ServerName www.otherdomain.tld
+DocumentRoot /www/otherdomain
+</VirtualHost></p>
+
+<p>ServerAlias indique aux utilisateurs les autres noms permis pour accéder au même site web.</p>
+
+<p>Le premier serveur virtuel listé est le serveur virtuel par defaut. La directive DocumentRoot du serveur principal ne sera jamais utilisé si l'adresse IP correspond dans une directive NameVirtualHost. </p>
+
+<p>Le fichier de configuration principal
+Apache est configuré en mettant des "directives". Le fichier de configuration principale est httpd.conf. D'autres fichiers de configuration peuvent ajoutés avec la directive Include. </p>
+
+<p>On peut vérifier l'absence d'erreur de syntaxe dans les fichiers de config avec la commande apachectl configtest.</p>
+
+<p>Modules
+si le serveur a été compilé de facon à utiliser les modules chargés dynamiquement, alors les modules peuvent être compilés séparément et chargés à n'importe quel moment à l'aide de la directive LoadModule. Dans le cas contraire, Apache doit être recompilé pour ajouter ou supprimer des modules.</p>
+
+<p>Pour savoir quels mofules sont compilés ont peut utiliser en ligne de commande -l: apache2ctl -l </p>
+
+<p>Apache permet la gestion décentralisée de la configuration via des fichiers spéciaux placés dans l'arborescence du site web. Ces fichiers spéciaux se nomment en général .htaccess, mais tout autre nom peut être spécifié à l'aide de la directive AccessFileName. Les directives placées dans les fichiers .htaccess  s'appliquent au répertoire dans lequel vous avez placé le fichier, ainsi qu'à tous ses sous-répertoires. La syntaxe des fichiers .htaccess est la même que celle des fichiers de configuration principaux. Comme les fichiers .htaccess sont lus à chaque requête, les modifications de ces fichiers prennent effet immédiatement.</p>
+
+<p>Les fichiers de configurations 
+apache2.conf fichier principal</p>
+
+<p>envvars </p>
+
+<p>conf.d/
+les fichiers sous ce répertoire sont inclus par la ligne dans apache2.conf
+Include /etc/apache2/conf.d</p>
+
+<p>httpd.conf: vide</p>
+
+<p>magic : vide</p>
+
+<p>mods-available/
+contient une série de fichiers .load et .conf </p>
+
+<p>mods-enable/
+contient les symlink vers les .load et .conf dans le repertoire mods-avaible</p>
+
+<p>ports.conf
+directive de configuration pour les ports et adresses IP à écouter. </p>
+
+<p>sites-enabled/ 
+contient des symlink vers les fichiers de sites-available/</p>
+
+<p>a2enmod et a2dismod enabling et disabling modules: a2emod [module]</p>
+
+<p>a2ensite et a2dissite enabling et disabling site: </p>
+
+<p>Directive DocumentRoot: 
+DocumentRoot /usr/web (moi j'ai /var/www)
+alors un accés à http://www.my.host.com/index.html se réfere à /usr/web/index.html. </p>
+
+<p>Fichiers situes en dehors du DocumentRoot
+Il est parfois nécessaire de permettre un accés web à des parties du systeme de fichier qui n'est pas sous le DocumentRoot. Apache permet de faire cela de plusieurs facons.
+On peut utiliser des liens symboliques. Pour des raisons de sécurité Apache va suivre les liens symboliques uniquement si Options pour le directory en question contient FollowSymlinks ou SymLinksIfOwnerMatch.
+On peut utiliser la directive Alias va mapper n'importe qu'elle partie du systeme de fichier sur le web. par exemple avec Alias /docs /var/web, http://my.host.com/docs/dir/file.html sera servi à partir de /var/web/dir/file.html. </p>
+
+<p>%%%%  DRUPAL6</p>
+
+<p>aptitude install php5-pgsql drupal6
+http://localhost/drupal6/install.php) to populate the database. This is the preferred method in drupal 6.x and upper.</p>
+
+<p>login: frouty
+password : "comme d'habitude"</p>
+
+<h1>GALLERY2</h1>
+
+<p>Créer un user séparé pour l'utilisation de gallery.</p>
+
+<p>sudo adduser --system --group gallery</p>
+
+<p>Créer un nouveau role (user), creer la database, mise en place d'un mot de passe, permettre que l'on se logue dans le role. </p>
+
+<p>sudo -u postgres psql
+postgres=# create role gallery; # creation du role
+postgres=# create database gallery2 owner gallery; # creation de la database gallery2
+postgres=# alter role gallery encrypted password '123b654';
+postgres=# alter role gallery login;
+postgres=# \l+
+postgres=# \q</p>
+
+<p>permettre de se loguer dans le role gallery à partir d'un autre utilisateur sans avoir a lancer psql
+nano /etc/postgresql/8.3/main/pg_hba.conf</p>
+
+<p>local      database  user  auth-method  [auth-options]
+local gallery2 gallery md5</p>
+
+<p>admin user setup:
+admin
+password "comme d'habitude"</p>
+
+<pre><code>*  The ImageMagick module was installed, but needs configuration to be activated
+* The Multiroot module was installed, but needs configuration to be activated
+* The Nokia Image Upload module was installed, but needs configuration to be activated
+* The URL Rewrite module was installed, but needs configuration to be activated
+</code></pre>
+
+<p>voir http://codex.gallery2.org/Gallery2:Security</p>
+
+<h1>WORDPRESS</h1>
+
+<p>INSTALLATION DE MYSQL SERVER </p>
+
+<p>Using MySQL under NIS/YP requires a mysql user account to be added on the local system with:    adduser --system --group --home /var/lib/mysql mysql</p>
+
+<p>You should also check the permissions and ownership of the /var/lib/mysql directory:
+      /var/lib/mysql: drwxr-xr-x   mysql    mysql                     </p>
+
+<p>While not mandatory, it is highly recommended that you set a password for the MySQL administrative "root" user. If this field is left blank, the password will not be changed. New password for the MySQL "root" user:   Je le laisse blank     </p>
+
+<p>pour se connecter</p>
+
+<h1>mysql -u root -p</h1>
+
+<p>Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 40
+Server version: 5.1.49-3~bpo50+1 (Debian)</p>
+
+<p>mysql> CREATE DATABASE wordpress;
+Query OK, 1 row affected (0.00 sec)
+mysql>grant all privileges on wordpress.* to wordpress@localhost identified by '123b654' with grant option;
+Query OK, 0 rows affected (0.00 sec)
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+mysql>exit</p>
+
+<p>finalement je comprends rien alors:</p>
+
+<p>nano /etc/apache2/site-avaible/wordpress</p>
+
+<p><VirtualHost *:80>
+  ServerName kuendu.homelinux.org
+  DocumentRoot /var/www/kuendu.homelinux.org/</p>
+
+<p><Directory /var/www/keundu.homelinux.org/>
+    AllowOverride All
+    Order Deny,Allow
+    Allow from all
+  </Directory>
+</VirtualHost></p>
+
+<p>ln -s /usr/share/wordpress /var/www/kuendu.homelinux.org
+a2ensite wordpress &amp;&amp; invoke-rc.d apache2 restart
+cd /usr/share/doc/wordpress/examples</p>
+
+<p>root@prony:/usr/share/doc/wordpress/examples# sh setup-mysql -n wordpress kuendu.homelinux.org</p>
+
+<p>PING kuendu.homelinux.org (202.22.227.98) 56(84) bytes of data.
+64 bytes from 202.22.227.98: icmp_seq=1 ttl=64 time=0.584 ms</p>
+
+<p>--- kuendu.homelinux.org ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.584/0.584/0.584/0.000 ms
+/etc/wordpress/config-kuendu.homelinux.org.php written
+Trying to create upload directory: /srv/www/wp-uploads/kuendu.homelinux.org
+Setting up permissions
+Goto http://kuendu.homelinux.org to setup Wordpress</p>
+
+<p>setup-mysql [-n NAME] [-h | -d | -b] FQDN</p>
+
+<p>Comment dropper une table:
+mysqladmin -u root -p drop wordpress</p>
+
+<p>wordpress
+sml<em>user
+sml</em>password</p>
+
+<h1>INSTALL OPENERP</h1>
+
+<p>sudo apt-get install openerp-server openerp-client python2.5 python2.5-dev python-profiler <br />
+wget http://sourceforge.net/projects/pyxml/files/pyxml/0.8.4/PyXML-0.8.4.tar.gz</p>
+
+<p>cd PyXML-0.8.4/ <br />
+sudo python2.5 setup.py install <br />
+mkdir -p /usr/lib/python2.5/site-packages/oldxml/<em>xmlplus/utils/
+sudo ln -s /usr/lib/python2.6/dist-packages/oldxml/</em>xmlplus/utils/boolean.so /usr/lib/python2.5/site-packages/oldxml/_xmlplus/utils/
+ sudo su postgres   </p>
+
+<h1>$ createuser openerp -P</h1>
+
+<h1>Enter password for new role: (enter password here)</h1>
+
+<h1>Enter it again: (enter password here)</h1>
+
+<h1>Shall the new role be a superuser? (y/n) n</h1>
+
+<h1>Shall the new role be allowed to create databases? (y/n) y</h1>
+
+<h1>Shall the new role be allowed to create more new roles? (y/n) n</h1>
+
+<h1>$ exit</h1>
+
+<ol>
+<li>$ sudo cp /usr/bin/openerp-server /usr/bin/openerp-server.orig   </li>
+<li>$ sudo vi /usr/bin/openerp-server      </li>
+</ol>
+
+<p>exec /usr/bin/python ./openerp-server.py $@ <br />
+to
+exec /usr/bin/python2.5 ./openerp-server.py $@  </p>
+
+<p>sudo vi /etc/openerp-server.conf     </p>
+
+<ol>
+<li>db_name = False   </li>
+<li>db_user = openerp   </li>
+<li>db_password = openerp </li>
+</ol>
+
+<p>sudo vi /etc/postgresql/8.3/main/pg_hba.conf</p>
+
+<p>local all all ident sameuser to local all all trust</p>
+
+<h1>sudo /etc/init.d/postgresql-8.3 restart</h1>
+
+<h1>$ sudo /etc/init.d/openerp-server restart</h1>
+
+<p>On a donc crée un nouveau user openerp. On va se connecter avec 
+psql -U openerp -W
+$ psql -U openerp -W
+psql: FATAL:  Ident authentication failed for user "openerp"</p>
+
+<p>sudo vi /etc/postgresql/8.4/main/pg_hba.conf
+local all all ident --> local all all trust</p>
+
+<p>sudo /etc/init.d/postgresql-8.4 restart
+psql -U openerp -W
+psql: FATAL:  database "openerp" does not exist</p>
+
+<p>C'est du au fait que postgres essaie de se connecter à une database qui a le meme nom que l'utilisateur si aucune database n'est spécifiée. On va essayer de se connecter à la database postgres qui est toujours installée. </p>
+
+<p>psql postgres-U openerp -W
+Password for user openerp: 
+psql: FATAL:  password authentication failed for user "openerp"
+postgres@woodin:~$ psql postgres -U openerp -W
+Password for user openerp: 
+psql (8.4.5)
+Type "help" for help.</p>
+
+<p>postgres=# </p>
+
+<p>OK ca marche. </p>
+
+<h1>POSTGRESQL</h1>
+
+<h2>Comment droper une database?</h2>
+
+<p>Drop database madatabase;</p>
+
+<p>Si ca marche pas 
+select * from pg<em>stat</em>activity where datname='madatabase';
+et kill -9 les procpid.</p>
+
+<p>puis Drop database madatabase;</p>
+
+<h1>Conversion de wma en ogg</h1>
+
+<p>ffmpeg -i 09\ Piste\ 9.wma -strict experimental -acodec vorbis -aq 100 09\ Piste\ 9.ogg</p>
+
+<h1>INSTALLATION DE SYSLINUX sur</h1>
+
+<p>une clef USB</p>
+
+<h1>mkdir /tmp/cdrom</h1>
+
+<h1>mount -o loop,exec /path/to/systemrescuecd-x86-x.y.z.iso /tmp/cdrom</h1>
+
+<h1>cd /tmp/cdrom</h1>
+
+<h1>./usb_inst.sh listdev</h1>
+
+<h1>./usb_inst.sh writembr /dev/sdx</h1>
+
+<h1>./usb_inst.sh format /dev/sdx1</h1>
+
+<h1>./usb_inst.sh copyfiles /dev/sdx1</h1>
+
+<h1>./usb_inst.sh syslinux /dev/sdx1</h1>
+
+<p>ne marche pas </p>
+
+<p>Marche en utilisant le LIVECD rescuecd avec </p>
+
+<h1>sysresccd-usbstick listdev to see which devices are seen as USB-sticks</h1>
+
+<h1>sysresccd-usbstick writembr /dev/sdX</h1>
+
+<h1>sysresccd-usbstick format /dev/sdXn</h1>
+
+<h1>sysresccd-usbstick copyfiles /dev/sdXn</h1>
+
+<h1>sysresccd-usbstick syslinux /dev/sdXn</h1>
+
+<h1>CREATION d'un LIVE CD DEBIAN sur une Clef USB</h1>
+
+<p>```</p>
+
+<h1>mkdir /tmp/isohybrid</h1>
+
+<h1>cd /tmp/isohybrid</h1>
+
+<h1>lb config --distribution squeeze --mirror-bootstrap http://debian.nautile.nc/debian --mirror-chroot-security http://debian.nautile.nc/debian-security/ --language fr --packages-lists "kde-full rescue" --bootappend-live "locales=fr_FR.UTF-8 keyboard-layouts=fr"</h1>
+
+<h1>lb build</h1>
+
+<p>```
+Marche pas avec testing le 170411</p>
+
+<h1>COMMENT METTRE UN TIMESTAMP sur UN NOM DE FICHIER</h1>
+
+<p>touch tempo.$(date +%Y%m%d-%Hh%M)</p>
+
+<h1>COMMENT CONNAITRE LE FSYSTEM D'UN DEVICE</h1>
+
+<p>fsarchiver probe simple
+ou plus élégant :
+blkid (du paquet util-linux
+mnemotechnique : blockID
+Donne aussi UUID</p>
+
+<h1>Comment connaitre les UUID des disques</h1>
+
+<p>ls /dev/disk/by-uuid -lha</p>
+
+<h1>Fonts</h1>
+
+<p>fc-list
+fc-cache -fv – rebuilds cached list of fonts 
+dpkg-reconfigure fontconfig-config
+dpkg-reconfigure fontconfig</p>
+
+<h2>FS_UUID</h2>
+
+<p>If you run "blkid" with no flags it should show you all block devices with details including LABEL (if any), type and uuid. </p>
+
+<h1>REPAIR GRUB2</h1>
+
+<p>J'ai un disque dur qui déconne. On peut le monter en disque dur externe USB mais on arrive pas à booter dessus en DD externe usb.
+Comment réparer le grub.</p>
+
+<p>installation du DD en USB externe avec le dock
+démarrage sur une clef usb live
+ATTENTION ca ne marche pas avec un installation existante sur un DD. Il faut utiliser le live
+sudo fdisk -l pour trouver le nom des partitions du disque en panne disons /dev/sdx
+sudo mount /dev/sdx2 (partition racine /) /mnt
+sudo mount /dev/sdx1 (partition boot)  /mnt/boot
+sudo mount --bind /dev /mnt/dev
+sudo mount --bind /proc /mnt/proc
+sudo chroot /
+grub-install /dev/sdx 
+grub-install recheck /dev/sdx
+exit
+sudo reboot</p>
+
+<p>on enleve le USB key live 
+et boot selection du DD externe et ca devrait marcher.  </p>
+
+<h1>check md5sum</h1>
+
+<p>md5sum -c package.tgz package.md5</p>
+
+<p>%%%%% INSTALL DE DEBIAN 
+PARTITION MANUELLE
+Si on utilise l'option guided use entire disk and set up encrypted LVM sur un DD de 1To la phase d'erasing les data est trop longue (plusieurs heures) donc on choisit manual. On crée une partition en ext3 bootable que l'on mount sur /boot. puis une nouvelle partition puis configure encrypted volume.
+puis on crée un volume groupe puis les partition / /home /opt /usr /var /tmp swap comme d'habitued </p>
+
+<h1>Comment lister les paquets installé?</h1>
+
+<p><code>aptitude search ~i</code></p>
+
+<h1>HOST DISCOVERY</h1>
+
+<p><code>nmap -sP 192.168.2.1-254</code>
+<code>nmap -sP 192.168.2.0/24</code></p>
+
+<p>%%%%% TP-LINK 8810
+bridge.
+pour communiquer avec le modem en bridge on peut le brancher rj45 en direct sur un pc et ping 192.168.1.1</p>
+
+<p>firmware :3.06L.03-T1.0a-091210.A2pB023k.d17m</p>
+
+<p>%%%% FLASH PLAYER 
+mise a jour : # update-flashplugin-nonfree --install
+connaitre sa version de </p>
+
+<h1>strings /usr/lib/flashplugin-nonfree/libflashplayer.so|grep -i flashplayer_</h1>
+
+<p>%%%% NIKON
+avant de faire les manips sur la carte </p>
+
+<h1>dd if=/dev/sdX of=/tmp/r1 bs=512</h1>
+
+<p>probleme avec les cartes compact flash qui ne veulent plus etre lue dans l'APN
+J'essaie dos
+mais la carte n'est tjs pas lu par l'APN qui demande a ce qu'elle soit formatée.
+Sur une autre carte il y a bcp d'err et renommage auto de nombreux fichiers ca prend trois plombes.</p>
+
+<p>%%%% Télécharger les video de eyetube.net
+login lau.francois@worldonline.fr
+password habituel
+recuperer le sources; trouver le code plugins: { <br />
+        controls: { url: '/assets_tube/flowplayer/flowplayer.controls-3.2.5.swf',</p>
+
+<pre><code>    bufferColor: '#CE151E', volumeColor: '#CE151E', timeColor: '#CE151E'},
+    akamai: { url: '/assets_tube/flowplayer/flowplayer.akamai-3.2.0.swf'},
+    rtmp: { url: '/assets_tube/flowplayer/flowplayer.rtmp-3.2.3.swf', netConnectionUrl: 'rtmp://video.bmctoday.net/ondemand/eyetube/streams/_definst_/'},
+    bwcheck: { url: '/assets_tube/flowplayer/flowplayer.bwcheck-3.2.5.swf', 
+    serverType: 'fms',
+    dynamic: true}
+},
+clip: {  
+    //scaling: 'fit',   
+
+    urlResolvers: 'bwcheck',
+    provider: 'rtmp',
+    bufferLength: 4,
+    autoPlay:true,
+    bitrates: [
+
+    {   url: "dumif_1000kbps", bitrate: 1000, normal:true, isDefault:true },
+    {   url: "dumif_748kbps", bitrate: 748, normal:true },
+    {   url: "dumif_512kbps", bitrate: 512, normal:true }
+    ]
+</code></pre>
+
+<p>et taper rtmpdump -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/dumif_1000kbps -o outputfile.flv</p>
+
+<p>A faire:</p>
+
+<p>*rtrtmpdump -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/hagaj<em>748kbps -o removal-canula-2.flv
+*rtmpdump -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/</em>definst<em>/hekoq</em>748kbps -o removal<em>canula.flv
+*rtmpdump -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/</em>definst<em>/deved</em>1000kbps -o chandelier<em>light.flv
+*rtmpdump -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/</em>definst<em>/gofob</em>1000kbps -o 9degree_insertion-23G.flv</p>
+
+<p>*rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/sisire -o principles<em>sutureless</em>vitrectomy.flv
+*rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/gibofo -o retrobulbar<em>hemorrhage.flv
+*rtmp://video.bmctoday.net/ondemand/eyetube/streams/</em>definst<em>/bosuw</em>1000kbps -o reichel-chun-forceps.flv</p>
+
+<p>*rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/pimoo<em>1000kbps
+rtmp://video.bmctoday.net/ondemand/eyetube/streams/</em>definst<em>/forub</em>1000kbps</p>
+
+<p>rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/locri_1000kbps</p>
+
+<p>COMMENT TELECHARGER SUR ARTE+7
+aller sur la page de l'émission à telécharger 
+view source
+rechercher quelque chose du genre :videorefFileUrl=http%3A%2F%2Fvideos.arte.tv%2Ffr%2Fdo<em>delegate%2Fvideos%2Fle</em>dessous<em>des</em>cartes-6590276%2Cview%2CasPlayerXml.xml"
+taper dans l'url cette adresse en convertissant %2F = / et %2C = ,
+Dans cette nouvelle page récuper : <video lang="fr" ref="http://videos.arte.tv/fr/do_delegate/videos/le_dessous_des_cartes-6590280,view,asPlayerXml.xml"/>
+A mettre dans l'url et récuperer enfin la bonne adresse. 
+Mettre la bonne adresse entre ""</p>
+
+<p>rtmpdump -o orgueil-prejuge-3.flv -r 'rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/default/arteprod/A7<em>SGT</em>ENC<em>08</em>046395-003-A<em>PG</em>HQ_FR?h=8c32a538b827423589901e7acc2dd37f'</p>
+
+<p>rtmpdump -o les-larmes-ameres-de-petra-van-kanpt.flv -o 'rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/default/arteprod/A7<em>SGT</em>ENC<em>08</em>045604-000-A<em>PG</em>HQ_FR?h=e20dfeb9d6691b79c8c89fddfbf165ce'</p>
+
+<p>*rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/EUR<em>DE</em>FR/arteprod/A7<em>SGT</em>ENC<em>08</em>039191-000-A<em>PG</em>HQ_FR?h=6022a761fedf7414294de00d6502eab4</p>
+
+<p>*rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/ALL/arteprod/2011/11/10/ar-dz-20111105-obama<em>DE</em>149233<em>16by9</em>800_MP4?h=006311e1c700963745c9562a15283640</p>
+
+<p>*rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/default/arteprod/A7<em>SGT</em>ENC<em>08</em>046171-000-A<em>PG</em>HQ_FR?h=8793207dc1dc41fda58ff8f5e2aff9a9</p>
+
+<p>*rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/default/arteprod/A7<em>SGT</em>ENC<em>08</em>035710-006-A<em>PG</em>HQ_FR?h=68a55efc4481a8bf43e210242d439d71</p>
+
+<p>rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/ALL/arteprod/2010/04/03/ARTE3123758<em>FR</em>19217<em>16by9</em>800_MP4?h=be72da68905b6fafbcdeba0f8c09e5f5</p>
+
+<p>*rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/ALL/arteprod/2010/06/23/ar-dz-0024<em>fr</em>20100619-papouasie<em>35717</em>16by9<em>800</em>MP4?h=82ac29feefa8e4324c1d148d37586650</p>
+
+<p>rtmpdump -o philosophie-vengeance.fvl -r 'rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/EUR<em>DE</em>FR/arteprod/A7<em>SGT</em>ENC<em>08</em>046412-010-A<em>PG</em>HQ_FR?h=e5d705e18a5cfd121fdcd4eafd129516'</p>
+
+<p>rtmpdump -o macular-surgery-7.flv -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/sigim_1000kbps</p>
+
+<p>rtmpdump -o macular-surgery-12.flv -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/hekoq<em>748kbps
+rtmpdump -o macular-surgery-13.flv -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/</em>definst<em>/hagaj</em>748kbps</p>
+
+<p>rtmpdmp -o phako-with-iris-coloboma.flv -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/mafed_1000kbps</p>
+
+<p>rtmpdump -o choroidal-drainage.flv -r rtmp://video.bmctoday.net/ondemand/eyetube/streams/<em>definst</em>/mevof_1000kbps</p>
+
+<p>rtmp -o reportage-baie-de-rio.flv -r "rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/ALL/arteprod/A7<em>SGT</em>ENC<em>08</em>030273-373-A<em>PG</em>HQ_FR?h=0e08cfc933c07c58c81329addb153d96"</p>
+
+<p>rtmpdump -o vers-union-fiscale-europenne.flv -r "rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/ALL/arteprod/2012/06/15/AJ-20120614-FIS<em>FR</em>208164<em>16by9</em>800_MP4?h=74bcb8a0e4bdc2f3021a7b5c2ff9d8b1"</p>
+
+<p>rtmpdump -o retour-au-chateau-1-7.flv -o 'rtmp://artestras.fcod.llnwd.net/a3903/o35/mp4:geo/videothek/EUR<em>DE</em>FR/arteprod/A7<em>SGT</em>ENC<em>08</em>046311-001-B<em>PG</em>HQ_FR?h=c289243c24f01a6874035a7d01488998'</p>
+
+<p>%%%% INSTALLATION DE JAVA</p>
+
+<p>openjdk-7-jre 
+et icedtea-plugin</p>
+
+<h1>EMACS</h1>
+
+<p>Gestion des paquet avec ELPA
+M-x package-list-packages
+r pour update de la liste
+i pour le marquer pour l'installation
+x pour le downloader et l'installer. </p>
+
+<p>Comment supprimer le highlight des lignes trop longues. Je n'ai réussi qu'a augmenter la taille des lignes sans highlight avec :</p>
+
+<p>M-x customize-group whitespace
+puis whitespace Line.</p>
+
+<p>%%%%%%% COMPRENDRE L'ALIGNEMENT
+fdisk
+/dev/sda
+head 255
+63 sectors/track
+7783 cylinder
+sector size 512 bytes</p>
+
+<p>Heads = track per cylinder
+Sectors = Sectors per track</p>
+
+<p>Les partitions doivent etre alignées sur le SSD erase block size
+Le erase block size est de 512kb sur les SSD en général.</p>
+
+<p>Pour LVM:
+En premier avec fdisk -l on cherche les partitions dont on dispose. 
+sur un disque: fdisk /dev/sdX
+add a new partition
+on la choisit primary
+First cylinder : default
+Last cylinder ou taille : on choisit ce que l'on veut +25000M ie (25G)
+on choisit le type Linux LVM: 8e
+On écrit la table de partition : w
+Cela crée une partition /dev/sdX1 de type Linux LVM
+Ensuite on crée une partition pour LVM avec un regroupement de partition Linux LVM
+pvcreate /dev/sdX1 /dev/sdY1 .....
+pvdisplay
+Sur ce physical volume on crée un volume groupe
+vgcreate un<em>nom</em>de<em>groupe /dev/sdX1 /dev/SdY1 ....
+Ensuite on crée un logical volume
+lvcreat --name unnom</em>volume --size unetaille nom<em>de</em>groupe
+Ensuite il faut faire les file systeme sur les logical volume
+mkfs."typefs" /dev/nom<em>groupe/nom</em>volume
+Apres il faut les monter. </p>
+
+<p>Sur mon disque ssd de 64g
+je cree une partition primaire /boot de 100M ca devrait suffire
+Je cree une autre partition primaire de 10G
+Je cree un physical volume  sur cette sda2
+Je crée un volume groupe sur ce physical volume
+Je crée un logical volume de 5G que j'appelle root
+Je crée un logical volume de 2G que j'appelle home</p>
+
+<p>fdisk -l -u -c /dev/sdX
+total sector le noter 125045424
+combien j'ai de Gigabyte (Gigabyte formula):
+125045424 / 2,097,152 = 59.6263 Gb
+Combien j'ai de sector restant dans cette division
+avec python
+125045424 % 2 097 152 = 1313456
+megabyte formula
+1 312 456 / 2,048 = 641 Mb</p>
+
+<p>Si je veux une partition de 26G:
+2 097 152 * 26 = 54,525,952 sectors
+Si je veux une partition de 256Mb
+2 048 * 750 = 1,536,000 sectors
+Si je veux une  partition de 26,750 (54 525,952 + 1,536,000) = 56,061,952 sectors</p>
+
+<p>Alignement: Le starting sector doit etre divible par 512 pas de reste dans la division par 512.
+--------------------d</p>
+
+<p>Je veux une partition de 100Mb : 2 048 * 100 = 204 800
+204 800 - 1 sector = 204 799</p>
+
+<p>start 2048 end 204 799</p>
+
+<p>Et une autre partition qui occupe tout le reste du SSD
+fdisk -H 32 -S 32 -cu /dev/sdx</p>
+
+<p>création des physical volume avec pvcreate --dataalignment 512k /dev/sdXY</p>
+
+<p>Création des volume group:vgcreate fileserver /dev/sdb1 /dev/sdc1 /dev/sdd1 /dev/sde1</p>
+
+<p>Création des logical volume:</p>
+
+<p>Creation d'un systeme de fichier:
+mkfs.ext4 -O extent -b 4096 -E stride=128,stripe-width=128 /dev/mapper/ssd-debian</p>
+
+<h1>RIP RIPPER LES DVD</h1>
+
+<p>acidrip
+dvdrip
+handbrake</p>
+
+<p>%%%%% PLAN de BATAILLE POUR AUGMENTER LE STOCKAGE SUR LES SERVEURS</p>
+
+<p>L'OS est installé sous /dev/hdc
+hdc1 /boot
+hdc3 / 
+hdc2 swap</p>
+
+<p>pvscan : sda1;sda2;sda3;sda4 : 640G</p>
+
+<p>hdd1: 320G. N'est pas monté. il n'a pas de données interesante. il est monté sur archive</p>
+
+<p>pvscan : sda1;2;3;4</p>
+
+<p>Il aurait ete interessant de faire un ll /etc >> droit.txt pour garder une trace des droits des fichiers car ils sont perdus avec fsarchiver.</p>
+
+<p>Il faut récupérer les films du DD de la videobox qui n'ont pu etre récupéré avant l'augmentation de la taille du serveur.</p>
+
+<p>Avant de pouvoir utiliser le hdd1 il faut récupérer le dir dvdrp-data</p>
+
+<p>%%%%%%% CHROOT %%%%
+problem avec le sysrescuecd
+% chroot /host 
+chroot: failed to run command `/bin/zsh': No such file or directory
+cet erreur a une mauvaise configuration de la variable shell
+This type of error is due to the wrong setting of the SHELL variable.</p>
+
+<p>root@sysresccd /root % echo $SHELL
+/bin/zsh
+root@sysresccd /root % SHELL=/bin/bash
+root@sysresccd /root % echo $SHELL <br />
+/bin/bash</p>
+
+<p>Now you can chroot ! </p>
+
+<p>%%%% TASK LIST OFF LINE</p>
+
+<p>remember the milk pas de off line depuis html5</p>
+
+<p>toodledo tres vite on depasse les possibilité du free</p>
+
+<p>plancake ne marche plus en offline des que l'on ferme le browser</p>
+
+<p>todolist</p>
+
+<p>Google task la technique avec l'onglet dans TB ne marche pas offline.
+pas moyen d'avoir l'adresse ics du calendrier associé.
+C'est bien car pas besoin de due date mais pas de offline.</p>
+
+<p>Coolendar c'est pas mal se lie bien avec TB car il y a un lien ics qui permet d'avoir un calendrier qui fonctionne bien en cache. Le probleme c'est que c'est un calendrier et que c'est pas pratique pour des taches que je n'ai pas de date pour les terminer.en fait bodf ne se synchrsosie pas tres bien avec TB</p>
+
+<p>Ne se lie pas bien avec google calendar. </p>
+
+<p>%%%%%%%%%%%% MYSQL PASSWORD
+New password pour Mysql 'root' user : 123b654
+%%%%%</p>
+
+<p>pourquoi </p>
+
+<p>ruby*
+dwb
+tango*
+fts
+libtk-pod-perl
+qhid
+phone*
+vdr
+valgrind
+xcp</p>
+
+<p>%%%%%%%%%%%%%%%%%%</p>
+
+<p>AMPOULE 
+6V
+20WG4</p>
+
+<h1>CHMOD</h1>
+
+<h2>Recursively chmod directories only</h2>
+
+<p>June 19th, 2006</p>
+
+<p><code>find . -type d -exec chmod 755 {} \;</code></p>
+
+<p>This will recursively search your directory tree (starting at dir ‘dot’) and chmod 755 all directories only.</p>
+
+<p>Similarly, the following will chmod all files only (and ignore the directories):</p>
+
+<p><code>find . -type f -exec chmod 644 {} \;</code></p>
+
+<p>%%%%%%%%%%%%%%% ASUS TRANSFORMER TFT300T
+ idVendor: 0b05
+idProduct: 4c80</p>
+
+<p>%%%%%</p>
+
+<p>┌─────────────────────────────────────────────────────────────────────────────┤ Configuring backuppc ├─────────────────────────────────────────────────────────────────────────────┐ <br />
+                               │ Web administration default user created
+                               │ BackupPC can be managed through its web interface:                                       │  http://woodin.venus.org/backuppc/ <br />
+                               │ For that purpose, a web user named 'backuppc' with 'jUifU8ft' as password has been created. You can change this password by running 'htpasswd /etc/backuppc/htpasswd backuppc'.  │                                </p>
+
+<p>PROBLEME avec GRUB2
+Cette methode ne marche pas si pas de connection internet"
+J'avais fait une mise à jour par aptitude safe-upgrade et je n'arrivais plus à booter sur le server. </p>
+
+<p>un cd live de debian. </p>
+
+<p>qui n'est pas dans le live. <br />
+blkid pour avoir une idée des partitions et savoir ce qu'il faut monter</p>
+
+<p>setxkbmap fr
+mount /dev/sda3 /mnt
+mount /dev/sda1 /mnt/boot
+for i in /dev /dev/pts /proc /sys; do mount -B $i /mnt$i; done
+chroot /mnt /bin/bash
+grub-install --recheck /dev/sda
+update-grub
+exit 
+halt
+enlever l'usblive</p>
+
+<p>PROBLEME AVEC UNE INSTALLATION QUI EST CASSEE</p>
+
+<p>boot sur un livecd</p>
+
+<p>mkdir -p /mnt/lf/boot
+mount /dev/volgroup/root /mnt/lf
+mount /dev/sda1 /mnt/lf/boot
+for i in /dev /dev/pts /proc /sys; do mount -B $i /mnt/lf$i; done
+chroot /mnt/lf /bin/bash
+source /etc/profile 
+export PS1="(chroot) $PS1"
+cp /mounts/proc /etc/mtab</p>
+
+<p>aptitude ne marche pas utiliser apt-get update et upgrade
+exit 
+reboot</p>
+
+<h1>Comment ajouter un user à un ou plusieurs groups ?</h1>
+
+<p>usermod -a -G nomgroup1,nomgroup2 nomuser</p>
+
+<h1>Linux Mint</h1>
+
+<h2>problem d'impression recto-verso</h2>
+
+<ul>
+<li>1 Menu / Administration / printers / Installable options / cocher duplex.</li>
+<li>2 Relancer libreoffice</li>
+</ul>
+
+<p>Par contre je n'ai pas eu ce probleme avec Okular.</p>
+
+<h1>password generateur.</h1>
+
+<p><code>xkcdpass</code> il y a un paquet pour cela.</p>
+
+<h1>cron job</h1>
+
+<ul>
+<li>anacrontab -> va lancer les scripts meme si la machine n'était pas allumée au moment ou ils auraient du etre joués.</li>
+<li>cron.d</li>
+<li>cron.daily</li>
+<li>cron.hourly</li>
+<li>cron.monthly</li>
+<li>crontab</li>
+<li>cron.weekly</li>
+</ul>
+
+<p>On utilise crontab pour éditer un crontab
+```</p>
+
+<h1>For details see man 4 crontabs</h1>
+
+<h1>Example of job definition:</h1>
+
+<h1>.---------------- minute (0 - 59)</h1>
+
+<h1>|  .------------- hour (0 - 23)</h1>
+
+<h1>|  |  .---------- day of month (1 - 31)</h1>
+
+<h1>|  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</h1>
+
+<h1>|  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</h1>
+
+<h1>|  |  |  |  |</h1>
+
+<h1>*  *  *  *  * user-name  command to be executed</h1>
+
+<p>```</p>
+
+<h2> j'ai un problem avec le script</h2>
+
+<ul>
+<li><p>reboot
+c'est problement un probleme de variables d'environnement</p>
+
+<h3> Comment obtenir les variables d'environnement de cron?</h3></li>
+<li><p>rajouter <code>* * * * *  env &gt; ~/cronenv</code></p></li>
+<li>cronenv 
+<code>`̀</code>
+LANGUAGE=fr<em>FR:fr
+HOME=/root
+LOGNAME=root
+PATH=/usr/bin:/bin
+LANG=fr</em>FR.UTF-8
+SHELL=/bin/sh
+PWD=/root
+<code>``
+</code>̀which reboot <code>--&gt; /sbin/reboot
+Donc il y a bien un probleme de variable. 
+Je rajoute dans le crontab -e :</code>30 6 * * 1-5 . $HOME/.zshrc; /sbin/reboot<code>
+On verra si cela regle le probleme demain matin. 
+Non cela ne marche pas.
+https://stackoverflow.com/questions/22743548/cronjob-not-running
+-1 vérifier que cron tourne :</code>ps aux | grep cron<code>
+-2</code>service cron start<code></code>service cron restart<code>
+-3 cron fonctionne :</code> * * * * * /bin/echo "cron works" >> ~/file.txt<code>
+-4</code>tail -f /var/log/messages<code></code>tail -f /var/log/syslog`
+-5 need to have write access to the file you are redirecting the output.
+-6 do not rely on environment variables like PATH, as their value will likely not be the same under cron as under an interactive session</li>
+<li>dont suppress output while debugging
+<ul>
+<li>commonly used is this suppression: 30 1 * * * command > /dev/null 2>&amp;1</li>
+<li>suppress > /dev/null 2>&amp;1</li>
+<li>add ̀>> cront.out 2&amp;1` will append standard output and standard error to cron.out in the invoking user's home directory.
+## syntax
+<h1>Minute  Hour  Day of Month      Month         Day of Week    User Command</h1></li>
+</ul></li>
+</ul>
+
+<h1>(0-59) (0-23)   (1-31)    (1-12 or Jan-Dec) (0-6 or Sun-Sat)</h1>
+
+<pre><code>0       2       *             *                *          root /usr/bin/finduser field c'est juste pour root. Pas de user field pour les autres users.
+</code></pre>
+
+<h1>Debian 10</h1>
+
+<p>ifconfig deprecated 
+à la place <code>ip addr</code></p>
+
+<h2>su maintenant c'est su -</h2>
+
+<h1>Dual screen</h1>
+
+<h2>to be tested</h2>
+
+<p><code>
+sudo apt-get install --reinstall xserver-xorg-video-intel xserver-xorg-core
+sudo dpkg-reconfigure xserver-xorg
+</code>
+Je suis passé de debian 9 a debian 10 et cela a reglé mon probleme de dual screen donc je n'ai pas testé.</p>
+
+<h1>Choisir sa version de python</h1>
+
+<h2>system wide switch between python versions : update-alternatives</h2>
+
+<p>```</p>
+
+<h1>update-alternatives --list python</h1>
+
+<p>update-alternatives: error: no alternatives for python
+```</p>
+
+<h3>List all options</h3>
+
+<p><code>
+$ ls /usr/bin/python*
+/usr/bin/python  /usr/bin/python2  /usr/bin/python2.7  /usr/bin/python3  /usr/bin/python3.5  /usr/bin/python3.5m  /usr/bin/python3m
+</code>
+```</p>
+
+<h1>update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1</h1>
+
+<p>update-alternatives: using /usr/bin/python2.7 to provide /usr/bin/python (python) in auto mode</p>
+
+<h1>update-alternatives --install /usr/bin/python python /usr/bin/python3.5 2</h1>
+
+<p>update-alternatives: using /usr/bin/python3.5 to provide /usr/bin/python (python) in auto mode
+<code>
+Plus l'entier est haut plus c'est prioritaire.
+</code></p>
+
+<h1>python --version</h1>
+
+<p>Python 3.5.3
+```</p>
+
+<h2>Changement de version de python</h2>
+
+<p>```</p>
+
+<h1>update-alternatives --config python</h1>
+
+<p>There are 2 choices for the alternative python (providing /usr/bin/python).
+```</p>
+
+<h2>Si on veut changer localement pour un user.</h2>
+
+<p>In case you need to only change a python version selectively on per user basis, you may try to edit user's .bashrc file. For example to change to python version 3.5 execute the following linux commands:</p>
+
+<p>$ python --version
+Python 2.7.13
+$ echo 'alias python="/usr/bin/python3.5"' >> ~/.bashrc
+$ . .bashrc 
+$ python --version
+Python 3.5.3</p>
+
+</body>
+</html>

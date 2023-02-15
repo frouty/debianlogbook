@@ -1,0 +1,40 @@
+Enigmail
+========
+
+Key Management
+--------------
+
+`ici document tres détaillé sur la gestion des clefs avec enigmail <https://www.enigmail.net/index.php/en/user-manual/key-management>`_
+
+Où sont stockés les clefs ?
+---------------------------
+
+Qd on fait un backup il faut tenir compte du fait que le format de stockage peut changer au cours du temps. Seul le format d'export est stable. Donc il faut backuper les keyring files (pubring, secring, trustdv) pour rendre les restaurations plus faciles.
+
+Je n'ai pas trouvé les clefs que j'avais mises en place avec manjaro 
+
+
+Comment faire des clefs?
+-----------------------
+`gpg --gen-key` 
+Je vois dans ~/.gnupg :
+
+``` 
+
+/home/lfs/.gnupg
+├── gpg-agent.conf
+├── openpgp-revocs.d
+│   └── 675764A7074570180EBE220AE50C7650F7CAEA0B.rev
+├── private-keys-v1.d
+│   ├── 020326FB896B4BF880879B2EA49BD798CF634B96.key
+│   └── D86305F6D9180E8FEBE0465702149C935FFB3A3F.key
+├── pubring.kbx
+├── pubring.kbx~
+└── trustdb.gpg
+
+``` 
+
+
+
+
+ 
