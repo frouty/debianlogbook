@@ -12,6 +12,7 @@ Welcome to Debian logbook's documentation!
 
    SSH_echange_de_clefs
    Gestion_des_paquets
+<<<<<<< HEAD
    Valeur-Numerique-Permission
    hplip
    dash-dock 
@@ -25,6 +26,9 @@ Welcome to Debian logbook's documentation!
    snap
    
    
+=======
+
+>>>>>>> 9c1d751 (update)
 Indices and tables
 ==================
 
