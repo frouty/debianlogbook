@@ -10,9 +10,7 @@ l'authentification par échange de clefs.
     - ~/.ssh/id_xxx la clef privée
     - ~/.ssh/id_xxx.pub la clef publique.
 - Sur l'ordinateur distant, le server:
-  -  ~/.ssh/authorized_keys : liste des clefs publiques
-     autorisées pour se connecter à l'utilisateur. C'est là
-     que l'on va mettre les clefs publiques.
+  -  ~/.ssh/authorized_keys : liste des clefs publiques autorisées pour se connecter à l'utilisateur. C'est là que l'on va mettre les clefs publiques.
 
 Génerer la paire de clef sur le pc local
 ****************************************

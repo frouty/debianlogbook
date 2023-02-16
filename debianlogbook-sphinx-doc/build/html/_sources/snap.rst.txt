@@ -51,3 +51,5 @@ Uninstall a package
 .. code::
 
    sudo snap remove nom_du_paquet --purge
+   
+le snap-store ne marche pas bien. Il y a tres peu de logiciel qui sont proposés. Je vais le laisser tourner et voir s'il finit par downloader des informations. 

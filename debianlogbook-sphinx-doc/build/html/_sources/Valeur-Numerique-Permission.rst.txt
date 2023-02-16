@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 Comment obtenir la valeur numérique des permissions d'un fichier?
 #################################################################
-=======
-===================================================================
- Comment obtenir la valeur numérique des permissions d'un fichier?
-===================================================================
->>>>>>> 9c1d751 (update)
 
 * stat filename
 

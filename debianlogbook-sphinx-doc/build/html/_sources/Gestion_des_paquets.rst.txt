@@ -1,12 +1,6 @@
 Comment savoir si un paquet est installé
-<<<<<<< HEAD
 ########################################
 
 ::
    
    apt list --installed nom.du.paquet
-=======
-========================================
-
-apt list --installed nom.du.paquet
->>>>>>> 9c1d751 (update)
