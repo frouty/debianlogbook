@@ -13,6 +13,7 @@ Welcome to Debian logbook's documentation!
    SSH_echange_de_clefs
    Gestion_des_paquets
    Valeur-Numerique-Permission
+   materiel
    hplip
    dash-dock 
    password
@@ -23,6 +24,10 @@ Welcome to Debian logbook's documentation!
    enigmail
    screen
    snap
+   users_and_groups
+   rsync
+   nfs
+   
    
    
 Indices and tables
